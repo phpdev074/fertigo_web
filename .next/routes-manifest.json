@@ -1,0 +1,140 @@
+{
+  "version": 3,
+  "pages404": true,
+  "appType": "app",
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "priority": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_global-error",
+      "regex": "^/_global\\-error(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_global\\-error(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/AddService",
+      "regex": "^/AddService(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/AddService(?:/)?$"
+    },
+    {
+      "page": "/BookingHistoryScreen",
+      "regex": "^/BookingHistoryScreen(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/BookingHistoryScreen(?:/)?$"
+    },
+    {
+      "page": "/Dashboard",
+      "regex": "^/Dashboard(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/Dashboard(?:/)?$"
+    },
+    {
+      "page": "/favicon.ico",
+      "regex": "^/favicon\\.ico(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/favicon\\.ico(?:/)?$"
+    },
+    {
+      "page": "/main",
+      "regex": "^/main(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/main(?:/)?$"
+    },
+    {
+      "page": "/main/AddProvider",
+      "regex": "^/main/AddProvider(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/main/AddProvider(?:/)?$"
+    },
+    {
+      "page": "/main/Booking",
+      "regex": "^/main/Booking(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/main/Booking(?:/)?$"
+    },
+    {
+      "page": "/main/ContactUs",
+      "regex": "^/main/ContactUs(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/main/ContactUs(?:/)?$"
+    },
+    {
+      "page": "/main/Content",
+      "regex": "^/main/Content(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/main/Content(?:/)?$"
+    },
+    {
+      "page": "/main/Provider",
+      "regex": "^/main/Provider(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/main/Provider(?:/)?$"
+    },
+    {
+      "page": "/main/Settings",
+      "regex": "^/main/Settings(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/main/Settings(?:/)?$"
+    },
+    {
+      "page": "/main/User",
+      "regex": "^/main/User(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/main/User(?:/)?$"
+    },
+    {
+      "page": "/UserManagement",
+      "regex": "^/UserManagement(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/UserManagement(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments",
+    "clientParamParsing": false,
+    "dynamicRSCPrerender": false
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}

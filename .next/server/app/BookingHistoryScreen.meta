@@ -1,0 +1,15 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/BookingHistoryScreen/layout,_N_T_/BookingHistoryScreen/page,_N_T_/BookingHistoryScreen"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/BookingHistoryScreen/__PAGE__",
+    "/BookingHistoryScreen",
+    "/_index",
+    "/_head"
+  ]
+}

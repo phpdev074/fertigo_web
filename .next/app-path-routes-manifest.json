@@ -1,0 +1,18 @@
+{
+  "/AddService/page": "/AddService",
+  "/BookingHistoryScreen/page": "/BookingHistoryScreen",
+  "/Dashboard/page": "/Dashboard",
+  "/UserManagement/page": "/UserManagement",
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/favicon.ico/route": "/favicon.ico",
+  "/main/AddProvider/page": "/main/AddProvider",
+  "/main/Booking/page": "/main/Booking",
+  "/main/ContactUs/page": "/main/ContactUs",
+  "/main/Content/page": "/main/Content",
+  "/main/Provider/page": "/main/Provider",
+  "/main/Settings/page": "/main/Settings",
+  "/main/User/page": "/main/User",
+  "/main/page": "/main",
+  "/page": "/"
+}
