@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 22, "column": 0}, "map": {"version":3,"sources":["file:///Users/apple/Documents/vishal%20chauhan/FertiGo/app/main/page.tsx"],"sourcesContent":["export default function DashboardPage() {\n  return (\n    <div>\n      <h1 className=\"text-3xl font-bold\">Dashboard Overview</h1>\n    </div>\n  );\n}\n"],"names":[],"mappings":";;;;;;AAAe,SAAS;IACtB,qBACE,yRAAC;kBACC,cAAA,yRAAC;YAAG,WAAU;sBAAqB;;;;;;;;;;;AAGzC"}}]
+}

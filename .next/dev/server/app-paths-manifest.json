@@ -1,0 +1,13 @@
+{
+  "/Dashboard/page": "app/Dashboard/page.js",
+  "/UserManagement/page": "app/UserManagement/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/main/Booking/page": "app/main/Booking/page.js",
+  "/main/ContactUs/page": "app/main/ContactUs/page.js",
+  "/main/Content/page": "app/main/Content/page.js",
+  "/main/Provider/page": "app/main/Provider/page.js",
+  "/main/Settings/page": "app/main/Settings/page.js",
+  "/main/User/page": "app/main/User/page.js",
+  "/main/page": "app/main/page.js",
+  "/page": "app/page.js"
+}
