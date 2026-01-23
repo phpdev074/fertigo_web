@@ -36,42 +36,6 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
 }
 
 
-// Validate ../../app/AddService/page.tsx
-{
-  type __IsExpected<Specific extends AppPageConfig<"/AddService">> = Specific
-  const handler = {} as typeof import("../../app/AddService/page.js")
-  type __Check = __IsExpected<typeof handler>
-  // @ts-ignore
-  type __Unused = __Check
-}
-
-// Validate ../../app/BookingHistoryScreen/page.tsx
-{
-  type __IsExpected<Specific extends AppPageConfig<"/BookingHistoryScreen">> = Specific
-  const handler = {} as typeof import("../../app/BookingHistoryScreen/page.js")
-  type __Check = __IsExpected<typeof handler>
-  // @ts-ignore
-  type __Unused = __Check
-}
-
-// Validate ../../app/Dashboard/page.tsx
-{
-  type __IsExpected<Specific extends AppPageConfig<"/Dashboard">> = Specific
-  const handler = {} as typeof import("../../app/Dashboard/page.js")
-  type __Check = __IsExpected<typeof handler>
-  // @ts-ignore
-  type __Unused = __Check
-}
-
-// Validate ../../app/UserManagement/page.tsx
-{
-  type __IsExpected<Specific extends AppPageConfig<"/UserManagement">> = Specific
-  const handler = {} as typeof import("../../app/UserManagement/page.js")
-  type __Check = __IsExpected<typeof handler>
-  // @ts-ignore
-  type __Unused = __Check
-}
-
 // Validate ../../app/main/AddProvider/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/main/AddProvider">> = Specific

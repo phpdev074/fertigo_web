@@ -41,24 +41,6 @@
       "namedRegex": "^/_not\\-found(?:/)?$"
     },
     {
-      "page": "/AddService",
-      "regex": "^/AddService(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/AddService(?:/)?$"
-    },
-    {
-      "page": "/BookingHistoryScreen",
-      "regex": "^/BookingHistoryScreen(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/BookingHistoryScreen(?:/)?$"
-    },
-    {
-      "page": "/Dashboard",
-      "regex": "^/Dashboard(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/Dashboard(?:/)?$"
-    },
-    {
       "page": "/favicon.ico",
       "regex": "^/favicon\\.ico(?:/)?$",
       "routeKeys": {},
@@ -111,12 +93,6 @@
       "regex": "^/main/User(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/main/User(?:/)?$"
-    },
-    {
-      "page": "/UserManagement",
-      "regex": "^/UserManagement(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/UserManagement(?:/)?$"
     }
   ],
   "dataRoutes": [],

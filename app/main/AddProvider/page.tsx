@@ -8,6 +8,17 @@ import { useEffect, useState } from 'react';
 import { GetServices } from '@/app/api/ApiHelper/serviceHelper';
 import { UploadProviderLogo } from '@/app/api/ApiHelper/uploadHelper';
 import { useRouter } from 'next/navigation';
+import dynamic from "next/dynamic";
+import { CreateProvider } from '@/app/api/ApiHelper/providerHelper';
+import toast from "react-hot-toast";
+import { Country } from 'country-state-city';
+import Swal from "sweetalert2";
+
+const MapPickerModal = dynamic(
+  () => import("../Map/MapPickerModal"),
+  { ssr: false }
+);
+
 
 interface AddProviderScreenProps {
   onBack?: () => void;
@@ -54,8 +65,53 @@ const URGENCY_TYPES = [
 
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
+interface MapLocation {
+  lat: number | null;
+  lng: number | null;
+}
+
+interface FormData {
+  name: any;
+  email: any;
+  phone: any;
+  website: string;
+  password: string;
+  confirmPassword: string;
+
+  serviceType: string;
+  treatmentTypes: string[];
+  treatmentSupport: boolean;
+  urgencySupport: boolean;
+  description: string;
+
+  treatmentPrices: Record<string, string>;
+  treatmentType: string;
+
+  selectedServices: string[];
+  servicePrices: Record<string, string>;
+  selectedCategories: string[];
+
+  address: any;
+  city: string;
+  country: string;
+  postalCode: string;
+
+  mapLocation: MapLocation;
+
+  urgencyOptions: string[];
+  languagesSupported: string;
+  areas: string;
+
+  businessHours: Record<
+    string,
+    { enabled: boolean; startTime: string; endTime: string }
+  >;
+
+  verified: boolean;
+}
+
 export default function AddProviderScreen({ onBack, provider }: AddProviderScreenProps) {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     // Basic Info
     name: provider?.name || '',
     email: provider?.email || '',
@@ -109,7 +165,12 @@ export default function AddProviderScreen({ onBack, provider }: AddProviderScree
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
   const [uploadingLogo, setUploadingLogo] = useState(false);
+  const [openMap, setOpenMap] = useState(false);
   const router = useRouter();
+
+  const isLocationSelected =
+    typeof formData.mapLocation.lat === "number" &&
+    typeof formData.mapLocation.lng === "number";
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -303,20 +364,47 @@ export default function AddProviderScreen({ onBack, provider }: AddProviderScree
         postalCode: formData.postalCode,
       },
 
-      location: {
-        lat: formData.mapLocation.lat,
-        lng: formData.mapLocation.lng,
-      },
+      ...(formData.mapLocation.lat != null &&
+        formData.mapLocation.lng != null && {
+        location: {
+          lat: formData.mapLocation.lat,
+          lng: formData.mapLocation.lng,
+        },
+      }),
 
       isVerified: formData.verified,
     };
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const payload = buildProviderPayload();
-    console.log('Form submitted:', payload);
-    onBack?.();
+
+    try {
+      const payload = buildProviderPayload();
+      console.log("Submitting payload:", payload);
+
+      const res = await CreateProvider(payload);
+
+      if (res.data?.status) {
+        // success
+        toast.success("Provider created successfully 🎉");
+        router.push("/main/Provider");
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Provider already exists",
+          text: res.data?.message || "Mobile number already exists",
+          confirmButtonColor: "#EC4899",
+        });
+      }
+
+    } catch (error: any) {
+      console.error("Create provider error:", error);
+      alert(
+        error?.response?.data?.message ||
+        "Something went wrong while creating provider"
+      );
+    }
   };
 
   return (
@@ -334,7 +422,7 @@ export default function AddProviderScreen({ onBack, provider }: AddProviderScree
             <h2 className="text-3xl font-bold text-gray-900">
               {provider ? 'Edit Provider' : 'Add New Provider'}
             </h2>
-            <p className="text-gray-600 mt-1">
+            <p className="text-gray-600 mt-1 mb-2">
               {provider ? 'Update provider information' : 'Fill in the details to add a new service provider'}
             </p>
           </div>
@@ -816,14 +904,18 @@ export default function AddProviderScreen({ onBack, provider }: AddProviderScree
                       <select
                         required
                         value={formData.country}
-                        onChange={(e) => handleInputChange('country', e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 outline-none transition-all bg-white"
+                        onChange={(e) => handleInputChange("country", e.target.value)}
+                        className="w-full px-4 py-3 rounded-xl border border-gray-300
+                                   focus:border-pink-500 focus:ring-2 focus:ring-pink-200
+                                   outline-none transition-all bg-white"
                       >
-                        <option value="">Select</option>
-                        <option value="us">United States</option>
-                        <option value="uk">United Kingdom</option>
-                        <option value="ca">Canada</option>
-                        <option value="au">Australia</option>
+                        <option value="">Select country</option>
+
+                        {Country.getAllCountries().map((country) => (
+                          <option key={country.isoCode} value={country.name}>
+                            {country.name}
+                          </option>
+                        ))}
                       </select>
                     </div>
 
@@ -848,19 +940,49 @@ export default function AddProviderScreen({ onBack, provider }: AddProviderScree
 
                       <button
                         type="button"
-                        className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl border-2 border-dashed border-pink-300 bg-pink-50 hover:bg-pink-100 transition-all font-bold text-pink-600"
-                        onClick={() => {
-                          // placeholder for map logic
-                          console.log('Pin my location clicked');
-                        }}
+                        onClick={() => setOpenMap(true)}
+                        className={`w-full flex flex-col items-center justify-center gap-1 px-4 py-3 rounded-xl border-2 transition-all font-bold
+                            ${isLocationSelected
+                            ? "border-green-400 bg-green-50 text-green-700 hover:bg-green-100"
+                            : "border-pink-300 bg-pink-50 text-pink-600 hover:bg-pink-100"
+                          }`}
                       >
-                        <MapPin className="w-5 h-5" />
-                        Pin My Location
+                        <div className="flex items-center gap-2">
+                          <MapPin className="w-5 h-5" />
+                          {isLocationSelected ? "Location Selected" : "Pin My Location"}
+                        </div>
+
+                        {isLocationSelected && (
+                          <span className="text-xs font-medium">
+                            Lat: {formData.mapLocation.lat?.toFixed(5)}, Lng:{" "}
+                            {formData.mapLocation.lng?.toFixed(5)}
+                          </span>
+                        )}
                       </button>
 
                       <p className="text-xs text-gray-500 mt-2 text-center">
-                        Use map to select the exact business location
+                        {isLocationSelected
+                          ? "Click to change the selected location"
+                          : "Use map to select the exact business location"}
                       </p>
+
+                      {openMap && (
+                        <MapPickerModal
+                          initialLat={formData.mapLocation.lat}
+                          initialLng={formData.mapLocation.lng}
+                          onClose={() => setOpenMap(false)}
+                          onSelect={(lat, lng) => {
+                            setFormData((prev) => ({
+                              ...prev,
+                              mapLocation: {
+                                lat: Number(lat),
+                                lng: Number(lng),
+                              },
+                            }));
+                            setOpenMap(false);
+                          }}
+                        />
+                      )}
                     </div>
 
                   </div>
@@ -914,6 +1036,7 @@ export default function AddProviderScreen({ onBack, provider }: AddProviderScree
                       />
                     </div> */}
                   </div>
+
                 </div>
               </motion.div>
 
@@ -922,7 +1045,7 @@ export default function AddProviderScreen({ onBack, provider }: AddProviderScree
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden"
+                className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden mb-6"
               >
                 <div className="bg-gradient-to-r from-[#EC4899] to-[#EC4899] px-6 py-4">
                   <h3 className="text-xl font-bold text-white flex items-center gap-2">
@@ -1048,9 +1171,21 @@ export default function AddProviderScreen({ onBack, provider }: AddProviderScree
                 <div className="mt-6 pt-6 border-t border-gray-200 space-y-3">
                   <button
                     type="submit"
-                    className="w-full py-3 rounded-xl bg-gradient-to-r from-[#EC4899] to-[#EC4899] text-white font-bold hover:from-[#f02287] hover:to-[#f02287] transition-all shadow-lg hover:shadow-xl"
+                    disabled={uploadingLogo || !logoUrl}
+                    className="
+                              w-full py-3 rounded-xl
+                              bg-gradient-to-r from-[#EC4899] to-[#EC4899]
+                              text-white font-bold
+                              transition-all shadow-lg hover:shadow-xl
+                              hover:from-[#f02287] hover:to-[#f02287]
+                              disabled:opacity-50 disabled:cursor-not-allowed
+                              "
                   >
-                    {provider ? 'Update Provider' : 'Add Provider'}
+                    {uploadingLogo
+                      ? "Uploading logo..."
+                      : provider
+                        ? "Update Provider"
+                        : "Add Provider"}
                   </button>
                   <button
                     type="button"

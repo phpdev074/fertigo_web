@@ -1,0 +1,3 @@
+module.exports=[6735,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(3373);a.n(d("[project]/sahil/fertigo_web/node_modules/next/dist/client/components/builtin/global-error.js <module evaluation>"))},59171,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(3373);a.n(d("[project]/sahil/fertigo_web/node_modules/next/dist/client/components/builtin/global-error.js"))},85117,a=>{"use strict";a.i(6735);var b=a.i(59171);a.n(b)}];
+
+//# sourceMappingURL=59d9d_next_dist_client_components_builtin_global-error_479d40d1.js.map

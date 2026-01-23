@@ -1,276 +1,31 @@
-[00:01:13.978] Server  LOG     ✓ Ready in 50.9s
-[00:01:17.023] Server  LOG     ○ Compiling /main/AddProvider ...
-[00:01:22.816] Server  LOG     ✓ Finished filesystem cache database compaction in 15.4s
-[00:01:50.747] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:03:54.948] Browser LOG     Form submitted: {"address":"ertuiop[","areas":"","businessHours":{"Friday":{"enabled":false,"endTime":"17:00","startTime":"09:00"},"Monday":{"enabled":false,"endTime":"17:00","startTime":"09:00"},"Saturday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Sunday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Thursday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Tuesday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Wednesday":{"enabled":true,"endTime":"17:00","startTime":"09:00"}},"city":"sdfghjkl;lkj","confirmPassword":"1","country":"us","description":"ertyuiop[","email":"df@gmail.com","languagesSupported":"dfgh","name":"edfg","password":"1","phone":"2345","postalCode":"234567","selectedCategories":["blood-test-labs","fertility-clinics","injection-nurses","ultrasound-clinics"],"selectedServices":["fertility-supplements"],"serviceType":"laboratory","treatmentSupport":false,"urgencyOptions":["same-day","scheduled","emergency"],"urgencySupport":false,"useMyLocation":false,"verified":false,"website":""}
-[00:03:56.247] Browser LOG     Form submitted: {"address":"ertuiop[","areas":"","businessHours":{"Friday":{"enabled":false,"endTime":"17:00","startTime":"09:00"},"Monday":{"enabled":false,"endTime":"17:00","startTime":"09:00"},"Saturday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Sunday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Thursday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Tuesday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Wednesday":{"enabled":true,"endTime":"17:00","startTime":"09:00"}},"city":"sdfghjkl;lkj","confirmPassword":"1","country":"us","description":"ertyuiop[","email":"df@gmail.com","languagesSupported":"dfgh","name":"edfg","password":"1","phone":"2345","postalCode":"234567","selectedCategories":["blood-test-labs","fertility-clinics","injection-nurses","ultrasound-clinics"],"selectedServices":["fertility-supplements"],"serviceType":"laboratory","treatmentSupport":false,"urgencyOptions":["same-day","scheduled","emergency"],"urgencySupport":false,"useMyLocation":false,"verified":false,"website":""}
-[00:03:58.540] Browser LOG     Form submitted: {"address":"ertuiop[","areas":"","businessHours":{"Friday":{"enabled":false,"endTime":"17:00","startTime":"09:00"},"Monday":{"enabled":false,"endTime":"17:00","startTime":"09:00"},"Saturday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Sunday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Thursday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Tuesday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Wednesday":{"enabled":true,"endTime":"17:00","startTime":"09:00"}},"city":"sdfghjkl;lkj","confirmPassword":"1","country":"us","description":"ertyuiop[","email":"df@gmail.com","languagesSupported":"dfgh","name":"edfg","password":"1","phone":"2345","postalCode":"234567","selectedCategories":["blood-test-labs","fertility-clinics","injection-nurses","ultrasound-clinics"],"selectedServices":["fertility-supplements"],"serviceType":"laboratory","treatmentSupport":false,"urgencyOptions":["same-day","scheduled","emergency"],"urgencySupport":false,"useMyLocation":false,"verified":true,"website":""}
-[00:03:59.164] Browser LOG     Form submitted: {"address":"ertuiop[","areas":"","businessHours":{"Friday":{"enabled":false,"endTime":"17:00","startTime":"09:00"},"Monday":{"enabled":false,"endTime":"17:00","startTime":"09:00"},"Saturday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Sunday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Thursday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Tuesday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Wednesday":{"enabled":true,"endTime":"17:00","startTime":"09:00"}},"city":"sdfghjkl;lkj","confirmPassword":"1","country":"us","description":"ertyuiop[","email":"df@gmail.com","languagesSupported":"dfgh","name":"edfg","password":"1","phone":"2345","postalCode":"234567","selectedCategories":["blood-test-labs","fertility-clinics","injection-nurses","ultrasound-clinics"],"selectedServices":["fertility-supplements"],"serviceType":"laboratory","treatmentSupport":false,"urgencyOptions":["same-day","scheduled","emergency"],"urgencySupport":false,"useMyLocation":false,"verified":true,"website":""}
-[00:04:53.171] Server  WARN    ⚠ Cross origin request detected from 192.168.1.105 to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
-Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
-[00:04:53.320] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:34:37.875] Server  LOG     ✓ Compiled in 21.1s
-[00:43:17.021] Browser LOG     Form submitted: {"address":"ertuiop[","areas":"","businessHours":{"Friday":{"enabled":false,"endTime":"17:00","startTime":"09:00"},"Monday":{"enabled":false,"endTime":"17:00","startTime":"09:00"},"Saturday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Sunday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Thursday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Tuesday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Wednesday":{"enabled":true,"endTime":"17:00","startTime":"09:00"}},"city":"sdfghjkl;lkj","confirmPassword":"1","country":"us","description":"ertyuiop[","email":"df@gmail.com","languagesSupported":"dfgh","name":"edfg","password":"1","phone":"2345","postalCode":"234567","selectedCategories":["blood-test-labs","fertility-clinics","injection-nurses","ultrasound-clinics"],"selectedServices":["fertility-supplements"],"serviceType":"laboratory","treatmentSupport":false,"urgencyOptions":["same-day","scheduled","emergency"],"urgencySupport":false,"useMyLocation":false,"verified":true,"website":""}
-[01:11:11.150] Server  LOG     ✓ Compiled in 9.7s
-[01:11:13.131] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:13:26.333] Server  LOG     ✓ Compiled in 690ms
-[01:21:20.090] Server  LOG     ✓ Compiled in 522ms
-[01:21:25.932] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:22:13.716] Server  LOG     ✓ Compiled in 205ms
-[01:30:38.404] Server  LOG     ✓ Compiled in 305ms
-[02:38:51.348] Server  LOG     ✓ Compiled in 1042ms
-[02:38:57.920] Server  LOG     ✓ Compiled in 307ms
-[02:39:00.699] Server  LOG     ✓ Compiled in 1345ms
-[02:44:16.522] Server  LOG     ✓ Compiled in 456ms
-[02:44:23.190] Server  LOG     ✓ Compiled in 455ms
-[02:44:38.786] Browser ERROR   uncaughtError: TypeError: Cannot read properties of undefined (reading 'ivf')
-[02:44:48.447] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[02:44:55.779] Server  LOG     ✓ Compiled in 256ms
-[02:44:57.026] Server  LOG     ✓ Compiled in 277ms
-[02:45:08.609] Server  LOG     ✓ Compiled in 819ms
-[02:45:09.764] Browser ERROR   ./sahil/fertigo_web/app/main/AddProvider/page.tsx:171:22
+[00:01:09.852] Server  LOG     ✓ Ready in 55.2s
+[00:01:24.406] Server  LOG     ○ Compiling / ...
+[00:01:51.176] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:24.710] Server  LOG     ○ Compiling /main/Provider ...
+[00:02:25.765] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:31.494] Server  LOG     ○ Compiling /main/AddProvider ...
+[00:02:41.405] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[00:02:42.212] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[00:33:18.663] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:33:20.248] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[00:34:18.877] Server  LOG     ✓ Compiled in 17.4s
+[00:34:24.427] Server  LOG     ✓ Compiled in 302ms
+[00:36:52.430] Server  LOG     ✓ Compiled in 3.1s
+[00:37:04.329] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:37:12.582] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:37:14.069] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[00:39:23.671] Browser LOG     Pin my location clicked
+[00:53:43.122] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[00:53:43.930] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[00:55:42.934] Server  LOG     ✓ Compiled in 4.8s
+[00:55:43.326] Browser ERROR   ./sahil/fertigo_web/app/api/api.tsx:14:13
 Parsing ecmascript source code failed
-  169 |   };
-  170 |
-> 171 |   treatmentPrices: {},
-      |                      ^
-  172 |
-  173 |   return (
-  174 |     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-4 lg:p-8">
+  12 | export const SERVICES = '/service';
+  13 |
+> 14 | export const 
+     |             ^
 
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component Browser]
-    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component SSR]
-    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
-[02:45:09.764] Browser ERROR   ./sahil/fertigo_web/app/main/AddProvider/page.tsx:171:22
-Parsing ecmascript source code failed
-  169 |   };
-  170 |
-> 171 |   treatmentPrices: {},
-      |                      ^
-  172 |
-  173 |   return (
-  174 |     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-4 lg:p-8">
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component Browser]
-    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component SSR]
-    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
-[02:45:12.330] Server  LOG     ✓ Compiled in 295ms
-[02:46:25.304] Server  LOG     ✓ Compiled in 177ms
-[02:47:05.102] Server  LOG     ✓ Compiled in 463ms
-[02:47:05.758] Browser ERROR   ./sahil/fertigo_web/app/main/AddProvider/page.tsx:70:28
-Parsing ecmascript source code failed
-  68 |     urgencySupport: false,
-  69 |     description: '',
-> 70 |     treatmentPrices: { [key: string]: number };
-     |                            ^
-  71 |
-  72 |     // Services with prices
-  73 |     selectedServices: [] as string[],
-
-Expected ']', got ':'
-
-Import traces:
-  Client Component Browser:
-    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component Browser]
-    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component SSR]
-    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
-[02:47:05.758] Browser ERROR   ./sahil/fertigo_web/app/main/AddProvider/page.tsx:70:28
-Parsing ecmascript source code failed
-  68 |     urgencySupport: false,
-  69 |     description: '',
-> 70 |     treatmentPrices: { [key: string]: number };
-     |                            ^
-  71 |
-  72 |     // Services with prices
-  73 |     selectedServices: [] as string[],
-
-Expected ']', got ':'
-
-Import traces:
-  Client Component Browser:
-    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component Browser]
-    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component SSR]
-    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
-[02:47:10.547] Server  LOG     ✓ Compiled in 313ms
-[02:49:01.137] Server  LOG     ✓ Compiled in 238ms
-[02:51:29.440] Server  LOG     ✓ Compiled in 451ms
-[02:51:37.689] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[03:02:44.045] Server  LOG     ✓ Compiled in 861ms
-[03:02:58.265] Server  LOG     ✓ Compiled in 323ms
-[03:03:08.461] Server  LOG     ✓ Compiled in 317ms
-[03:04:31.020] Server  LOG     ✓ Compiled in 293ms
-[03:04:46.913] Server  LOG     ✓ Compiled in 659ms
-[03:04:51.727] Server  LOG     ✓ Compiled in 285ms
-[03:05:35.680] Server  LOG     ✓ Compiled in 993ms
-[03:06:35.028] Server  LOG     ✓ Compiled in 288ms
-[03:08:58.331] Server  LOG     ✓ Compiled in 429ms
-[03:09:00.628] Server  LOG     ✓ Compiled in 786ms
-[03:11:42.688] Server  LOG     ✓ Compiled in 766ms
-[03:12:18.542] Server  LOG     ✓ Compiled in 262ms
-[03:13:19.408] Server  LOG     ✓ Compiled in 303ms
-[03:15:11.152] Server  LOG     ✓ Compiled in 301ms
-[03:16:14.136] Server  LOG     ✓ Compiled in 275ms
-[03:17:14.388] Server  LOG     ✓ Compiled in 389ms
-[03:21:49.517] Server  LOG     ✓ Compiled in 427ms
-[03:21:51.707] Server  LOG     ✓ Compiled in 462ms
-[03:22:55.002] Server  LOG     ✓ Compiled in 721ms
-[03:22:56.583] Browser LOG     Pin my location clicked
-[03:22:57.431] Browser LOG     Pin my location clicked
-[03:22:58.243] Browser LOG     Pin my location clicked
-[03:23:31.171] Server  LOG     ✓ Compiled in 185ms
-[03:23:49.675] Server  LOG     ✓ Compiled in 277ms
-[03:24:01.643] Server  LOG     ✓ Compiled in 576ms
-[03:24:04.238] Browser LOG     Pin my location clicked
-[03:26:14.699] Browser LOG     Pin my location clicked
-[03:26:15.155] Browser LOG     Pin my location clicked
-[03:26:15.521] Browser LOG     Pin my location clicked
-[03:26:15.952] Browser LOG     Pin my location clicked
-[03:26:38.502] Server  LOG     ✓ Compiled in 290ms
-[03:41:03.964] Browser LOG     Pin my location clicked
-[03:44:13.443] Server  LOG     ✓ Compiled in 587ms
-[03:44:18.121] Server  LOG     ✓ Compiled in 155ms
-[03:52:40.231] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[04:24:55.171] Server  LOG     ✓ Compiled in 2.2s
-[04:25:13.858] Server  LOG     ✓ Compiled in 1374ms
-[04:29:39.459] Server  LOG     ✓ Compiled in 1527ms
-[04:29:54.693] Server  LOG     ✓ Compiled in 1375ms
-[04:29:57.224] Browser ERROR   uncaughtError: ReferenceError: useEffect is not defined
-[04:30:03.660] Server  LOG     ✓ Compiled in 3s
-[04:30:03.834] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[04:30:05.879] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[04:30:08.765] Browser ERROR   Failed to fetch services {}
-[04:30:46.262] Server  LOG     ✓ Compiled in 313ms
-[04:30:51.603] Server  LOG     ✓ Compiled in 326ms
-[04:40:21.770] Server  LOG     ✓ Compiled in 1824ms
-[04:40:22.472] Server  LOG     ✓ Compiled in 331ms
-[04:41:13.536] Server  LOG     ✓ Compiled in 44.2s
-[04:41:38.993] Server  LOG     ✓ Compiled in 584ms
-[04:41:47.346] Server  LOG     ✓ Compiled in 806ms
-[04:41:53.425] Server  LOG     ✓ Compiled in 259ms
-[04:41:59.657] Server  LOG     ✓ Compiled in 197ms
-[04:42:04.842] Server  LOG     ✓ Compiled in 241ms
-[04:43:13.493] Server  LOG     ✓ Compiled in 278ms
-[04:43:26.704] Server  LOG     ✓ Compiled in 290ms
-[04:43:48.518] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[04:43:50.949] Browser LOG     {"config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"baseURL":"http://85.31.234.205:5200","env":{},"headers":{"Accept":"application/json, text/plain, */*"},"maxBodyLength":-1,"maxContentLength":-1,"method":"get","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/service?page=1&limit=10","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"data":{"data":[{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}],"message":"Service list fetched successfully","pagination":{"limit":10,"page":1,"total":3,"totalPages":1},"status":true,"statusCode":200},"headers":{"content-length":"738","content-type":"application/json; charset=utf-8"},"request":{},"status":200,"statusText":"OK"}
-[04:44:10.758] Server  LOG     ✓ Compiled in 240ms
-[04:44:19.894] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[04:44:22.429] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
-[04:44:44.467] Server  LOG     ✓ Compiled in 199ms
-[04:44:45.902] Browser ERROR   Each child in a list should have a unique "key" prop.%s%s See https://react.dev/link/warning-keys for more information. 
-
-Check the render method of `AddProviderScreen`. 
-[04:44:59.553] Server  LOG     ✓ Compiled in 248ms
-[04:45:04.573] Server  LOG     ✓ Compiled in 238ms
-[04:45:09.874] Server  LOG     ✓ Compiled in 341ms
-[04:45:15.155] Server  LOG     ✓ Compiled in 242ms
-[04:45:28.077] Server  LOG     ✓ Compiled in 380ms
-[04:45:49.053] Server  LOG     ✓ Compiled in 219ms
-[04:46:01.415] Server  LOG     ✓ Compiled in 488ms
-[04:46:07.795] Server  LOG     ✓ Compiled in 407ms
-[04:46:10.710] Server  LOG     ✓ Compiled in 424ms
-[04:46:13.268] Server  LOG     ✓ Compiled in 261ms
-[04:46:19.275] Server  LOG     ✓ Compiled in 187ms
-[04:46:23.269] Server  LOG     ✓ Compiled in 378ms
-[04:46:28.579] Server  LOG     ✓ Compiled in 260ms
-[04:46:49.814] Browser LOG     Pin my location clicked
-[04:49:31.271] Server  LOG     ✓ Compiled in 1826ms
-[04:49:37.700] Server  LOG     ✓ Compiled in 525ms
-[04:50:44.289] Server  LOG     ✓ Compiled in 225ms
-[04:50:47.718] Server  LOG     ✓ Compiled in 375ms
-[04:51:06.760] Server  LOG     ✓ Compiled in 262ms
-[04:51:10.126] Server  LOG     ✓ Compiled in 255ms
-[04:51:17.461] Server  LOG     ✓ Compiled in 301ms
-[04:51:41.029] Server  LOG     ✓ Compiled in 163ms
-[04:51:45.071] Server  LOG     ✓ Compiled in 296ms
-[04:51:59.108] Server  LOG     ✓ Compiled in 168ms
-[04:52:03.079] Server  LOG     ✓ Compiled in 316ms
-[04:52:17.844] Server  LOG     ✓ Compiled in 205ms
-[04:52:21.225] Server  LOG     ✓ Compiled in 368ms
-[04:52:46.111] Server  LOG     ✓ Compiled in 270ms
-[04:52:49.850] Server  LOG     ✓ Compiled in 380ms
-[04:53:10.251] Server  LOG     ✓ Compiled in 240ms
-[04:53:13.426] Server  LOG     ✓ Compiled in 321ms
-[04:54:49.469] Server  LOG     ✓ Compiled in 818ms
-[04:55:51.759] Server  LOG     ✓ Compiled in 231ms
-[04:55:53.999] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
-[04:56:19.586] Server  LOG     ✓ Compiled in 321ms
-[04:56:23.241] Server  LOG     ✓ Compiled in 237ms
-[04:57:12.864] Server  LOG     ✓ Compiled in 744ms
-[04:57:14.585] Server  LOG     ✓ Compiled in 212ms
-[04:57:16.874] Server  LOG     ✓ Compiled in 500ms
-[04:57:44.213] Server  LOG     ✓ Compiled in 369ms
-[04:57:46.856] Server  LOG     ✓ Compiled in 659ms
-[04:58:11.311] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[04:58:12.920] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
-[04:58:30.774] Server  LOG     ✓ Compiled in 350ms
-[04:58:35.598] Server  LOG     ✓ Compiled in 218ms
-[04:58:38.205] Server  LOG     ✓ Compiled in 285ms
-[04:58:43.702] Server  LOG     ✓ Compiled in 221ms
-[04:59:23.724] Server  LOG     ✓ Compiled in 850ms
-[04:59:28.207] Server  LOG     ✓ Compiled in 2.2s
-[04:59:51.751] Server  LOG     ✓ Compiled in 599ms
-[04:59:57.310] Server  LOG     ✓ Compiled in 461ms
-[05:00:20.375] Server  LOG     ✓ Compiled in 746ms
-[05:00:22.940] Server  LOG     ✓ Compiled in 671ms
-[05:00:59.503] Server  LOG     ✓ Compiled in 984ms
-[05:02:08.207] Browser LOG     Pin my location clicked
-[05:13:47.547] Browser LOG     Pin my location clicked
-[05:14:04.368] Browser LOG     Form submitted: {"address":"full address","areas":"","businessHours":{"Friday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Monday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Saturday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Sunday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Thursday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Tuesday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Wednesday":{"enabled":true,"endTime":"17:00","startTime":"09:00"}},"city":"city","confirmPassword":"1","country":"us","description":"test","email":"test@gmail.com","languagesSupported":"eng","mapLocation":{"lat":null,"lng":null},"name":"Test","password":"1","phone":"9874563214","postalCode":"123456","selectedCategories":[],"selectedServices":[],"servicePrices":{},"serviceType":"","treatmentPrices":{"69709f816629e9fd8335c073":"20"},"treatmentSupport":true,"treatmentType":"both","treatmentTypes":["69709f816629e9fd8335c073"],"urgencyOptions":["same-day","next-day","scheduled","emergency"],"urgencySupport":true,"verified":true,"website":""}
-[05:23:07.981] Server  LOG     ✓ Compiled in 7.1s
-[05:23:40.147] Server  LOG     ✓ Compiled in 242ms
-[05:24:05.957] Browser LOG     Form submitted: {"address":"full address","areas":"","businessHours":{"Friday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Monday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Saturday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Sunday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Thursday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Tuesday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Wednesday":{"enabled":true,"endTime":"17:00","startTime":"09:00"}},"city":"city","confirmPassword":"1","country":"us","description":"test","email":"test@gmail.com","languagesSupported":"eng","mapLocation":{"lat":null,"lng":null},"name":"Test","password":"1","phone":"9874563214","postalCode":"123456","selectedCategories":[],"selectedServices":[],"servicePrices":{},"serviceType":"","treatmentPrices":{"69709f816629e9fd8335c073":"20"},"treatmentSupport":true,"treatmentType":"both","treatmentTypes":["69709f816629e9fd8335c073"],"urgencyOptions":["same-day","next-day","scheduled","emergency"],"urgencySupport":true,"verified":true,"website":""}
-[05:24:35.289] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[05:24:38.272] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
-[05:26:18.374] Browser LOG     Form submitted: {"address":"Full Address","areas":"","businessHours":{"Friday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Monday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Saturday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Sunday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Thursday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Tuesday":{"enabled":true,"endTime":"17:00","startTime":"09:00"},"Wednesday":{"enabled":true,"endTime":"17:00","startTime":"09:00"}},"city":"City","confirmPassword":"1","country":"au","description":"Provider description","email":"contact@gmail.com","languagesSupported":"English, Hindi","mapLocation":{"lat":null,"lng":null},"name":"Provider Name","password":"1","phone":"987456321","postalCode":"123456","selectedCategories":[],"selectedServices":[],"servicePrices":{},"serviceType":"","treatmentPrices":{"69709f816629e9fd8335c073":"299"},"treatmentSupport":true,"treatmentType":"both","treatmentTypes":["69709f816629e9fd8335c073"],"urgencyOptions":["next-day","same-day","emergency","scheduled"],"urgencySupport":true,"verified":true,"website":""}
-[05:27:43.268] Server  LOG     ✓ Compiled in 235ms
-[05:27:52.968] Browser LOG     Form submitted: {"address":{"city":"City","country":"au","fullAddress":"Full Address","postalCode":"123456"},"countryCode":"+91","email":"contact@gmail.com","isActive":true,"isVerified":true,"languageSupport":["English","Hindi"],"location":{"lat":null,"lng":null},"mobileNumber":987456321,"name":"Provider Name","operatingHours":[{"day":"monday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"tuesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"wednesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"thursday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"friday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"saturday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"sunday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]}],"providerDescription":"Provider description","providerLogo":"Generated Item.png","providerVerificationStatus":false,"serviceType":[{"price":299,"serviceId":"69709f816629e9fd8335c073"}],"treatmentSupport":["IVF","IUI"],"urgencySupport":["Next Day","Same Day","Emergency","Scheduled"],"webSiteUrl":""}
-[05:49:08.290] Server  LOG     ✓ Compiled in 465ms
-[05:49:23.864] Browser LOG     Form submitted: {"address":{"city":"City","country":"au","fullAddress":"Full Address","postalCode":"123456"},"countryCode":"+91","email":"contact@gmail.com","isActive":true,"isVerified":true,"languageSupport":["English","Hindi"],"location":{"lat":null,"lng":null},"mobileNumber":987456321,"name":"Provider Name","operatingHours":[{"day":"monday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"tuesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"wednesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"thursday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"friday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"saturday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"sunday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]}],"providerDescription":"Provider description","providerLogo":"Generated Item.png","providerVerificationStatus":false,"serviceType":[{"price":299,"serviceId":"69709f816629e9fd8335c073"}],"treatmentSupport":["IVF","IUI"],"urgencySupport":["Next Day","Same Day","Emergency","Scheduled"],"webSiteUrl":""}
-[05:50:04.913] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[05:50:06.572] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
-[05:53:47.813] Server  LOG     ✓ Compiled in 1123ms
-[05:53:53.764] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
-[05:56:18.767] Server  LOG     ✓ Compiled in 231ms
-[05:56:23.429] Server  LOG     ✓ Compiled in 248ms
-[05:56:25.418] Server  LOG     ✓ Compiled in 292ms
-[05:57:10.439] Server  LOG     ✓ Compiled in 240ms
-[05:58:01.788] Server  LOG     ✓ Compiled in 275ms
-[05:58:02.760] Browser ERROR   uncaughtError: ReferenceError: handleLogoUpload is not defined
-[05:58:05.137] Server  LOG     ✓ Compiled in 571ms
-[05:58:05.609] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[05:58:09.032] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[05:58:11.519] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
-[05:59:27.086] Server  LOG     ✓ Compiled in 3.5s
-[06:00:10.024] Server  LOG     ✓ Compiled in 596ms
-[06:00:10.756] Browser ERROR   ./sahil/fertigo_web/app/api/api.tsx:12:1
-Parsing ecmascript source code failed
-  10 | export const 
-  11 |
-> 12 | export const SERVICES = '/service';
-     | ^^^^^^
-
-Expected ident
+Unexpected token `<eof>`. Expected yield, an identifier, [ or {
 
 Import traces:
   Client Component Browser:
@@ -284,95 +39,589 @@ Import traces:
     ./sahil/fertigo_web/app/api/ApiHelper/uploadHelper.tsx [Client Component SSR]
     ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component SSR]
     ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
-[06:00:14.682] Server  LOG     ✓ Compiled in 479ms
-[06:00:15.648] Server  LOG     ✓ Compiled in 150ms
-[06:00:26.385] Server  LOG     ✓ Compiled in 229ms
-[06:00:28.798] Server  LOG     ✓ Compiled in 428ms
-[06:01:57.194] Server  LOG     ✓ Compiled in 322ms
-[06:03:02.831] Browser LOG     {"config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"baseURL":"http://85.31.234.205:5200","data":{},"env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"multipart/form-data"},"maxBodyLength":-1,"maxContentLength":-1,"method":"post","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/upload","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"data":{"data":{"mimeType":"image/png","originalName":"Generated Item.png","size":1755517,"url":"/uploads/1769084810286-16718727.png"},"message":"File uploaded successfully","status":true,"statusCode":201},"headers":{"content-length":"198","content-type":"application/json; charset=utf-8"},"request":{},"status":201,"statusText":"Created"}
-[06:03:06.442] Browser LOG     Form submitted: {"address":{"city":"ef","country":"us","fullAddress":"er","postalCode":"123"},"countryCode":"+91","email":"dv@gmail.com","isActive":true,"isVerified":true,"languageSupport":["ef"],"location":{"lat":null,"lng":null},"mobileNumber":3,"name":"t","operatingHours":[{"day":"monday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"tuesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"wednesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"thursday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"friday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"saturday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"sunday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]}],"providerDescription":"ererg","providerLogo":"/uploads/1769084810286-16718727.png","providerVerificationStatus":false,"serviceType":[],"treatmentSupport":[],"urgencySupport":[],"webSiteUrl":""}
-[06:03:11.213] Browser LOG     Form submitted: {"address":{"city":"ef","country":"us","fullAddress":"er","postalCode":"123"},"countryCode":"+91","email":"dv@gmail.com","isActive":true,"isVerified":true,"languageSupport":["ef"],"location":{"lat":null,"lng":null},"mobileNumber":3,"name":"t","operatingHours":[{"day":"monday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"tuesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"wednesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"thursday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"friday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"saturday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"sunday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]}],"providerDescription":"ererg","providerLogo":"/uploads/1769084810286-16718727.png","providerVerificationStatus":false,"serviceType":[],"treatmentSupport":[],"urgencySupport":[],"webSiteUrl":""}
-[06:03:12.081] Browser LOG     Form submitted: {"address":{"city":"ef","country":"us","fullAddress":"er","postalCode":"123"},"countryCode":"+91","email":"dv@gmail.com","isActive":true,"isVerified":true,"languageSupport":["ef"],"location":{"lat":null,"lng":null},"mobileNumber":3,"name":"t","operatingHours":[{"day":"monday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"tuesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"wednesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"thursday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"friday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"saturday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"sunday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]}],"providerDescription":"ererg","providerLogo":"/uploads/1769084810286-16718727.png","providerVerificationStatus":false,"serviceType":[],"treatmentSupport":[],"urgencySupport":[],"webSiteUrl":""}
-[06:03:13.196] Browser LOG     Form submitted: {"address":{"city":"ef","country":"us","fullAddress":"er","postalCode":"123"},"countryCode":"+91","email":"dv@gmail.com","isActive":true,"isVerified":true,"languageSupport":["ef"],"location":{"lat":null,"lng":null},"mobileNumber":3,"name":"t","operatingHours":[{"day":"monday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"tuesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"wednesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"thursday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"friday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"saturday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"sunday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]}],"providerDescription":"ererg","providerLogo":"/uploads/1769084810286-16718727.png","providerVerificationStatus":false,"serviceType":[],"treatmentSupport":[],"urgencySupport":[],"webSiteUrl":""}
-[06:07:49.849] Server  LOG     ✓ Compiled in 2.1s
-[06:08:05.709] Server  LOG     ✓ Compiled in 792ms
-[06:08:28.580] Server  LOG     ✓ Compiled in 599ms
-[06:08:59.887] Server  LOG     ✓ Compiled in 785ms
-[06:13:18.031] Server  LOG     ✓ Compiled in 845ms
-[06:13:38.504] Server  LOG     ✓ Compiled in 878ms
-[06:13:57.612] Server  LOG     ✓ Compiled in 714ms
-[06:14:18.357] Server  LOG     ✓ Compiled in 499ms
-[06:15:35.338] Server  LOG     ✓ Compiled in 480ms
-[06:15:38.732] Server  LOG     ✓ Compiled in 536ms
-[06:18:04.224] Server  LOG     ✓ Compiled in 636ms
-[06:18:23.628] Server  LOG     ✓ Compiled in 881ms
-[06:19:35.623] Server  LOG     ✓ Compiled in 457ms
-[06:19:40.456] Server  LOG     ✓ Compiled in 403ms
-[06:19:44.539] Server  LOG     ✓ Compiled in 330ms
-[06:19:53.497] Server  LOG     ✓ Finished filesystem cache database compaction in 10.5s
-[06:20:28.403] Server  LOG     ✓ Compiled in 473ms
-[06:20:50.029] Server  LOG     ✓ Compiled in 296ms
-[06:21:15.128] Server  LOG     ✓ Compiled in 260ms
-[06:21:21.552] Server  LOG     ✓ Compiled in 259ms
-[06:21:23.360] Server  LOG     ✓ Compiled in 445ms
-[06:21:26.404] Server  LOG     ✓ Compiled in 773ms
-[06:21:29.624] Server  LOG     ✓ Compiled in 221ms
-[06:21:31.521] Server  LOG     ✓ Compiled in 185ms
-[06:21:34.610] Server  LOG     ✓ Compiled in 173ms
-[06:21:40.101] Server  LOG     ✓ Compiled in 462ms
-[06:21:51.730] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[06:21:53.366] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
-[06:22:21.512] Server  LOG     ✓ Compiled in 282ms
-[06:24:40.833] Server  LOG     ✓ Compiled in 466ms
-[06:24:52.854] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[06:24:54.430] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
-[06:27:14.645] Server  LOG     ✓ Compiled in 268ms
-[06:27:17.143] Server  LOG     ✓ Compiled in 390ms
-[06:27:20.518] Server  LOG     ✓ Compiled in 1295ms
-[06:28:45.656] Server  LOG     ✓ Compiled in 389ms
-[06:29:08.676] Server  LOG     ✓ Compiled in 250ms
-[06:29:14.517] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[06:29:16.127] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
-[06:31:23.917] Server  LOG     ✓ Compiled in 474ms
-[06:31:45.325] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
-[06:31:46.182] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
-[06:31:50.823] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
-[06:31:51.707] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
-[06:32:54.769] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
-[06:32:55.254] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
-[06:32:58.775] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
-[06:32:59.597] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
-[06:33:33.214] Server  LOG     ✓ Compiled in 724ms
-[06:33:34.423] Browser ERROR   uncaughtError: ReferenceError: router is not defined
-[06:34:07.110] Server  LOG     ✓ Compiled in 492ms
-[06:34:12.836] Server  LOG     ✓ Compiled in 359ms
-[06:34:13.759] Browser ERROR   uncaughtError: ReferenceError: useRouter is not defined
-[06:34:27.247] Server  LOG     ✓ Compiled in 7.2s
-[06:34:27.849] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[06:34:28.926] Server  ERROR   ⨯ Error: NextRouter was not mounted. https://nextjs.org/docs/messages/next-router-not-mounted
-[06:34:29.007] Browser ERROR   uncaughtError: Error: NextRouter was not mounted. https://nextjs.org/docs/messages/next-router-not-mounted
-[06:34:29.519] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[06:34:29.973] Browser ERROR   uncaughtError: Error: NextRouter was not mounted. https://nextjs.org/docs/messages/next-router-not-mounted
-[06:36:46.909] Server  LOG     ✓ Compiled in 936ms
-[06:36:46.964] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[06:36:48.352] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[06:36:50.290] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
-[06:37:02.279] Server  LOG     ✓ Finished filesystem cache database compaction in 10.7s
-[06:37:12.560] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
-[06:37:13.397] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
-[06:38:09.207] Server  LOG     ✓ Compiled in 218ms
-[06:38:11.776] Server  LOG     ✓ Compiled in 221ms
-[06:38:15.093] Server  LOG     ✓ Compiled in 502ms
-[06:38:23.768] Server  LOG     ✓ Compiled in 620ms
-[06:38:27.514] Server  LOG     ✓ Compiled in 388ms
-[06:38:31.787] Server  LOG     ✓ Compiled in 405ms
-[06:38:36.798] Server  LOG     ✓ Compiled in 444ms
-[06:38:42.153] Server  LOG     ✓ Finished filesystem cache database compaction in 15.7s
-[06:38:42.549] Server  LOG     ✓ Finished writing to filesystem cache in 13.0s
-[06:38:47.937] Server  LOG     ✓ Compiled in 396ms
-[06:38:53.433] Server  LOG     ✓ Compiled in 245ms
-[06:41:21.446] Server  LOG     ✓ Compiled in 208ms
-[06:41:23.533] Server  LOG     ✓ Compiled in 882ms
-[06:41:33.508] Server  LOG     ✓ Compiled in 203ms
-[06:41:45.920] Server  LOG     ✓ Compiled in 257ms
-[06:41:51.116] Server  LOG     ✓ Compiled in 274ms
+[00:55:46.305] Server  LOG     ✓ Compiled in 740ms
+[00:55:47.362] Server  LOG     ✓ Compiled in 372ms
+[00:55:58.980] Server  LOG     ✓ Compiled in 243ms
+[01:02:11.795] Browser LOG     Pin my location clicked
+[01:02:12.897] Browser LOG     Pin my location clicked
+[01:02:13.512] Browser LOG     Pin my location clicked
+[01:02:14.798] Browser LOG     Pin my location clicked
+[01:02:15.111] Browser LOG     Pin my location clicked
+[01:08:07.681] Server  LOG     ✓ Compiled in 11.4s
+[01:08:08.326] Browser ERROR   ./sahil/fertigo_web/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: E:\sahil\fertigo_web\app\globals.css:2:1: Unknown word import
+    [at Input.error (turbopack:///[project]/sahil/fertigo_web/node_modules/postcss/lib/input.js:135:16)]
+    [at Parser.unknownWord (turbopack:///[project]/sahil/fertigo_web/node_modules/postcss/lib/parser.js:595:22)]
+    [at Parser.other (turbopack:///[project]/sahil/fertigo_web/node_modules/postcss/lib/parser.js:437:12)]
+    [at Parser.parse (turbopack:///[project]/sahil/fertigo_web/node_modules/postcss/lib/parser.js:472:16)]
+    [at parse (turbopack:///[project]/sahil/fertigo_web/node_modules/postcss/lib/parse.js:11:12)]
+    [at new LazyResult (turbopack:///[project]/sahil/fertigo_web/node_modules/postcss/lib/lazy-result.js:165:16)]
+    [at Processor.process (turbopack:///[project]/sahil/fertigo_web/node_modules/postcss/lib/processor.js:53:14)]
+    [at transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:51)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:29)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:115:11)]
+
+Import trace:
+  Client Component Browser:
+    ./sahil/fertigo_web/app/globals.css [Client Component Browser]
+    ./sahil/fertigo_web/app/layout.tsx [Server Component]
+[01:08:18.867] Server  LOG     ✓ Compiled in 3.9s
+[01:08:21.563] Browser ERROR   unhandledRejection: Error: No link element found for chunk /_next/static/chunks/%5Broot-of-the-server%5D__04a31fad._.css
+[01:08:24.408] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:08:28.315] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[01:09:42.283] Server  LOG     ✓ Compiled in 1479ms
+[01:11:08.871] Server  LOG     ✓ Compiled in 1176ms
+[01:11:09.396] Server  LOG     ✓ Compiled in 305ms
+[01:11:11.317] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[01:11:32.585] Server  LOG     ✓ Compiled in 196ms
+[01:12:16.194] Server  LOG     ✓ Compiled in 224ms
+[01:12:19.144] Server  LOG     ✓ Compiled in 209ms
+[01:12:26.509] Server  LOG     ✓ Compiled in 3.5s
+[01:12:34.851] Server  LOG     ✓ Compiled in 544ms
+[01:12:36.322] Browser ERROR   ./sahil/fertigo_web/app/main/AddProvider/page.tsx:929:28
+Parsing ecmascript source code failed
+  927 |                   </div>
+  928 |                 </div>
+> 929 |               </motion.div>
+      |                            ^
+> 930 |
+      | ^
+> 931 |               {/* Business Hours */}
+      | ^^^^^^^^^^^^^^^
+  932 |               <motion.div
+  933 |                 initial={{ opacity: 0, y: 20 }}
+  934 |                 animate={{ opacity: 1, y: 0 }}
+
+Expected '</', got 'jsx text (
+
+              )'
+
+Import traces:
+  Client Component Browser:
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component Browser]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component SSR]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+[01:12:36.715] Server  LOG     ✓ Compiled in 338ms
+[01:12:43.001] Server  LOG     ✓ Compiled in 909ms
+[01:12:45.639] Server  LOG     ✓ Finished filesystem cache database compaction in 15.9s
+[01:13:16.851] Server  ERROR   ⨯ ReferenceError: window is not defined
+[01:13:18.064] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:13:20.571] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[01:17:46.007] Server  LOG     ✓ Compiled in 429ms
+[01:17:49.067] Server  LOG     ✓ Compiled in 207ms
+[01:19:33.103] Server  ERROR   ⨯ ReferenceError: window is not defined
+[01:19:34.369] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:19:37.709] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[01:22:29.819] Browser LOG     Form submitted: {"address":{"city":"dfg","country":"us","fullAddress":"werty","postalCode":"123456"},"countryCode":"+91","email":"address@gmail.com","isActive":true,"isVerified":false,"languageSupport":["ert"],"location":{"lat":null,"lng":null},"mobileNumber":112456788,"name":"Provider Name","operatingHours":[{"day":"monday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"tuesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"wednesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"thursday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"friday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"saturday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"sunday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]}],"providerDescription":"sdfgre","providerLogo":null,"providerVerificationStatus":false,"serviceType":[{"price":20,"serviceId":"69709f816629e9fd8335c073"}],"treatmentSupport":[],"urgencySupport":[],"webSiteUrl":""}
+[01:22:56.468] Browser LOG     Form submitted: {"address":{"city":"dfg","country":"us","fullAddress":"werty","postalCode":"123456"},"countryCode":"+91","email":"address@gmail.com","isActive":true,"isVerified":false,"languageSupport":["ert"],"location":{"lat":22.06233490376972,"lng":78.07291173921841},"mobileNumber":112456788,"name":"Provider Name","operatingHours":[{"day":"monday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"tuesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"wednesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"thursday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"friday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"saturday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"sunday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]}],"providerDescription":"sdfgre","providerLogo":null,"providerVerificationStatus":false,"serviceType":[{"price":20,"serviceId":"69709f816629e9fd8335c073"}],"treatmentSupport":[],"urgencySupport":[],"webSiteUrl":""}
+[01:23:13.529] Browser LOG     Form submitted: {"address":{"city":"dfg","country":"us","fullAddress":"werty","postalCode":"123456"},"countryCode":"+91","email":"address@gmail.com","isActive":true,"isVerified":false,"languageSupport":["ert"],"location":{"lat":21.04349121680354,"lng":84.78808566927913},"mobileNumber":112456788,"name":"Provider Name","operatingHours":[{"day":"monday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"tuesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"wednesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"thursday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"friday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"saturday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"sunday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]}],"providerDescription":"sdfgre","providerLogo":null,"providerVerificationStatus":false,"serviceType":[{"price":20,"serviceId":"69709f816629e9fd8335c073"}],"treatmentSupport":[],"urgencySupport":[],"webSiteUrl":""}
+[01:24:36.192] Server  LOG     ✓ Compiled in 9s
+[01:24:37.442] Browser ERROR   ./sahil/fertigo_web/app/main/Map/MapPickerModal.tsx:35:25
+Ecmascript file had an error
+  33 | }
+  34 |
+> 35 | export default function MapPickerModal({ onSelect, onClose }: Props) {
+     |                         ^^^^^^^^^^^^^^
+  36 |     const [position, setPosition] = useState<{ lat: number; lng: number } | null>(null);
+  37 |
+  38 |     return (
+
+the name `MapPickerModal` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./sahil/fertigo_web/app/main/Map/MapPickerModal.tsx [Client Component Browser]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component Browser]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./sahil/fertigo_web/app/main/Map/MapPickerModal.tsx [Client Component SSR]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component SSR]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+[01:26:03.746] Server  LOG     ✓ Compiled in 681ms
+[01:28:18.834] Server  LOG     ✓ Compiled in 3.5s
+[01:28:33.114] Server  LOG     ✓ Finished filesystem cache database compaction in 11.0s
+[01:28:53.891] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:28:56.972] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[01:29:07.806] Server  LOG     ✓ Compiled in 236ms
+[01:29:10.116] Server  LOG     ✓ Compiled in 355ms
+[01:29:16.605] Server  LOG     ✓ Compiled in 557ms
+[01:29:19.936] Server  LOG     ✓ Compiled in 256ms
+[01:39:51.001] Server  LOG     ✓ Compiled in 323ms
+[01:39:52.561] Server  LOG     ✓ Compiled in 219ms
+[01:41:01.466] Server  LOG     ✓ Compiled in 848ms
+[01:41:03.580] Server  LOG     ✓ Compiled in 675ms
+[01:42:50.328] Server  LOG     ✓ Compiled in 178ms
+[01:42:59.068] Server  LOG     ✓ Compiled in 286ms
+[01:43:19.817] Server  ERROR   ⨯ ReferenceError: window is not defined
+[01:43:20.465] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:43:22.194] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[01:45:12.858] Server  LOG     ✓ Compiled in 193ms
+[01:45:43.073] Server  LOG     ✓ Compiled in 290ms
+[01:45:45.220] Server  LOG     ✓ Compiled in 235ms
+[01:45:46.675] Server  LOG     ✓ Compiled in 267ms
+[01:45:51.233] Server  ERROR   ⨯ ReferenceError: window is not defined
+[01:45:52.872] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:45:55.683] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[01:46:33.772] Server  LOG     ✓ Compiled in 307ms
+[01:46:43.197] Server  LOG     ✓ Compiled in 220ms
+[01:47:08.230] Server  ERROR   ⨯ ReferenceError: window is not defined
+[01:47:09.018] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:47:10.974] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[01:50:23.497] Server  LOG     ✓ Compiled in 4.6s
+[01:50:31.579] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:50:33.198] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[01:50:51.080] Server  LOG     ✓ Finished filesystem cache database compaction in 12.5s
+[01:52:40.984] Server  LOG     ✓ Compiled in 120ms
+[01:52:42.303] Server  LOG     ✓ Compiled in 138ms
+[01:53:03.312] Server  LOG     ✓ Compiled in 1036ms
+[01:53:05.586] Server  LOG     ✓ Compiled in 273ms
+[01:53:09.586] Server  LOG     ✓ Compiled in 82ms
+[01:53:11.085] Server  LOG     ✓ Compiled in 202ms
+[01:53:12.595] Server  LOG     ✓ Compiled in 103ms
+[01:53:23.206] Server  LOG     ✓ Compiled in 134ms
+[01:53:26.419] Server  LOG     ✓ Compiled in 159ms
+[01:54:02.516] Server  LOG     ✓ Compiled in 207ms
+[01:54:04.632] Server  LOG     ✓ Compiled in 182ms
+[01:54:06.264] Server  LOG     ✓ Compiled in 155ms
+[01:54:16.519] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:54:18.078] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[01:55:25.961] Server  LOG     ✓ Compiled in 377ms
+[01:55:27.716] Browser ERROR   ./sahil/fertigo_web/app/main/Map/MapPickerModal.tsx:61:45
+Parsing ecmascript source code failed
+  59 |             const provider = new OpenStreetMapProvider();
+  60 |
+> 61 |             const searchControl = new 'new' expression, whose target lacks a construct signature, implicitly has an 'any' type.({
+     |                                             ^^^^^^^^^^
+  62 |                 provider,
+  63 |                 style: "bar",
+  64 |                 showMarker: false,
+
+Expected a semicolon
+
+Import trace:
+  Client Component Browser:
+    ./sahil/fertigo_web/app/main/Map/MapPickerModal.tsx [Client Component Browser]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component Browser]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+[01:55:39.744] Server  LOG     ✓ Compiled in 152ms
+[01:55:46.292] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:55:47.782] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[01:56:20.178] Server  LOG     ✓ Compiled in 169ms
+[01:56:24.433] Server  LOG     ✓ Compiled in 142ms
+[01:56:48.580] Server  LOG     ✓ Compiled in 169ms
+[01:56:54.576] Server  LOG     ✓ Compiled in 403ms
+[01:56:56.940] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:56:58.453] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[01:58:58.441] Server  LOG     ✓ Compiled in 814ms
+[01:58:59.081] Server  LOG     ✓ Compiled in 150ms
+[01:59:00.328] Browser ERROR   uncaughtError: TypeError: Cannot read properties of undefined (reading 'appendChild')
+[01:59:00.328] Browser ERROR   uncaughtError: Error: Map container is being reused by another instance
+[01:59:20.395] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:59:21.883] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[02:04:53.762] Server  LOG     ✓ Compiled in 354ms
+[02:04:57.755] Server  LOG     ✓ Compiled in 308ms
+[02:05:02.723] Server  LOG     ✓ Compiled in 276ms
+[02:05:08.868] Server  LOG     ✓ Compiled in 1869ms
+[02:05:10.094] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:05:12.329] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[02:13:18.255] Server  LOG     ✓ Compiled in 466ms
+[02:13:35.641] Server  LOG     ✓ Compiled in 303ms
+[02:13:36.919] Server  ERROR   ⨯ ./sahil/fertigo_web/app/main/AddProvider/page.tsx:13:1
+Module not found: Can't resolve 'react-hot-toast'
+  11 | import dynamic from "next/dynamic";
+  12 | import { CreateProvider } from '@/app/api/ApiHelper/providerHelper';
+> 13 | import toast from "react-hot-toast";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  14 |
+  15 | const MapPickerModal = dynamic(
+  16 |   () => import("../Map/MapPickerModal"),
+
+
+
+Import traces:
+  Client Component Browser:
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component Browser]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component SSR]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:13:36.947] Server  ERROR   ⨯ ./sahil/fertigo_web/app/main/AddProvider/page.tsx:13:1
+Module not found: Can't resolve 'react-hot-toast'
+  11 | import dynamic from "next/dynamic";
+  12 | import { CreateProvider } from '@/app/api/ApiHelper/providerHelper';
+> 13 | import toast from "react-hot-toast";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  14 |
+  15 | const MapPickerModal = dynamic(
+  16 |   () => import("../Map/MapPickerModal"),
+
+
+
+Import traces:
+  Client Component Browser:
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component Browser]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component SSR]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:13:37.025] Server  ERROR   ⨯ ./sahil/fertigo_web/app/main/AddProvider/page.tsx:13:1
+Module not found: Can't resolve 'react-hot-toast'
+  11 | import dynamic from "next/dynamic";
+  12 | import { CreateProvider } from '@/app/api/ApiHelper/providerHelper';
+> 13 | import toast from "react-hot-toast";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  14 |
+  15 | const MapPickerModal = dynamic(
+  16 |   () => import("../Map/MapPickerModal"),
+
+
+
+Import traces:
+  Client Component Browser:
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component Browser]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component SSR]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:13:37.075] Server  ERROR   ⨯ ./sahil/fertigo_web/app/main/AddProvider/page.tsx:13:1
+Module not found: Can't resolve 'react-hot-toast'
+  11 | import dynamic from "next/dynamic";
+  12 | import { CreateProvider } from '@/app/api/ApiHelper/providerHelper';
+> 13 | import toast from "react-hot-toast";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  14 |
+  15 | const MapPickerModal = dynamic(
+  16 |   () => import("../Map/MapPickerModal"),
+
+
+
+Import traces:
+  Client Component Browser:
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component Browser]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component SSR]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:13:37.120] Server  ERROR   ⨯ ./sahil/fertigo_web/app/main/AddProvider/page.tsx:13:1
+Module not found: Can't resolve 'react-hot-toast'
+  11 | import dynamic from "next/dynamic";
+  12 | import { CreateProvider } from '@/app/api/ApiHelper/providerHelper';
+> 13 | import toast from "react-hot-toast";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  14 |
+  15 | const MapPickerModal = dynamic(
+  16 |   () => import("../Map/MapPickerModal"),
+
+
+
+Import traces:
+  Client Component Browser:
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component Browser]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component SSR]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:13:37.150] Server  ERROR   ⨯ ./sahil/fertigo_web/app/main/AddProvider/page.tsx:13:1
+Module not found: Can't resolve 'react-hot-toast'
+  11 | import dynamic from "next/dynamic";
+  12 | import { CreateProvider } from '@/app/api/ApiHelper/providerHelper';
+> 13 | import toast from "react-hot-toast";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  14 |
+  15 | const MapPickerModal = dynamic(
+  16 |   () => import("../Map/MapPickerModal"),
+
+
+
+Import traces:
+  Client Component Browser:
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component Browser]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component SSR]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:13:37.193] Server  ERROR   ⨯ ./sahil/fertigo_web/app/main/AddProvider/page.tsx:13:1
+Module not found: Can't resolve 'react-hot-toast'
+  11 | import dynamic from "next/dynamic";
+  12 | import { CreateProvider } from '@/app/api/ApiHelper/providerHelper';
+> 13 | import toast from "react-hot-toast";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  14 |
+  15 | const MapPickerModal = dynamic(
+  16 |   () => import("../Map/MapPickerModal"),
+
+
+
+Import traces:
+  Client Component Browser:
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component Browser]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component SSR]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:13:37.227] Server  ERROR   ⨯ ./sahil/fertigo_web/app/main/AddProvider/page.tsx:13:1
+Module not found: Can't resolve 'react-hot-toast'
+  11 | import dynamic from "next/dynamic";
+  12 | import { CreateProvider } from '@/app/api/ApiHelper/providerHelper';
+> 13 | import toast from "react-hot-toast";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  14 |
+  15 | const MapPickerModal = dynamic(
+  16 |   () => import("../Map/MapPickerModal"),
+
+
+
+Import traces:
+  Client Component Browser:
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component Browser]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component SSR]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:13:37.287] Server  ERROR   ⨯ ./sahil/fertigo_web/app/main/AddProvider/page.tsx:13:1
+Module not found: Can't resolve 'react-hot-toast'
+  11 | import dynamic from "next/dynamic";
+  12 | import { CreateProvider } from '@/app/api/ApiHelper/providerHelper';
+> 13 | import toast from "react-hot-toast";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  14 |
+  15 | const MapPickerModal = dynamic(
+  16 |   () => import("../Map/MapPickerModal"),
+
+
+
+Import traces:
+  Client Component Browser:
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component Browser]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component SSR]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:13:37.310] Server  ERROR   ⨯ ./sahil/fertigo_web/app/main/AddProvider/page.tsx:13:1
+Module not found: Can't resolve 'react-hot-toast'
+  11 | import dynamic from "next/dynamic";
+  12 | import { CreateProvider } from '@/app/api/ApiHelper/providerHelper';
+> 13 | import toast from "react-hot-toast";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  14 |
+  15 | const MapPickerModal = dynamic(
+  16 |   () => import("../Map/MapPickerModal"),
+
+
+
+Import traces:
+  Client Component Browser:
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component Browser]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component SSR]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:13:37.343] Server  ERROR   ⨯ ./sahil/fertigo_web/app/main/AddProvider/page.tsx:13:1
+Module not found: Can't resolve 'react-hot-toast'
+  11 | import dynamic from "next/dynamic";
+  12 | import { CreateProvider } from '@/app/api/ApiHelper/providerHelper';
+> 13 | import toast from "react-hot-toast";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  14 |
+  15 | const MapPickerModal = dynamic(
+  16 |   () => import("../Map/MapPickerModal"),
+
+
+
+Import traces:
+  Client Component Browser:
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component Browser]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component SSR]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:13:37.375] Server  ERROR   ⨯ ./sahil/fertigo_web/app/main/AddProvider/page.tsx:13:1
+Module not found: Can't resolve 'react-hot-toast'
+  11 | import dynamic from "next/dynamic";
+  12 | import { CreateProvider } from '@/app/api/ApiHelper/providerHelper';
+> 13 | import toast from "react-hot-toast";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  14 |
+  15 | const MapPickerModal = dynamic(
+  16 |   () => import("../Map/MapPickerModal"),
+
+
+
+Import traces:
+  Client Component Browser:
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component Browser]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component SSR]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:13:37.393] Server  LOG     ✓ Compiled in 521ms
+[02:13:38.324] Browser ERROR   ./sahil/fertigo_web/app/main/AddProvider/page.tsx:13:1
+Module not found: Can't resolve 'react-hot-toast'
+  11 | import dynamic from "next/dynamic";
+  12 | import { CreateProvider } from '@/app/api/ApiHelper/providerHelper';
+> 13 | import toast from "react-hot-toast";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  14 |
+  15 | const MapPickerModal = dynamic(
+  16 |   () => import("../Map/MapPickerModal"),
+
+Import traces:
+  Client Component Browser:
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component Browser]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Client Component SSR]
+    ./sahil/fertigo_web/app/main/AddProvider/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[02:14:33.536] Server  LOG     ✓ Compiled in 16.7s
+[02:27:30.483] Server  LOG     ✓ Compiled in 561ms
+[02:27:33.433] Server  LOG     ✓ Compiled in 234ms
+[02:27:38.125] Server  LOG     ✓ Compiled in 226ms
+[02:33:55.261] Server  LOG     ✓ Finished filesystem cache database compaction in 42s
+[02:36:28.545] Browser LOG     Submitting payload: {"address":{"city":"New York","country":"us","fullAddress":"Manhattan","postalCode":"123456"},"countryCode":"+91","email":"provider@gmail.com","isActive":true,"isVerified":true,"languageSupport":["English","Hindi"],"location":{"lat":40.75844032338939,"lng":-73.9863967895508},"mobileNumber":1234567891,"name":"Provider Test","operatingHours":[{"day":"monday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"tuesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"wednesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"thursday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"friday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"saturday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"sunday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]}],"providerDescription":"This is a test description of the provider.","providerLogo":null,"providerVerificationStatus":false,"serviceType":[{"price":20,"serviceId":"69709f816629e9fd8335c073"}],"treatmentSupport":["IVF"],"urgencySupport":["Scheduled"],"webSiteUrl":""}
+[02:36:30.973] Browser LOG     {"config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"baseURL":"http://85.31.234.205:5200","data":"{\"name\":\"Provider Test\",\"email\":\"provider@gmail.com\",\"countryCode\":\"+91\",\"mobileNumber\":1234567891,\"webSiteUrl\":\"\",\"providerDescription\":\"This is a test description of the provider.\",\"providerLogo\":null,\"isActive\":true,\"providerVerificationStatus\":false,\"serviceType\":[{\"serviceId\":\"69709f816629e9fd8335c073\",\"price\":20}],\"treatmentSupport\":[\"IVF\"],\"urgencySupport\":[\"Scheduled\"],\"languageSupport\":[\"English\",\"Hindi\"],\"operatingHours\":[{\"day\":\"monday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"tuesday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"wednesday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"thursday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"friday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"saturday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"sunday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]}],\"address\":{\"fullAddress\":\"Manhattan\",\"city\":\"New York\",\"country\":\"us\",\"postalCode\":\"123456\"},\"location\":{\"lat\":40.75844032338939,\"lng\":-73.9863967895508},\"isVerified\":true}","env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json"},"maxBodyLength":-1,"maxContentLength":-1,"method":"post","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/providers","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"data":{"autoGeneratedPassword":"6onKfzOp","data":{"__v":0,"_id":"69731fdfbeb5761b27a72936","address":{"city":"New York","country":"us","fullAddress":"Manhattan","postalCode":"123456"},"countryCode":"+91","createdAt":"2026-01-23T07:14:39.705Z","email":"provider@gmail.com","isActive":true,"isNotificationEnabled":true,"isVerified":true,"languageSupport":["English","Hindi"],"location":{"lat":40.75844032338939,"lng":-73.9863967895508},"mobileNumber":1234567891,"name":"Provider Test","operatingHours":[{"day":"monday","isAvailable":true,"slots":"[Array]"},{"day":"tuesday","isAvailable":true,"slots":"[Array]"},{"day":"wednesday","isAvailable":true,"slots":"[Array]"},{"day":"thursday","isAvailable":true,"slots":"[Array]"},{"day":"friday","isAvailable":true,"slots":"[Array]"},{"day":"saturday","isAvailable":true,"slots":"[Array]"},{"day":"sunday","isAvailable":true,"slots":"[Array]"}],"providerDescription":"This is a test description of the provider.","providerLogo":null,"providerVerificationStatus":false,"serviceType":[{"price":20,"serviceId":"69709f816629e9fd8335c073"}],"treatmentSupport":["IVF"],"updatedAt":"2026-01-23T07:14:39.705Z","urgencySupport":["Scheduled"],"webSiteUrl":""},"message":"Provider created successfully","status":true,"statusCode":201},"headers":{"content-length":"1484","content-type":"application/json; charset=utf-8"},"request":{},"status":201,"statusText":"Created"} ===
+[02:36:33.837] Server  LOG     ○ Compiling /main/Provider ...
+[02:36:38.708] Browser LOG     {"config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"baseURL":"http://85.31.234.205:5200","data":{},"env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"multipart/form-data"},"maxBodyLength":-1,"maxContentLength":-1,"method":"post","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/upload","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"data":{"data":{"mimeType":"image/png","originalName":"Generated Item.png","size":1755517,"url":"/uploads/1769152450410-4956725.png"},"message":"File uploaded successfully","status":true,"statusCode":201},"headers":{"content-length":"197","content-type":"application/json; charset=utf-8"},"request":{},"status":201,"statusText":"Created"}
+[02:37:46.365] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[02:37:46.365] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[02:46:42.799] Browser LOG     {"config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"baseURL":"http://85.31.234.205:5200","data":{},"env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"multipart/form-data"},"maxBodyLength":-1,"maxContentLength":-1,"method":"post","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/upload","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"data":{"data":{"mimeType":"image/png","originalName":"Generated Item.png","size":1755517,"url":"/uploads/1769153066235-852784189.png"},"message":"File uploaded successfully","status":true,"statusCode":201},"headers":{"content-length":"199","content-type":"application/json; charset=utf-8"},"request":{},"status":201,"statusText":"Created"}
+[02:49:02.126] Server  LOG     ✓ Compiled in 772ms
+[02:49:30.787] Server  LOG     ✓ Compiled in 4.3s
+[02:49:41.189] Server  LOG     ✓ Compiled in 244ms
+[02:49:44.375] Server  LOG     ✓ Compiled in 599ms
+[02:50:32.853] Server  LOG     ✓ Compiled in 209ms
+[02:50:47.667] Server  LOG     ✓ Compiled in 543ms
+[02:50:55.250] Server  LOG     ✓ Compiled in 446ms
+[02:51:15.006] Server  LOG     ✓ Compiled in 304ms
+[02:51:59.854] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:52:02.795] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[02:57:55.925] Server  LOG     ✓ Compiled in 715ms
+[02:57:56.315] Browser ERROR   uncaughtError: ReferenceError: Country is not defined
+[02:58:31.718] Server  LOG     ✓ Compiled in 8.8s
+[02:58:32.126] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[02:58:34.845] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[02:58:36.713] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:58:41.489] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[03:11:29.716] Server  LOG     ✓ Compiled in 1059ms
+[03:11:31.123] Server  LOG     ✓ Compiled in 694ms
+[03:11:37.344] Server  LOG     ✓ Compiled in 689ms
+[03:11:58.552] Server  LOG     ✓ Compiled in 345ms
+[03:12:40.630] Browser LOG     {"config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"baseURL":"http://85.31.234.205:5200","data":{},"env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"multipart/form-data"},"maxBodyLength":-1,"maxContentLength":-1,"method":"post","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/upload","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"data":{"data":{"mimeType":"image/png","originalName":"Adobe_Stock_740172758_bc20f05229.png","size":517753,"url":"/uploads/1769154646478-824088654.png"},"message":"File uploaded successfully","status":true,"statusCode":201},"headers":{"content-length":"216","content-type":"application/json; charset=utf-8"},"request":{},"status":201,"statusText":"Created"}
+[03:13:50.136] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[03:13:50.941] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[03:14:06.248] Server  LOG     ✓ Compiled in 217ms
+[03:14:08.221] Server  LOG     ✓ Compiled in 237ms
+[03:14:13.638] Server  LOG     ✓ Compiled in 187ms
+[03:14:24.529] Server  LOG     ✓ Compiled in 209ms
+[03:14:26.369] Server  LOG     ✓ Compiled in 320ms
+[03:14:26.958] Server  LOG     ✓ Compiled in 166ms
+[03:20:01.648] Browser LOG     {"config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"baseURL":"http://85.31.234.205:5200","data":{},"env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"multipart/form-data"},"maxBodyLength":-1,"maxContentLength":-1,"method":"post","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/upload","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"data":{"data":{"mimeType":"image/png","originalName":"Adobe_Stock_740172758_bc20f05229.png","size":517753,"url":"/uploads/1769155085286-644290408.png"},"message":"File uploaded successfully","status":true,"statusCode":201},"headers":{"content-length":"216","content-type":"application/json; charset=utf-8"},"request":{},"status":201,"statusText":"Created"}
+[03:20:25.721] Browser LOG     Submitting payload: {"address":{"city":"Beaujon","country":"France","fullAddress":"Hospital Beaujon","postalCode":"123456"},"countryCode":"+91","email":"contact@gmail.com","isActive":true,"isVerified":true,"languageSupport":["French"],"location":{"lat":48.9081722272656,"lng":2.3103475570678715},"mobileNumber":123456,"name":"Provider Name","operatingHours":[{"day":"monday","isAvailable":false,"slots":[]},{"day":"tuesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"wednesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"thursday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"friday","isAvailable":false,"slots":[]},{"day":"saturday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"sunday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]}],"providerDescription":"This is a test description about the provider.","providerLogo":"/uploads/1769155085286-644290408.png","providerVerificationStatus":false,"serviceType":[{"price":500,"serviceId":"69709f816629e9fd8335c073"},{"price":300,"serviceId":"69709f756629e9fd8335c071"},{"price":250,"serviceId":"697098236629e9fd8335c06d"}],"treatmentSupport":["IVF","IUI"],"urgencySupport":["Same Day","Next Day","Scheduled","Emergency"],"webSiteUrl":"htttps://www.hospital.com"}
+[03:20:28.094] Browser LOG     {"config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"baseURL":"http://85.31.234.205:5200","data":"{\"name\":\"Provider Name\",\"email\":\"contact@gmail.com\",\"countryCode\":\"+91\",\"mobileNumber\":123456,\"webSiteUrl\":\"htttps://www.hospital.com\",\"providerDescription\":\"This is a test description about the provider.\",\"providerLogo\":\"/uploads/1769155085286-644290408.png\",\"isActive\":true,\"providerVerificationStatus\":false,\"serviceType\":[{\"serviceId\":\"69709f816629e9fd8335c073\",\"price\":500},{\"serviceId\":\"69709f756629e9fd8335c071\",\"price\":300},{\"serviceId\":\"697098236629e9fd8335c06d\",\"price\":250}],\"treatmentSupport\":[\"IVF\",\"IUI\"],\"urgencySupport\":[\"Same Day\",\"Next Day\",\"Scheduled\",\"Emergency\"],\"languageSupport\":[\"French\"],\"operatingHours\":[{\"day\":\"monday\",\"isAvailable\":false,\"slots\":[]},{\"day\":\"tuesday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"wednesday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"thursday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"friday\",\"isAvailable\":false,\"slots\":[]},{\"day\":\"saturday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"sunday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]}],\"address\":{\"fullAddress\":\"Hospital Beaujon\",\"city\":\"Beaujon\",\"country\":\"France\",\"postalCode\":\"123456\"},\"location\":{\"lat\":48.9081722272656,\"lng\":2.3103475570678715},\"isVerified\":true}","env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json"},"maxBodyLength":-1,"maxContentLength":-1,"method":"post","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/providers","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"data":{"autoGeneratedPassword":"vo3V5@rS","data":{"__v":0,"_id":"69732a2cbeb5761b27a72948","address":{"city":"Beaujon","country":"France","fullAddress":"Hospital Beaujon","postalCode":"123456"},"countryCode":"+91","createdAt":"2026-01-23T07:58:36.989Z","email":"contact@gmail.com","isActive":true,"isNotificationEnabled":true,"isVerified":true,"languageSupport":["French"],"location":{"lat":48.9081722272656,"lng":2.3103475570678715},"mobileNumber":123456,"name":"Provider Name","operatingHours":[{"day":"monday","isAvailable":false,"slots":[]},{"day":"tuesday","isAvailable":true,"slots":"[Array]"},{"day":"wednesday","isAvailable":true,"slots":"[Array]"},{"day":"thursday","isAvailable":true,"slots":"[Array]"},{"day":"friday","isAvailable":false,"slots":[]},{"day":"saturday","isAvailable":true,"slots":"[Array]"},{"day":"sunday","isAvailable":true,"slots":"[Array]"}],"providerDescription":"This is a test description about the provider.","providerLogo":"/uploads/1769155085286-644290408.png","providerVerificationStatus":false,"serviceType":[{"price":500,"serviceId":"69709f816629e9fd8335c073"},{"price":300,"serviceId":"69709f756629e9fd8335c071"},{"price":250,"serviceId":"697098236629e9fd8335c06d"}],"treatmentSupport":["IVF","IUI"],"updatedAt":"2026-01-23T07:58:36.989Z","urgencySupport":["Same Day","Next Day","Scheduled","Emergency"],"webSiteUrl":"htttps://www.hospital.com"},"message":"Provider created successfully","status":true,"statusCode":201},"headers":{"content-length":"1613","content-type":"application/json; charset=utf-8"},"request":{},"status":201,"statusText":"Created"} ===
+[04:10:06.838] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[04:10:07.716] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[04:12:47.809] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[04:12:48.626] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[04:29:00.321] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[04:29:00.322] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[04:29:37.721] Browser LOG     {"config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"baseURL":"http://85.31.234.205:5200","data":{},"env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"multipart/form-data"},"maxBodyLength":-1,"maxContentLength":-1,"method":"post","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/upload","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"data":{"data":{"mimeType":"image/png","originalName":"Adobe_Stock_740172758_bc20f05229.png","size":517753,"url":"/uploads/1769159260539-95057962.png"},"message":"File uploaded successfully","status":true,"statusCode":201},"headers":{"content-length":"215","content-type":"application/json; charset=utf-8"},"request":{},"status":201,"statusText":"Created"}
+[04:29:58.936] Browser LOG     Submitting payload: {"address":{"city":"sdfg","country":"Azerbaijan","fullAddress":"sdfgh","postalCode":"sdfg"},"countryCode":"+91","email":"contact@gmail.com","isActive":true,"isVerified":false,"languageSupport":["sdfgh"],"location":{"lat":null,"lng":null},"mobileNumber":null,"name":"tre","operatingHours":[{"day":"monday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"tuesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"wednesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"thursday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"friday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"saturday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"sunday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]}],"providerDescription":"wert","providerLogo":"/uploads/1769159260539-95057962.png","providerVerificationStatus":false,"serviceType":[],"treatmentSupport":[],"urgencySupport":[],"webSiteUrl":""}
+[04:30:06.233] Browser ERROR   Create provider error: {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"baseURL":"http://85.31.234.205:5200","data":"{\"name\":\"tre\",\"email\":\"contact@gmail.com\",\"countryCode\":\"+91\",\"mobileNumber\":null,\"webSiteUrl\":\"\",\"providerDescription\":\"wert\",\"providerLogo\":\"/uploads/1769159260539-95057962.png\",\"isActive\":true,\"providerVerificationStatus\":false,\"serviceType\":[],\"treatmentSupport\":[],\"urgencySupport\":[],\"languageSupport\":[\"sdfgh\"],\"operatingHours\":[{\"day\":\"monday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"tuesday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"wednesday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"thursday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"friday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"saturday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"sunday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]}],\"address\":{\"fullAddress\":\"sdfgh\",\"city\":\"sdfg\",\"country\":\"Azerbaijan\",\"postalCode\":\"sdfg\"},\"location\":{\"lat\":null,\"lng\":null},\"isVerified\":false}","env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json"},"maxBodyLength":-1,"maxContentLength":-1,"method":"post","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/providers","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 400","name":"AxiosError","stack":"AxiosError: Request failed with status code 400\n    at settle (http://localhost:3000/_next/static/chunks/59d9d_cee6808d._.js:3873:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/59d9d_cee6808d._.js:4388:198)\n    at Axios.request (http://localhost:3000/_next/static/chunks/59d9d_cee6808d._.js:5192:49)\n    at async handleSubmit (http://localhost:3000/_next/static/chunks/sahil_fertigo_web_app_c53fc52b._.js?id=%255Bproject%255D%252Fsahil%252Ffertigo_web%252Fapp%252Fmain%252FAddProvider%252Fpage.tsx+%255Bapp-client%255D+%2528ecmascript%2529:402:25)","status":400}
+[04:30:22.921] Browser LOG     Submitting payload: {"address":{"city":"sdfg","country":"Azerbaijan","fullAddress":"sdfgh","postalCode":"sdfg"},"countryCode":"+91","email":"contact@gmail.com","isActive":true,"isVerified":false,"languageSupport":["sdfgh"],"location":{"lat":23.28171917560003,"lng":77.60742187500001},"mobileNumber":null,"name":"tre","operatingHours":[{"day":"monday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"tuesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"wednesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"thursday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"friday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"saturday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"sunday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]}],"providerDescription":"wert","providerLogo":"/uploads/1769159260539-95057962.png","providerVerificationStatus":false,"serviceType":[],"treatmentSupport":[],"urgencySupport":[],"webSiteUrl":""}
+[04:30:26.041] Browser LOG     {"config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"baseURL":"http://85.31.234.205:5200","data":"{\"name\":\"tre\",\"email\":\"contact@gmail.com\",\"countryCode\":\"+91\",\"mobileNumber\":null,\"webSiteUrl\":\"\",\"providerDescription\":\"wert\",\"providerLogo\":\"/uploads/1769159260539-95057962.png\",\"isActive\":true,\"providerVerificationStatus\":false,\"serviceType\":[],\"treatmentSupport\":[],\"urgencySupport\":[],\"languageSupport\":[\"sdfgh\"],\"operatingHours\":[{\"day\":\"monday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"tuesday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"wednesday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"thursday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"friday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"saturday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"sunday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]}],\"address\":{\"fullAddress\":\"sdfgh\",\"city\":\"sdfg\",\"country\":\"Azerbaijan\",\"postalCode\":\"sdfg\"},\"location\":{\"lat\":23.28171917560003,\"lng\":77.60742187500001},\"isVerified\":false}","env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json"},"maxBodyLength":-1,"maxContentLength":-1,"method":"post","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/providers","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"data":{"data":null,"message":"Email already exists","status":false,"statusCode":400},"headers":{"content-length":"78","content-type":"application/json; charset=utf-8"},"request":{},"status":201,"statusText":"Created"} ===
+[04:30:30.675] Browser LOG     Submitting payload: {"address":{"city":"sdfg","country":"Azerbaijan","fullAddress":"sdfgh","postalCode":"sdfg"},"countryCode":"+91","email":"contact@gmail.comm","isActive":true,"isVerified":false,"languageSupport":["sdfgh"],"location":{"lat":23.28171917560003,"lng":77.60742187500001},"mobileNumber":null,"name":"tre","operatingHours":[{"day":"monday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"tuesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"wednesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"thursday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"friday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"saturday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"sunday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]}],"providerDescription":"wert","providerLogo":"/uploads/1769159260539-95057962.png","providerVerificationStatus":false,"serviceType":[],"treatmentSupport":[],"urgencySupport":[],"webSiteUrl":""}
+[04:30:33.201] Browser LOG     {"config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"baseURL":"http://85.31.234.205:5200","data":"{\"name\":\"tre\",\"email\":\"contact@gmail.comm\",\"countryCode\":\"+91\",\"mobileNumber\":null,\"webSiteUrl\":\"\",\"providerDescription\":\"wert\",\"providerLogo\":\"/uploads/1769159260539-95057962.png\",\"isActive\":true,\"providerVerificationStatus\":false,\"serviceType\":[],\"treatmentSupport\":[],\"urgencySupport\":[],\"languageSupport\":[\"sdfgh\"],\"operatingHours\":[{\"day\":\"monday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"tuesday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"wednesday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"thursday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"friday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"saturday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"sunday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]}],\"address\":{\"fullAddress\":\"sdfgh\",\"city\":\"sdfg\",\"country\":\"Azerbaijan\",\"postalCode\":\"sdfg\"},\"location\":{\"lat\":23.28171917560003,\"lng\":77.60742187500001},\"isVerified\":false}","env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json"},"maxBodyLength":-1,"maxContentLength":-1,"method":"post","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/providers","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"data":{"autoGeneratedPassword":"KtlUY8Tm","data":{"__v":0,"_id":"69733a99beb5761b27a72959","address":{"city":"sdfg","country":"Azerbaijan","fullAddress":"sdfgh","postalCode":"sdfg"},"countryCode":"+91","createdAt":"2026-01-23T09:08:41.793Z","email":"contact@gmail.comm","isActive":true,"isNotificationEnabled":true,"isVerified":false,"languageSupport":["sdfgh"],"location":{"lat":23.28171917560003,"lng":77.60742187500001},"mobileNumber":null,"name":"tre","operatingHours":[{"day":"monday","isAvailable":true,"slots":"[Array]"},{"day":"tuesday","isAvailable":true,"slots":"[Array]"},{"day":"wednesday","isAvailable":true,"slots":"[Array]"},{"day":"thursday","isAvailable":true,"slots":"[Array]"},{"day":"friday","isAvailable":true,"slots":"[Array]"},{"day":"saturday","isAvailable":true,"slots":"[Array]"},{"day":"sunday","isAvailable":true,"slots":"[Array]"}],"providerDescription":"wert","providerLogo":"/uploads/1769159260539-95057962.png","providerVerificationStatus":false,"serviceType":[],"treatmentSupport":[],"updatedAt":"2026-01-23T09:08:41.793Z","urgencySupport":[],"webSiteUrl":""},"message":"Provider created successfully","status":true,"statusCode":201},"headers":{"content-length":"1384","content-type":"application/json; charset=utf-8"},"request":{},"status":201,"statusText":"Created"} ===
+[04:30:57.382] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[05:11:41.196] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[05:11:47.967] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[05:11:48.825] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[05:12:05.272] Browser LOG     {"config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"baseURL":"http://85.31.234.205:5200","data":{},"env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"multipart/form-data"},"maxBodyLength":-1,"maxContentLength":-1,"method":"post","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/upload","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"data":{"data":{"mimeType":"image/png","originalName":"Adobe_Stock_740172758_bc20f05229.png","size":517753,"url":"/uploads/1769161810879-414126726.png"},"message":"File uploaded successfully","status":true,"statusCode":201},"headers":{"content-length":"216","content-type":"application/json; charset=utf-8"},"request":{},"status":201,"statusText":"Created"}
+[05:13:18.247] Browser LOG     Submitting payload: {"address":{"city":"wdfre","country":"Aruba","fullAddress":"sdfgtre","postalCode":"1234"},"countryCode":"+91","email":"rgytfrtyhuy@gmail.com","isActive":true,"isVerified":true,"languageSupport":["eng"],"location":{"lat":null,"lng":null},"mobileNumber":123456,"name":"wrtyt","operatingHours":[{"day":"monday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"tuesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"wednesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"thursday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"friday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"saturday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"sunday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]}],"providerDescription":"test","providerLogo":"/uploads/1769161810879-414126726.png","providerVerificationStatus":false,"serviceType":[{"price":20,"serviceId":"69709f816629e9fd8335c073"}],"treatmentSupport":[],"urgencySupport":[],"webSiteUrl":""}
+[05:13:24.143] Browser ERROR   Create provider error: {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"baseURL":"http://85.31.234.205:5200","data":"{\"name\":\"wrtyt\",\"email\":\"rgytfrtyhuy@gmail.com\",\"countryCode\":\"+91\",\"mobileNumber\":123456,\"webSiteUrl\":\"\",\"providerDescription\":\"test\",\"providerLogo\":\"/uploads/1769161810879-414126726.png\",\"isActive\":true,\"providerVerificationStatus\":false,\"serviceType\":[{\"serviceId\":\"69709f816629e9fd8335c073\",\"price\":20}],\"treatmentSupport\":[],\"urgencySupport\":[],\"languageSupport\":[\"eng\"],\"operatingHours\":[{\"day\":\"monday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"tuesday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"wednesday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"thursday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"friday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"saturday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"sunday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]}],\"address\":{\"fullAddress\":\"sdfgtre\",\"city\":\"wdfre\",\"country\":\"Aruba\",\"postalCode\":\"1234\"},\"location\":{\"lat\":null,\"lng\":null},\"isVerified\":true}","env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json"},"maxBodyLength":-1,"maxContentLength":-1,"method":"post","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/providers","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 400","name":"AxiosError","stack":"AxiosError: Request failed with status code 400\n    at settle (http://localhost:3000/_next/static/chunks/59d9d_cee6808d._.js:3873:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/59d9d_cee6808d._.js:4388:198)\n    at Axios.request (http://localhost:3000/_next/static/chunks/59d9d_cee6808d._.js:5192:49)\n    at async handleSubmit (http://localhost:3000/_next/static/chunks/sahil_fertigo_web_app_c53fc52b._.js:520:25)","status":400}
+[05:16:52.719] Server  LOG     ✓ Compiled in 6.9s
+[05:17:00.877] Browser LOG     Submitting payload: {"address":{"city":"wdfre","country":"Aruba","fullAddress":"sdfgtre","postalCode":"1234"},"countryCode":"+91","email":"rgytfrtyhuy@gmail.com","isActive":true,"isVerified":true,"languageSupport":["eng"],"mobileNumber":123456,"name":"wrtyt","operatingHours":[{"day":"monday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"tuesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"wednesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"thursday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"friday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"saturday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"sunday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]}],"providerDescription":"test","providerLogo":"/uploads/1769161810879-414126726.png","providerVerificationStatus":false,"serviceType":[{"price":20,"serviceId":"69709f816629e9fd8335c073"}],"treatmentSupport":[],"urgencySupport":[],"webSiteUrl":""}
+[05:17:05.391] Browser LOG     {"config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"baseURL":"http://85.31.234.205:5200","data":"{\"name\":\"wrtyt\",\"email\":\"rgytfrtyhuy@gmail.com\",\"countryCode\":\"+91\",\"mobileNumber\":123456,\"webSiteUrl\":\"\",\"providerDescription\":\"test\",\"providerLogo\":\"/uploads/1769161810879-414126726.png\",\"isActive\":true,\"providerVerificationStatus\":false,\"serviceType\":[{\"serviceId\":\"69709f816629e9fd8335c073\",\"price\":20}],\"treatmentSupport\":[],\"urgencySupport\":[],\"languageSupport\":[\"eng\"],\"operatingHours\":[{\"day\":\"monday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"tuesday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"wednesday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"thursday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"friday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"saturday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"sunday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]}],\"address\":{\"fullAddress\":\"sdfgtre\",\"city\":\"wdfre\",\"country\":\"Aruba\",\"postalCode\":\"1234\"},\"isVerified\":true}","env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json"},"maxBodyLength":-1,"maxContentLength":-1,"method":"post","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/providers","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"data":{"data":null,"message":"Mobile number already exists","status":false,"statusCode":400},"headers":{"content-length":"86","content-type":"application/json; charset=utf-8"},"request":{},"status":201,"statusText":"Created"} ===
+[05:17:07.842] Browser LOG     Submitting payload: {"address":{"city":"wdfre","country":"Aruba","fullAddress":"sdfgtre","postalCode":"1234"},"countryCode":"+91","email":"rgytfrtyhuy@gmail.com","isActive":true,"isVerified":true,"languageSupport":["eng"],"mobileNumber":123456,"name":"wrtyt","operatingHours":[{"day":"monday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"tuesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"wednesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"thursday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"friday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"saturday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"sunday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]}],"providerDescription":"test","providerLogo":"/uploads/1769161810879-414126726.png","providerVerificationStatus":false,"serviceType":[{"price":20,"serviceId":"69709f816629e9fd8335c073"}],"treatmentSupport":[],"urgencySupport":[],"webSiteUrl":""}
+[05:17:40.560] Browser LOG     {"config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"baseURL":"http://85.31.234.205:5200","data":"{\"name\":\"wrtyt\",\"email\":\"rgytfrtyhuy@gmail.com\",\"countryCode\":\"+91\",\"mobileNumber\":123456,\"webSiteUrl\":\"\",\"providerDescription\":\"test\",\"providerLogo\":\"/uploads/1769161810879-414126726.png\",\"isActive\":true,\"providerVerificationStatus\":false,\"serviceType\":[{\"serviceId\":\"69709f816629e9fd8335c073\",\"price\":20}],\"treatmentSupport\":[],\"urgencySupport\":[],\"languageSupport\":[\"eng\"],\"operatingHours\":[{\"day\":\"monday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"tuesday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"wednesday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"thursday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"friday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"saturday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"sunday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]}],\"address\":{\"fullAddress\":\"sdfgtre\",\"city\":\"wdfre\",\"country\":\"Aruba\",\"postalCode\":\"1234\"},\"isVerified\":true}","env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json"},"maxBodyLength":-1,"maxContentLength":-1,"method":"post","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/providers","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"data":{"data":null,"message":"Mobile number already exists","status":false,"statusCode":400},"headers":{"content-length":"86","content-type":"application/json; charset=utf-8"},"request":{},"status":201,"statusText":"Created"} ===
+[05:18:50.598] Server  LOG     ✓ Compiled in 581ms
+[05:20:05.812] Server  LOG     ✓ Compiled in 7.1s
+[05:20:14.463] Browser LOG     Submitting payload: {"address":{"city":"wdfre","country":"Aruba","fullAddress":"sdfgtre","postalCode":"1234"},"countryCode":"+91","email":"rgytfrtyhuy@gmail.com","isActive":true,"isVerified":true,"languageSupport":["eng"],"mobileNumber":123456,"name":"wrtyt","operatingHours":[{"day":"monday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"tuesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"wednesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"thursday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"friday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"saturday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"sunday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]}],"providerDescription":"test","providerLogo":"/uploads/1769161810879-414126726.png","providerVerificationStatus":false,"serviceType":[{"price":20,"serviceId":"69709f816629e9fd8335c073"}],"treatmentSupport":[],"urgencySupport":[],"webSiteUrl":""}
+[05:20:16.264] Browser LOG     {"config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"baseURL":"http://85.31.234.205:5200","data":"{\"name\":\"wrtyt\",\"email\":\"rgytfrtyhuy@gmail.com\",\"countryCode\":\"+91\",\"mobileNumber\":123456,\"webSiteUrl\":\"\",\"providerDescription\":\"test\",\"providerLogo\":\"/uploads/1769161810879-414126726.png\",\"isActive\":true,\"providerVerificationStatus\":false,\"serviceType\":[{\"serviceId\":\"69709f816629e9fd8335c073\",\"price\":20}],\"treatmentSupport\":[],\"urgencySupport\":[],\"languageSupport\":[\"eng\"],\"operatingHours\":[{\"day\":\"monday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"tuesday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"wednesday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"thursday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"friday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"saturday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"sunday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]}],\"address\":{\"fullAddress\":\"sdfgtre\",\"city\":\"wdfre\",\"country\":\"Aruba\",\"postalCode\":\"1234\"},\"isVerified\":true}","env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json"},"maxBodyLength":-1,"maxContentLength":-1,"method":"post","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/providers","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"data":{"data":null,"message":"Mobile number already exists","status":false,"statusCode":400},"headers":{"content-length":"86","content-type":"application/json; charset=utf-8"},"request":{},"status":201,"statusText":"Created"} ===
+[05:20:39.291] Browser LOG     Submitting payload: {"address":{"city":"wdfre","country":"Aruba","fullAddress":"sdfgtre","postalCode":"1234"},"countryCode":"+91","email":"contact@gmail.com","isActive":true,"isVerified":true,"languageSupport":["eng"],"mobileNumber":123456,"name":"wrtyt","operatingHours":[{"day":"monday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"tuesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"wednesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"thursday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"friday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"saturday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"sunday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]}],"providerDescription":"test","providerLogo":"/uploads/1769161810879-414126726.png","providerVerificationStatus":false,"serviceType":[{"price":20,"serviceId":"69709f816629e9fd8335c073"}],"treatmentSupport":[],"urgencySupport":[],"webSiteUrl":""}
+[05:20:40.787] Browser LOG     {"config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"baseURL":"http://85.31.234.205:5200","data":"{\"name\":\"wrtyt\",\"email\":\"contact@gmail.com\",\"countryCode\":\"+91\",\"mobileNumber\":123456,\"webSiteUrl\":\"\",\"providerDescription\":\"test\",\"providerLogo\":\"/uploads/1769161810879-414126726.png\",\"isActive\":true,\"providerVerificationStatus\":false,\"serviceType\":[{\"serviceId\":\"69709f816629e9fd8335c073\",\"price\":20}],\"treatmentSupport\":[],\"urgencySupport\":[],\"languageSupport\":[\"eng\"],\"operatingHours\":[{\"day\":\"monday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"tuesday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"wednesday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"thursday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"friday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"saturday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"sunday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]}],\"address\":{\"fullAddress\":\"sdfgtre\",\"city\":\"wdfre\",\"country\":\"Aruba\",\"postalCode\":\"1234\"},\"isVerified\":true}","env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json"},"maxBodyLength":-1,"maxContentLength":-1,"method":"post","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/providers","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"data":{"data":null,"message":"Email already exists","status":false,"statusCode":400},"headers":{"content-length":"78","content-type":"application/json; charset=utf-8"},"request":{},"status":201,"statusText":"Created"} ===
+[05:20:48.254] Server  LOG     ✓ Finished filesystem cache database compaction in 36.3s
+[05:20:51.656] Browser LOG     Submitting payload: {"address":{"city":"wdfre","country":"Aruba","fullAddress":"sdfgtre","postalCode":"1234"},"countryCode":"+91","email":"contact@gmail.comm","isActive":true,"isVerified":true,"languageSupport":["eng"],"mobileNumber":1234567,"name":"wrtyt","operatingHours":[{"day":"monday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"tuesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"wednesday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"thursday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"friday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"saturday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]},{"day":"sunday","isAvailable":true,"slots":[{"endTime":"17:00","startTime":"09:00"}]}],"providerDescription":"test","providerLogo":"/uploads/1769161810879-414126726.png","providerVerificationStatus":false,"serviceType":[{"price":20,"serviceId":"69709f816629e9fd8335c073"}],"treatmentSupport":[],"urgencySupport":[],"webSiteUrl":""}
+[05:20:53.989] Browser LOG     {"config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"baseURL":"http://85.31.234.205:5200","data":"{\"name\":\"wrtyt\",\"email\":\"contact@gmail.comm\",\"countryCode\":\"+91\",\"mobileNumber\":1234567,\"webSiteUrl\":\"\",\"providerDescription\":\"test\",\"providerLogo\":\"/uploads/1769161810879-414126726.png\",\"isActive\":true,\"providerVerificationStatus\":false,\"serviceType\":[{\"serviceId\":\"69709f816629e9fd8335c073\",\"price\":20}],\"treatmentSupport\":[],\"urgencySupport\":[],\"languageSupport\":[\"eng\"],\"operatingHours\":[{\"day\":\"monday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"tuesday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"wednesday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"thursday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"friday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"saturday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]},{\"day\":\"sunday\",\"isAvailable\":true,\"slots\":[{\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]}],\"address\":{\"fullAddress\":\"sdfgtre\",\"city\":\"wdfre\",\"country\":\"Aruba\",\"postalCode\":\"1234\"},\"isVerified\":true}","env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json"},"maxBodyLength":-1,"maxContentLength":-1,"method":"post","timeout":0,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"/providers","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"data":{"autoGeneratedPassword":"nAerOqiB","data":{"__v":0,"_id":"69734666ac2c84b8301b1bb4","address":{"city":"wdfre","country":"Aruba","fullAddress":"sdfgtre","postalCode":"1234"},"countryCode":"+91","createdAt":"2026-01-23T09:59:02.642Z","email":"contact@gmail.comm","isActive":true,"isNotificationEnabled":true,"isVerified":true,"languageSupport":["eng"],"mobileNumber":1234567,"name":"wrtyt","operatingHours":[{"day":"monday","isAvailable":true,"slots":"[Array]"},{"day":"tuesday","isAvailable":true,"slots":"[Array]"},{"day":"wednesday","isAvailable":true,"slots":"[Array]"},{"day":"thursday","isAvailable":true,"slots":"[Array]"},{"day":"friday","isAvailable":true,"slots":"[Array]"},{"day":"saturday","isAvailable":true,"slots":"[Array]"},{"day":"sunday","isAvailable":true,"slots":"[Array]"}],"providerDescription":"test","providerLogo":"/uploads/1769161810879-414126726.png","providerVerificationStatus":false,"serviceType":[{"price":20,"serviceId":"69709f816629e9fd8335c073"}],"treatmentSupport":[],"updatedAt":"2026-01-23T09:59:02.642Z","urgencySupport":[],"webSiteUrl":""},"message":"Provider created successfully","status":true,"statusCode":201},"headers":{"content-length":"1375","content-type":"application/json; charset=utf-8"},"request":{},"status":201,"statusText":"Created"} ===
+[05:21:36.803] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[05:21:48.534] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[05:21:49.417] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[05:30:59.463] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[05:31:00.262] Browser LOG     [{"__v":0,"_id":"69709f816629e9fd8335c073","createdAt":"2026-01-21T09:42:25.407Z","icon":"https://example.com/icons/dog-walking.png","name":"Xray & Scans","updatedAt":"2026-01-21T09:42:25.407Z"},{"__v":0,"_id":"69709f756629e9fd8335c071","createdAt":"2026-01-21T09:42:13.796Z","icon":"https://example.com/icons/dog-walking.png","name":"Ultrasound","updatedAt":"2026-01-21T09:42:13.796Z"},{"__v":0,"_id":"697098236629e9fd8335c06d","createdAt":"2026-01-21T09:10:59.699Z","icon":"https://example.com/icons/dog-walking.png","name":"Blood Test Laboratories","updatedAt":"2026-01-21T09:10:59.699Z"}]
+[05:31:19.116] Server  LOG     ✓ Compiled in 1061ms

@@ -1,1 +1,11 @@
-{}
+{
+  "[project]/sahil/fertigo_web/app/main/Map/MapPickerModal.tsx [app-client] (ecmascript, next/dynamic entry)": {
+    "id": "[project]/sahil/fertigo_web/app/main/Map/MapPickerModal.tsx [app-client] (ecmascript, next/dynamic entry)",
+    "files": [
+      "static/chunks/59d9d_b5d99ccc._.js",
+      "static/chunks/sahil_fertigo_web_app_main_Map_MapPickerModal_tsx_8e1091e9._.js",
+      "static/chunks/59d9d_leaflet-geosearch_dist_geosearch_6ad91b2b.css",
+      "static/chunks/sahil_fertigo_web_app_main_Map_MapPickerModal_tsx_86ff28fa._.js"
+    ]
+  }
+}

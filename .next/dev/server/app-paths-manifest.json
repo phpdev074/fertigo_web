@@ -1,7 +1,6 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
   "/main/AddProvider/page": "app/main/AddProvider/page.js",
-  "/main/Booking/page": "app/main/Booking/page.js",
   "/main/Provider/page": "app/main/Provider/page.js",
-  "/main/User/page": "app/main/User/page.js"
+  "/page": "app/page.js"
 }

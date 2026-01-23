@@ -10,3 +10,5 @@ export const DELETE = 'DELETE';
 export const UPLOAD = '/upload';
 
 export const SERVICES = '/service';
+
+export const PROVIDER = '/providers';

@@ -1,3 +1,0 @@
-module.exports=[99078,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(89850);a.n(d("[project]/Documents/vishal chauhan/FertiGo/node_modules/next/dist/client/components/builtin/global-error.js <module evaluation>"))},2532,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(89850);a.n(d("[project]/Documents/vishal chauhan/FertiGo/node_modules/next/dist/client/components/builtin/global-error.js"))},25769,a=>{"use strict";a.i(99078);var b=a.i(2532);a.n(b)}];
-
-//# sourceMappingURL=39515_next_dist_client_components_builtin_global-error_177b6ebf.js.map

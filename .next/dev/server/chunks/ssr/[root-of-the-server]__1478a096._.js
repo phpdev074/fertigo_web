@@ -99,6 +99,8 @@ __turbopack_context__.s([
     ()=>PATCH,
     "POST",
     ()=>POST,
+    "PROVIDER",
+    ()=>PROVIDER,
     "PUT",
     ()=>PUT,
     "SERVICES",
@@ -115,6 +117,7 @@ const PATCH = 'PATCH';
 const DELETE = 'DELETE';
 const UPLOAD = '/upload';
 const SERVICES = '/service';
+const PROVIDER = '/providers';
 }),
 "[project]/sahil/fertigo_web/app/api/ApiHelper/serviceHelper.tsx [app-ssr] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
@@ -182,6 +185,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node
 var __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$app$2f$api$2f$ApiHelper$2f$serviceHelper$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/sahil/fertigo_web/app/api/ApiHelper/serviceHelper.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$app$2f$api$2f$ApiHelper$2f$uploadHelper$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/sahil/fertigo_web/app/api/ApiHelper/uploadHelper.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/sahil/fertigo_web/node_modules/next/navigation.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$shared$2f$lib$2f$app$2d$dynamic$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/sahil/fertigo_web/node_modules/next/dist/shared/lib/app-dynamic.js [app-ssr] (ecmascript)");
+;
 "use client";
 ;
 ;
@@ -190,6 +195,15 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node
 ;
 ;
 ;
+;
+const MapPickerModal = (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$shared$2f$lib$2f$app$2d$dynamic$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"])(async ()=>{}, {
+    loadableGenerated: {
+        modules: [
+            "[project]/sahil/fertigo_web/app/main/Map/MapPickerModal.tsx [app-client] (ecmascript, next/dynamic entry)"
+        ]
+    },
+    ssr: false
+});
 const SERVICES = [
     {
         id: 'ivf-medications',
@@ -352,7 +366,9 @@ function AddProviderScreen({ onBack, provider }) {
     const [logoPreview, setLogoPreview] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
     const [logoUrl, setLogoUrl] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
     const [uploadingLogo, setUploadingLogo] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [openMap, setOpenMap] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRouter"])();
+    const isLocationSelected = typeof formData.mapLocation.lat === "number" && typeof formData.mapLocation.lng === "number";
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         const fetchServices = async ()=>{
             try {
@@ -526,11 +542,23 @@ function AddProviderScreen({ onBack, provider }) {
             isVerified: formData.verified
         };
     };
-    const handleSubmit = (e)=>{
+    const handleSubmit = async (e)=>{
         e.preventDefault();
-        const payload = buildProviderPayload();
-        console.log('Form submitted:', payload);
-        onBack?.();
+        try {
+            const payload = buildProviderPayload();
+            console.log("Submitting payload:", payload);
+            const res = await CreateProvider(payload);
+            if (res.data?.status) {
+                // success
+                alert("Provider created successfully");
+                router.push("/main/Provider");
+            } else {
+                alert(res.data?.message || "Failed to create provider");
+            }
+        } catch (error) {
+            console.error("Create provider error:", error);
+            alert(error?.response?.data?.message || "Something went wrong while creating provider");
+        }
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "h-full bg-gradient-to-br from-gray-50 to-gray-100 p-4 lg:p-8",
@@ -547,12 +575,12 @@ function AddProviderScreen({ onBack, provider }) {
                                 className: "w-5 h-5 text-gray-600"
                             }, void 0, false, {
                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                lineNumber: 331,
+                                lineNumber: 406,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                            lineNumber: 327,
+                            lineNumber: 402,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -562,7 +590,7 @@ function AddProviderScreen({ onBack, provider }) {
                                     children: provider ? 'Edit Provider' : 'Add New Provider'
                                 }, void 0, false, {
                                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                    lineNumber: 334,
+                                    lineNumber: 409,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -570,19 +598,19 @@ function AddProviderScreen({ onBack, provider }) {
                                     children: provider ? 'Update provider information' : 'Fill in the details to add a new service provider'
                                 }, void 0, false, {
                                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                    lineNumber: 337,
+                                    lineNumber: 412,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                            lineNumber: 333,
+                            lineNumber: 408,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                    lineNumber: 326,
+                    lineNumber: 401,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -614,19 +642,19 @@ function AddProviderScreen({ onBack, provider }) {
                                                             className: "w-5 h-5"
                                                         }, void 0, false, {
                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                            lineNumber: 356,
+                                                            lineNumber: 431,
                                                             columnNumber: 21
                                                         }, this),
                                                         "Basic Information"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                    lineNumber: 355,
+                                                    lineNumber: 430,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                lineNumber: 354,
+                                                lineNumber: 429,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -646,13 +674,13 @@ function AddProviderScreen({ onBack, provider }) {
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                            lineNumber: 365,
+                                                                            lineNumber: 440,
                                                                             columnNumber: 39
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                    lineNumber: 364,
+                                                                    lineNumber: 439,
                                                                     columnNumber: 23
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -662,7 +690,7 @@ function AddProviderScreen({ onBack, provider }) {
                                                                             className: "absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                            lineNumber: 368,
+                                                                            lineNumber: 443,
                                                                             columnNumber: 25
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -674,19 +702,19 @@ function AddProviderScreen({ onBack, provider }) {
                                                                             className: "w-full pl-11 pr-4 py-3 rounded-xl border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 outline-none transition-all"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                            lineNumber: 369,
+                                                                            lineNumber: 444,
                                                                             columnNumber: 25
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                    lineNumber: 367,
+                                                                    lineNumber: 442,
                                                                     columnNumber: 23
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                            lineNumber: 363,
+                                                            lineNumber: 438,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -700,13 +728,13 @@ function AddProviderScreen({ onBack, provider }) {
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                            lineNumber: 382,
+                                                                            lineNumber: 457,
                                                                             columnNumber: 39
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                    lineNumber: 381,
+                                                                    lineNumber: 456,
                                                                     columnNumber: 23
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -716,7 +744,7 @@ function AddProviderScreen({ onBack, provider }) {
                                                                             className: "absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                            lineNumber: 385,
+                                                                            lineNumber: 460,
                                                                             columnNumber: 25
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -728,19 +756,19 @@ function AddProviderScreen({ onBack, provider }) {
                                                                             className: "w-full pl-11 pr-4 py-3 rounded-xl border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 outline-none transition-all"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                            lineNumber: 386,
+                                                                            lineNumber: 461,
                                                                             columnNumber: 25
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                    lineNumber: 384,
+                                                                    lineNumber: 459,
                                                                     columnNumber: 23
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                            lineNumber: 380,
+                                                            lineNumber: 455,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -754,13 +782,13 @@ function AddProviderScreen({ onBack, provider }) {
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                            lineNumber: 399,
+                                                                            lineNumber: 474,
                                                                             columnNumber: 38
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                    lineNumber: 398,
+                                                                    lineNumber: 473,
                                                                     columnNumber: 23
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -770,7 +798,7 @@ function AddProviderScreen({ onBack, provider }) {
                                                                             className: "absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                            lineNumber: 402,
+                                                                            lineNumber: 477,
                                                                             columnNumber: 25
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -782,19 +810,19 @@ function AddProviderScreen({ onBack, provider }) {
                                                                             className: "w-full pl-11 pr-4 py-3 rounded-xl border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 outline-none transition-all"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                            lineNumber: 403,
+                                                                            lineNumber: 478,
                                                                             columnNumber: 25
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                    lineNumber: 401,
+                                                                    lineNumber: 476,
                                                                     columnNumber: 23
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                            lineNumber: 397,
+                                                            lineNumber: 472,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -805,7 +833,7 @@ function AddProviderScreen({ onBack, provider }) {
                                                                     children: "Website URL"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                    lineNumber: 415,
+                                                                    lineNumber: 490,
                                                                     columnNumber: 23
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -815,7 +843,7 @@ function AddProviderScreen({ onBack, provider }) {
                                                                             className: "absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                            lineNumber: 419,
+                                                                            lineNumber: 494,
                                                                             columnNumber: 25
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -826,36 +854,36 @@ function AddProviderScreen({ onBack, provider }) {
                                                                             className: "w-full pl-11 pr-4 py-3 rounded-xl border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 outline-none transition-all"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                            lineNumber: 420,
+                                                                            lineNumber: 495,
                                                                             columnNumber: 25
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                    lineNumber: 418,
+                                                                    lineNumber: 493,
                                                                     columnNumber: 23
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                            lineNumber: 414,
+                                                            lineNumber: 489,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                    lineNumber: 362,
+                                                    lineNumber: 437,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                lineNumber: 360,
+                                                lineNumber: 435,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                        lineNumber: 349,
+                                        lineNumber: 424,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -881,19 +909,19 @@ function AddProviderScreen({ onBack, provider }) {
                                                             className: "w-5 h-5"
                                                         }, void 0, false, {
                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                            lineNumber: 475,
+                                                            lineNumber: 550,
                                                             columnNumber: 21
                                                         }, this),
                                                         "Service Type & Features"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                    lineNumber: 474,
+                                                    lineNumber: 549,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                lineNumber: 473,
+                                                lineNumber: 548,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -906,7 +934,7 @@ function AddProviderScreen({ onBack, provider }) {
                                                                 children: "Services Types Supported"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                lineNumber: 501,
+                                                                lineNumber: 576,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -926,7 +954,7 @@ function AddProviderScreen({ onBack, provider }) {
                                                                                         className: "w-5 h-5 rounded border-gray-300 text-pink-500 focus:ring-pink-500"
                                                                                     }, void 0, false, {
                                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                        lineNumber: 519,
+                                                                                        lineNumber: 594,
                                                                                         columnNumber: 31
                                                                                     }, this),
                                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -934,13 +962,13 @@ function AddProviderScreen({ onBack, provider }) {
                                                                                         children: treatment.name
                                                                                     }, void 0, false, {
                                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                        lineNumber: 525,
+                                                                                        lineNumber: 600,
                                                                                         columnNumber: 31
                                                                                     }, this)
                                                                                 ]
                                                                             }, void 0, true, {
                                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                lineNumber: 518,
+                                                                                lineNumber: 593,
                                                                                 columnNumber: 29
                                                                             }, this),
                                                                             isSelected && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -959,30 +987,30 @@ function AddProviderScreen({ onBack, provider }) {
                                                                                     className: "w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 outline-none transition-all"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                    lineNumber: 533,
+                                                                                    lineNumber: 608,
                                                                                     columnNumber: 33
                                                                                 }, this)
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                lineNumber: 532,
+                                                                                lineNumber: 607,
                                                                                 columnNumber: 31
                                                                             }, this)
                                                                         ]
                                                                     }, treatment._id, true, {
                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                        lineNumber: 510,
+                                                                        lineNumber: 585,
                                                                         columnNumber: 27
                                                                     }, this);
                                                                 })
                                                             }, void 0, false, {
                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                lineNumber: 505,
+                                                                lineNumber: 580,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                        lineNumber: 500,
+                                                        lineNumber: 575,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1001,7 +1029,7 @@ function AddProviderScreen({ onBack, provider }) {
                                                                                         children: "Treatment Support"
                                                                                     }, void 0, false, {
                                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                        lineNumber: 561,
+                                                                                        lineNumber: 636,
                                                                                         columnNumber: 27
                                                                                     }, this),
                                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1009,13 +1037,13 @@ function AddProviderScreen({ onBack, provider }) {
                                                                                         children: "Provide IVF/IUI treatment"
                                                                                     }, void 0, false, {
                                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                        lineNumber: 562,
+                                                                                        lineNumber: 637,
                                                                                         columnNumber: 27
                                                                                     }, this)
                                                                                 ]
                                                                             }, void 0, true, {
                                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                lineNumber: 560,
+                                                                                lineNumber: 635,
                                                                                 columnNumber: 25
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1028,33 +1056,33 @@ function AddProviderScreen({ onBack, provider }) {
                                                                                         className: "sr-only peer"
                                                                                     }, void 0, false, {
                                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                        lineNumber: 565,
+                                                                                        lineNumber: 640,
                                                                                         columnNumber: 27
                                                                                     }, this),
                                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                                         className: "w-12 h-6 bg-gray-300 rounded-full peer-checked:bg-pink-500 transition-colors"
                                                                                     }, void 0, false, {
                                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                        lineNumber: 571,
+                                                                                        lineNumber: 646,
                                                                                         columnNumber: 27
                                                                                     }, this),
                                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                                         className: "absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full transition-transform peer-checked:translate-x-6 shadow-sm"
                                                                                     }, void 0, false, {
                                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                        lineNumber: 572,
+                                                                                        lineNumber: 647,
                                                                                         columnNumber: 27
                                                                                     }, this)
                                                                                 ]
                                                                             }, void 0, true, {
                                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                lineNumber: 564,
+                                                                                lineNumber: 639,
                                                                                 columnNumber: 25
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                        lineNumber: 559,
+                                                                        lineNumber: 634,
                                                                         columnNumber: 23
                                                                     }, this),
                                                                     formData.treatmentSupport && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1085,31 +1113,31 @@ function AddProviderScreen({ onBack, provider }) {
                                                                                             className: "hidden"
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                            lineNumber: 594,
+                                                                                            lineNumber: 669,
                                                                                             columnNumber: 35
                                                                                         }, this),
                                                                                         treatment.label
                                                                                     ]
                                                                                 }, treatment.id, true, {
                                                                                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                    lineNumber: 587,
+                                                                                    lineNumber: 662,
                                                                                     columnNumber: 33
                                                                                 }, this);
                                                                             })
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                            lineNumber: 578,
+                                                                            lineNumber: 653,
                                                                             columnNumber: 27
                                                                         }, this)
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                        lineNumber: 577,
+                                                                        lineNumber: 652,
                                                                         columnNumber: 25
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                lineNumber: 558,
+                                                                lineNumber: 633,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1125,7 +1153,7 @@ function AddProviderScreen({ onBack, provider }) {
                                                                                         children: "Urgency Support"
                                                                                     }, void 0, false, {
                                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                        lineNumber: 614,
+                                                                                        lineNumber: 689,
                                                                                         columnNumber: 27
                                                                                     }, this),
                                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1133,13 +1161,13 @@ function AddProviderScreen({ onBack, provider }) {
                                                                                         children: "Urgent delivery available"
                                                                                     }, void 0, false, {
                                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                        lineNumber: 615,
+                                                                                        lineNumber: 690,
                                                                                         columnNumber: 27
                                                                                     }, this)
                                                                                 ]
                                                                             }, void 0, true, {
                                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                lineNumber: 613,
+                                                                                lineNumber: 688,
                                                                                 columnNumber: 25
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1152,33 +1180,33 @@ function AddProviderScreen({ onBack, provider }) {
                                                                                         className: "sr-only peer"
                                                                                     }, void 0, false, {
                                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                        lineNumber: 618,
+                                                                                        lineNumber: 693,
                                                                                         columnNumber: 27
                                                                                     }, this),
                                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                                         className: "w-12 h-6 bg-gray-300 rounded-full peer-checked:bg-pink-500 transition-colors"
                                                                                     }, void 0, false, {
                                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                        lineNumber: 624,
+                                                                                        lineNumber: 699,
                                                                                         columnNumber: 27
                                                                                     }, this),
                                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                                         className: "absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full transition-transform peer-checked:translate-x-6 shadow-sm"
                                                                                     }, void 0, false, {
                                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                        lineNumber: 625,
+                                                                                        lineNumber: 700,
                                                                                         columnNumber: 27
                                                                                     }, this)
                                                                                 ]
                                                                             }, void 0, true, {
                                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                lineNumber: 617,
+                                                                                lineNumber: 692,
                                                                                 columnNumber: 25
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                        lineNumber: 612,
+                                                                        lineNumber: 687,
                                                                         columnNumber: 23
                                                                     }, this),
                                                                     formData.urgencySupport && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1211,30 +1239,30 @@ function AddProviderScreen({ onBack, provider }) {
                                                                                     children: urgency.label
                                                                                 }, urgency.id, false, {
                                                                                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                    lineNumber: 640,
+                                                                                    lineNumber: 715,
                                                                                     columnNumber: 33
                                                                                 }, this);
                                                                             })
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                            lineNumber: 630,
+                                                                            lineNumber: 705,
                                                                             columnNumber: 27
                                                                         }, this)
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                        lineNumber: 629,
+                                                                        lineNumber: 704,
                                                                         columnNumber: 25
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                lineNumber: 611,
+                                                                lineNumber: 686,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                        lineNumber: 557,
+                                                        lineNumber: 632,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1248,13 +1276,13 @@ function AddProviderScreen({ onBack, provider }) {
                                                                         children: "*"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                        lineNumber: 662,
+                                                                        lineNumber: 737,
                                                                         columnNumber: 35
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                lineNumber: 661,
+                                                                lineNumber: 736,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -1266,25 +1294,25 @@ function AddProviderScreen({ onBack, provider }) {
                                                                 className: "w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 outline-none transition-all resize-none"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                lineNumber: 664,
+                                                                lineNumber: 739,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                        lineNumber: 660,
+                                                        lineNumber: 735,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                lineNumber: 479,
+                                                lineNumber: 554,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                        lineNumber: 467,
+                                        lineNumber: 542,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -1310,19 +1338,19 @@ function AddProviderScreen({ onBack, provider }) {
                                                             className: "w-5 h-5"
                                                         }, void 0, false, {
                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                            lineNumber: 778,
+                                                            lineNumber: 853,
                                                             columnNumber: 21
                                                         }, this),
                                                         "Location Details"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                    lineNumber: 777,
+                                                    lineNumber: 852,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                lineNumber: 776,
+                                                lineNumber: 851,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1339,13 +1367,13 @@ function AddProviderScreen({ onBack, provider }) {
                                                                         children: "*"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                        lineNumber: 785,
+                                                                        lineNumber: 860,
                                                                         columnNumber: 36
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                lineNumber: 784,
+                                                                lineNumber: 859,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -1357,13 +1385,13 @@ function AddProviderScreen({ onBack, provider }) {
                                                                 className: "w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 outline-none transition-all resize-none"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                lineNumber: 787,
+                                                                lineNumber: 862,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                        lineNumber: 783,
+                                                        lineNumber: 858,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1380,13 +1408,13 @@ function AddProviderScreen({ onBack, provider }) {
                                                                                 children: "*"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                lineNumber: 800,
+                                                                                lineNumber: 875,
                                                                                 columnNumber: 30
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                        lineNumber: 799,
+                                                                        lineNumber: 874,
                                                                         columnNumber: 23
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1398,13 +1426,13 @@ function AddProviderScreen({ onBack, provider }) {
                                                                         className: "w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 outline-none transition-all"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                        lineNumber: 802,
+                                                                        lineNumber: 877,
                                                                         columnNumber: 23
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                lineNumber: 798,
+                                                                lineNumber: 873,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1418,13 +1446,13 @@ function AddProviderScreen({ onBack, provider }) {
                                                                                 children: "*"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                lineNumber: 814,
+                                                                                lineNumber: 889,
                                                                                 columnNumber: 33
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                        lineNumber: 813,
+                                                                        lineNumber: 888,
                                                                         columnNumber: 23
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -1438,7 +1466,7 @@ function AddProviderScreen({ onBack, provider }) {
                                                                                 children: "Select"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                lineNumber: 822,
+                                                                                lineNumber: 897,
                                                                                 columnNumber: 25
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1446,7 +1474,7 @@ function AddProviderScreen({ onBack, provider }) {
                                                                                 children: "United States"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                lineNumber: 823,
+                                                                                lineNumber: 898,
                                                                                 columnNumber: 25
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1454,7 +1482,7 @@ function AddProviderScreen({ onBack, provider }) {
                                                                                 children: "United Kingdom"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                lineNumber: 824,
+                                                                                lineNumber: 899,
                                                                                 columnNumber: 25
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1462,7 +1490,7 @@ function AddProviderScreen({ onBack, provider }) {
                                                                                 children: "Canada"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                lineNumber: 825,
+                                                                                lineNumber: 900,
                                                                                 columnNumber: 25
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1470,19 +1498,19 @@ function AddProviderScreen({ onBack, provider }) {
                                                                                 children: "Australia"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                lineNumber: 826,
+                                                                                lineNumber: 901,
                                                                                 columnNumber: 25
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                        lineNumber: 816,
+                                                                        lineNumber: 891,
                                                                         columnNumber: 23
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                lineNumber: 812,
+                                                                lineNumber: 887,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1496,13 +1524,13 @@ function AddProviderScreen({ onBack, provider }) {
                                                                                 children: "*"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                lineNumber: 832,
+                                                                                lineNumber: 907,
                                                                                 columnNumber: 37
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                        lineNumber: 831,
+                                                                        lineNumber: 906,
                                                                         columnNumber: 23
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1514,13 +1542,13 @@ function AddProviderScreen({ onBack, provider }) {
                                                                         className: "w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 outline-none transition-all"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                        lineNumber: 834,
+                                                                        lineNumber: 909,
                                                                         columnNumber: 23
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                lineNumber: 830,
+                                                                lineNumber: 905,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1534,55 +1562,95 @@ function AddProviderScreen({ onBack, provider }) {
                                                                                 children: "*"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                lineNumber: 846,
+                                                                                lineNumber: 921,
                                                                                 columnNumber: 42
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                        lineNumber: 845,
+                                                                        lineNumber: 920,
                                                                         columnNumber: 23
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                                         type: "button",
-                                                                        className: "w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl border-2 border-dashed border-pink-300 bg-pink-50 hover:bg-pink-100 transition-all font-bold text-pink-600",
-                                                                        onClick: ()=>{
-                                                                            // placeholder for map logic
-                                                                            console.log('Pin my location clicked');
-                                                                        },
+                                                                        onClick: ()=>setOpenMap(true),
+                                                                        className: `w-full flex flex-col items-center justify-center gap-1 px-4 py-3 rounded-xl border-2 transition-all font-bold
+                            ${isLocationSelected ? "border-green-400 bg-green-50 text-green-700 hover:bg-green-100" : "border-pink-300 bg-pink-50 text-pink-600 hover:bg-pink-100"}`,
                                                                         children: [
-                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$map$2d$pin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__MapPin$3e$__["MapPin"], {
-                                                                                className: "w-5 h-5"
-                                                                            }, void 0, false, {
+                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                                className: "flex items-center gap-2",
+                                                                                children: [
+                                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$map$2d$pin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__MapPin$3e$__["MapPin"], {
+                                                                                        className: "w-5 h-5"
+                                                                                    }, void 0, false, {
+                                                                                        fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
+                                                                                        lineNumber: 934,
+                                                                                        columnNumber: 27
+                                                                                    }, this),
+                                                                                    isLocationSelected ? "Location Selected" : "Pin My Location"
+                                                                                ]
+                                                                            }, void 0, true, {
                                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                lineNumber: 857,
+                                                                                lineNumber: 933,
                                                                                 columnNumber: 25
                                                                             }, this),
-                                                                            "Pin My Location"
+                                                                            isLocationSelected && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                                className: "text-xs font-medium",
+                                                                                children: [
+                                                                                    "Lat: ",
+                                                                                    formData.mapLocation.lat?.toFixed(5),
+                                                                                    ", Lng:",
+                                                                                    " ",
+                                                                                    formData.mapLocation.lng?.toFixed(5)
+                                                                                ]
+                                                                            }, void 0, true, {
+                                                                                fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
+                                                                                lineNumber: 939,
+                                                                                columnNumber: 27
+                                                                            }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                        lineNumber: 849,
+                                                                        lineNumber: 924,
                                                                         columnNumber: 23
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                                         className: "text-xs text-gray-500 mt-2 text-center",
-                                                                        children: "Use map to select the exact business location"
+                                                                        children: isLocationSelected ? "Click to change the selected location" : "Use map to select the exact business location"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                        lineNumber: 861,
+                                                                        lineNumber: 946,
                                                                         columnNumber: 23
+                                                                    }, this),
+                                                                    openMap && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(MapPickerModal, {
+                                                                        initialLat: formData.mapLocation.lat,
+                                                                        initialLng: formData.mapLocation.lng,
+                                                                        onClose: ()=>setOpenMap(false),
+                                                                        onSelect: (lat, lng)=>{
+                                                                            setFormData((prev)=>({
+                                                                                    ...prev,
+                                                                                    mapLocation: {
+                                                                                        lat: Number(lat),
+                                                                                        lng: Number(lng)
+                                                                                    }
+                                                                                }));
+                                                                            setOpenMap(false);
+                                                                        }
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
+                                                                        lineNumber: 953,
+                                                                        columnNumber: 25
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                lineNumber: 844,
+                                                                lineNumber: 919,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                        lineNumber: 797,
+                                                        lineNumber: 872,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1598,13 +1666,13 @@ function AddProviderScreen({ onBack, provider }) {
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                            lineNumber: 892,
+                                                                            lineNumber: 997,
                                                                             columnNumber: 45
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                    lineNumber: 891,
+                                                                    lineNumber: 996,
                                                                     columnNumber: 23
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1616,30 +1684,30 @@ function AddProviderScreen({ onBack, provider }) {
                                                                     className: "w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 outline-none transition-all"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                    lineNumber: 894,
+                                                                    lineNumber: 999,
                                                                     columnNumber: 23
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                            lineNumber: 890,
+                                                            lineNumber: 995,
                                                             columnNumber: 21
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                        lineNumber: 889,
+                                                        lineNumber: 994,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                lineNumber: 782,
+                                                lineNumber: 857,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                        lineNumber: 770,
+                                        lineNumber: 845,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -1665,19 +1733,19 @@ function AddProviderScreen({ onBack, provider }) {
                                                             className: "w-5 h-5"
                                                         }, void 0, false, {
                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                            lineNumber: 929,
+                                                            lineNumber: 1035,
                                                             columnNumber: 21
                                                         }, this),
                                                         "Business Hours"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                    lineNumber: 928,
+                                                    lineNumber: 1034,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                lineNumber: 927,
+                                                lineNumber: 1033,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1702,27 +1770,27 @@ function AddProviderScreen({ onBack, provider }) {
                                                                                         className: "sr-only peer"
                                                                                     }, void 0, false, {
                                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                        lineNumber: 940,
+                                                                                        lineNumber: 1046,
                                                                                         columnNumber: 31
                                                                                     }, this),
                                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                                         className: "w-11 h-6 bg-gray-300 rounded-full peer-checked:bg-pink-500 transition-colors"
                                                                                     }, void 0, false, {
                                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                        lineNumber: 946,
+                                                                                        lineNumber: 1052,
                                                                                         columnNumber: 31
                                                                                     }, this),
                                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                                         className: "absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full transition-transform peer-checked:translate-x-5 shadow-sm"
                                                                                     }, void 0, false, {
                                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                        lineNumber: 947,
+                                                                                        lineNumber: 1053,
                                                                                         columnNumber: 31
                                                                                     }, this)
                                                                                 ]
                                                                             }, void 0, true, {
                                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                lineNumber: 939,
+                                                                                lineNumber: 1045,
                                                                                 columnNumber: 29
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1730,18 +1798,18 @@ function AddProviderScreen({ onBack, provider }) {
                                                                                 children: day
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                lineNumber: 949,
+                                                                                lineNumber: 1055,
                                                                                 columnNumber: 29
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                        lineNumber: 938,
+                                                                        lineNumber: 1044,
                                                                         columnNumber: 27
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                    lineNumber: 937,
+                                                                    lineNumber: 1043,
                                                                     columnNumber: 25
                                                                 }, this),
                                                                 formData.businessHours[day].enabled && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1754,7 +1822,7 @@ function AddProviderScreen({ onBack, provider }) {
                                                                                     children: "Start"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                    lineNumber: 956,
+                                                                                    lineNumber: 1062,
                                                                                     columnNumber: 31
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1764,13 +1832,13 @@ function AddProviderScreen({ onBack, provider }) {
                                                                                     className: "w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 outline-none text-sm"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                    lineNumber: 957,
+                                                                                    lineNumber: 1063,
                                                                                     columnNumber: 31
                                                                                 }, this)
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                            lineNumber: 955,
+                                                                            lineNumber: 1061,
                                                                             columnNumber: 29
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1780,7 +1848,7 @@ function AddProviderScreen({ onBack, provider }) {
                                                                                     children: "End"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                    lineNumber: 965,
+                                                                                    lineNumber: 1071,
                                                                                     columnNumber: 31
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1790,47 +1858,47 @@ function AddProviderScreen({ onBack, provider }) {
                                                                                     className: "w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 outline-none text-sm"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                    lineNumber: 966,
+                                                                                    lineNumber: 1072,
                                                                                     columnNumber: 31
                                                                                 }, this)
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                            lineNumber: 964,
+                                                                            lineNumber: 1070,
                                                                             columnNumber: 29
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                    lineNumber: 954,
+                                                                    lineNumber: 1060,
                                                                     columnNumber: 27
                                                                 }, this)
                                                             ]
                                                         }, day, true, {
                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                            lineNumber: 936,
+                                                            lineNumber: 1042,
                                                             columnNumber: 23
                                                         }, this))
                                                 }, void 0, false, {
                                                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                    lineNumber: 934,
+                                                    lineNumber: 1040,
                                                     columnNumber: 19
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                lineNumber: 933,
+                                                lineNumber: 1039,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                        lineNumber: 921,
+                                        lineNumber: 1027,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                lineNumber: 346,
+                                lineNumber: 421,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1852,7 +1920,7 @@ function AddProviderScreen({ onBack, provider }) {
                                                 children: "Provider Logo"
                                             }, void 0, false, {
                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                lineNumber: 990,
+                                                lineNumber: 1096,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1866,7 +1934,7 @@ function AddProviderScreen({ onBack, provider }) {
                                                             className: "w-full h-full object-cover"
                                                         }, void 0, false, {
                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                            lineNumber: 994,
+                                                            lineNumber: 1100,
                                                             columnNumber: 23
                                                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                             className: "w-full h-full bg-gradient-to-br from-[#EC4899] to-[#EC4899] flex items-center justify-center",
@@ -1874,17 +1942,17 @@ function AddProviderScreen({ onBack, provider }) {
                                                                 className: "w-16 h-16 text-white"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                lineNumber: 1001,
+                                                                lineNumber: 1107,
                                                                 columnNumber: 25
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                            lineNumber: 1000,
+                                                            lineNumber: 1106,
                                                             columnNumber: 23
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                        lineNumber: 992,
+                                                        lineNumber: 1098,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -1897,7 +1965,7 @@ function AddProviderScreen({ onBack, provider }) {
                                                                 className: "hidden"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                lineNumber: 1006,
+                                                                lineNumber: 1112,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1907,20 +1975,20 @@ function AddProviderScreen({ onBack, provider }) {
                                                                         className: "w-5 h-5"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                        lineNumber: 1014,
+                                                                        lineNumber: 1120,
                                                                         columnNumber: 23
                                                                     }, this),
                                                                     logoPreview ? 'Change Logo' : 'Upload Logo'
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                lineNumber: 1013,
+                                                                lineNumber: 1119,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                        lineNumber: 1005,
+                                                        lineNumber: 1111,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1929,20 +1997,20 @@ function AddProviderScreen({ onBack, provider }) {
                                                             "PNG, JPG or SVG",
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                lineNumber: 1019,
+                                                                lineNumber: 1125,
                                                                 columnNumber: 36
                                                             }, this),
                                                             "Recommended 500x500px"
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                        lineNumber: 1018,
+                                                        lineNumber: 1124,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                lineNumber: 991,
+                                                lineNumber: 1097,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1953,7 +2021,7 @@ function AddProviderScreen({ onBack, provider }) {
                                                         children: "Verification Status"
                                                     }, void 0, false, {
                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                        lineNumber: 1024,
+                                                        lineNumber: 1130,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -1969,27 +2037,27 @@ function AddProviderScreen({ onBack, provider }) {
                                                                         className: "sr-only peer"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                        lineNumber: 1027,
+                                                                        lineNumber: 1133,
                                                                         columnNumber: 23
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                         className: "w-12 h-6 bg-gray-300 rounded-full peer-checked:bg-green-500 transition-colors"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                        lineNumber: 1033,
+                                                                        lineNumber: 1139,
                                                                         columnNumber: 23
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                         className: "absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full transition-transform peer-checked:translate-x-6 shadow-sm"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                        lineNumber: 1034,
+                                                                        lineNumber: 1140,
                                                                         columnNumber: 23
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                lineNumber: 1026,
+                                                                lineNumber: 1132,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2001,7 +2069,7 @@ function AddProviderScreen({ onBack, provider }) {
                                                                                 className: "w-5 h-5 text-green-600"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                lineNumber: 1038,
+                                                                                lineNumber: 1144,
                                                                                 columnNumber: 25
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2009,13 +2077,13 @@ function AddProviderScreen({ onBack, provider }) {
                                                                                 children: "Verified Provider"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                                lineNumber: 1039,
+                                                                                lineNumber: 1145,
                                                                                 columnNumber: 25
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                        lineNumber: 1037,
+                                                                        lineNumber: 1143,
                                                                         columnNumber: 23
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2023,25 +2091,25 @@ function AddProviderScreen({ onBack, provider }) {
                                                                         children: "Display verification badge on profile"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                        lineNumber: 1041,
+                                                                        lineNumber: 1147,
                                                                         columnNumber: 23
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                lineNumber: 1036,
+                                                                lineNumber: 1142,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                        lineNumber: 1025,
+                                                        lineNumber: 1131,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                lineNumber: 1023,
+                                                lineNumber: 1129,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2053,7 +2121,7 @@ function AddProviderScreen({ onBack, provider }) {
                                                         children: provider ? 'Update Provider' : 'Add Provider'
                                                     }, void 0, false, {
                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                        lineNumber: 1049,
+                                                        lineNumber: 1155,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2063,19 +2131,19 @@ function AddProviderScreen({ onBack, provider }) {
                                                         children: "Cancel"
                                                     }, void 0, false, {
                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                        lineNumber: 1055,
+                                                        lineNumber: 1161,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                lineNumber: 1048,
+                                                lineNumber: 1154,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                        lineNumber: 985,
+                                        lineNumber: 1091,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -2099,14 +2167,14 @@ function AddProviderScreen({ onBack, provider }) {
                                                         className: "w-4 h-4 text-pink-600"
                                                     }, void 0, false, {
                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                        lineNumber: 1073,
+                                                        lineNumber: 1179,
                                                         columnNumber: 19
                                                     }, this),
                                                     "Form Progress"
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                lineNumber: 1072,
+                                                lineNumber: 1178,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2120,7 +2188,7 @@ function AddProviderScreen({ onBack, provider }) {
                                                                 children: "Basic Info"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                lineNumber: 1078,
+                                                                lineNumber: 1184,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2128,13 +2196,13 @@ function AddProviderScreen({ onBack, provider }) {
                                                                 children: formData.name && formData.email && formData.phone ? '✓' : '○'
                                                             }, void 0, false, {
                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                lineNumber: 1079,
+                                                                lineNumber: 1185,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                        lineNumber: 1077,
+                                                        lineNumber: 1183,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2145,7 +2213,7 @@ function AddProviderScreen({ onBack, provider }) {
                                                                 children: "Service Type"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                lineNumber: 1084,
+                                                                lineNumber: 1190,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2153,13 +2221,13 @@ function AddProviderScreen({ onBack, provider }) {
                                                                 children: formData.serviceType ? '✓' : '○'
                                                             }, void 0, false, {
                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                lineNumber: 1085,
+                                                                lineNumber: 1191,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                        lineNumber: 1083,
+                                                        lineNumber: 1189,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2170,7 +2238,7 @@ function AddProviderScreen({ onBack, provider }) {
                                                                 children: "Services"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                lineNumber: 1090,
+                                                                lineNumber: 1196,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2178,13 +2246,13 @@ function AddProviderScreen({ onBack, provider }) {
                                                                 children: formData.selectedServices.length > 0 ? '✓' : '○'
                                                             }, void 0, false, {
                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                lineNumber: 1091,
+                                                                lineNumber: 1197,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                        lineNumber: 1089,
+                                                        lineNumber: 1195,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2195,7 +2263,7 @@ function AddProviderScreen({ onBack, provider }) {
                                                                 children: "Location"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                lineNumber: 1096,
+                                                                lineNumber: 1202,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2203,13 +2271,13 @@ function AddProviderScreen({ onBack, provider }) {
                                                                 children: formData.address && formData.city ? '✓' : '○'
                                                             }, void 0, false, {
                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                lineNumber: 1097,
+                                                                lineNumber: 1203,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                        lineNumber: 1095,
+                                                        lineNumber: 1201,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2220,7 +2288,7 @@ function AddProviderScreen({ onBack, provider }) {
                                                                 children: "Business Hours"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                lineNumber: 1102,
+                                                                lineNumber: 1208,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$sahil$2f$fertigo_web$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2228,53 +2296,53 @@ function AddProviderScreen({ onBack, provider }) {
                                                                 children: "✓"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                                lineNumber: 1103,
+                                                                lineNumber: 1209,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                        lineNumber: 1101,
+                                                        lineNumber: 1207,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                                lineNumber: 1076,
+                                                lineNumber: 1182,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                        lineNumber: 1066,
+                                        lineNumber: 1172,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                                lineNumber: 983,
+                                lineNumber: 1089,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                        lineNumber: 344,
+                        lineNumber: 419,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-                    lineNumber: 343,
+                    lineNumber: 418,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-            lineNumber: 324,
+            lineNumber: 399,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/sahil/fertigo_web/app/main/AddProvider/page.tsx",
-        lineNumber: 323,
+        lineNumber: 398,
         columnNumber: 5
     }, this);
 }
