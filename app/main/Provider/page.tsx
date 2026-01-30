@@ -1,27 +1,37 @@
 "use client";
 import { motion } from 'motion/react';
-import { 
-  Building2, Search, Filter, Eye, Trash2, 
+import {
+  Building2, Search, Filter, Eye, Trash2,
   Plus, Mail, Phone, MapPin, Star, CheckCircle,
   ChevronDown, Edit
 } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { GetProviders } from '@/app/api/ApiHelper/providerHelper';
+import { IMAGE_BASE_URL } from '@/app/api/api';
 
 interface ProviderManagementScreenProps {
   onAddProvider?: () => void;
   onEditProvider?: (provider: any) => void;
 }
 
-export default function Provider({ onAddProvider, onEditProvider }: ProviderManagementScreenProps) { 
+export default function Provider({ onAddProvider, onEditProvider }: ProviderManagementScreenProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [showCategoryFilter, setShowCategoryFilter] = useState(false);
+  const [providers, setProviders] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [imageErrorIds, setImageErrorIds] = useState<Record<string, boolean>>({});
+
   const router = useRouter();
 
-  const handleAddProvider = () => { 
+  const handleAddProvider = () => {
     router.push('/main/AddProvider');
   }
+
+  const ITEMS_PER_PAGE = 5;
+
+  const [currentPage, setCurrentPage] = useState(1);
 
   // Categories for filter
   const categories = [
@@ -34,94 +44,147 @@ export default function Provider({ onAddProvider, onEditProvider }: ProviderMana
   ];
 
   // Mock provider data
-  const providers = [
-    {
-      id: 'PRV-001',
-      name: 'Hope Fertility Center',
-      category: 'fertility-clinic',
-      email: 'contact@hopefertility.com',
-      phone: '+1 (555) 111-2222',
-      address: '123 Medical Plaza, New York, NY 10001',
-      rating: 4.8,
-      reviews: 245,
-      verified: true,
-      status: 'active',
-      logo: 'HF',
-    },
-    {
-      id: 'PRV-002',
-      name: 'LifeCare Laboratory',
-      category: 'lab',
-      email: 'info@lifecarelab.com',
-      phone: '+1 (555) 222-3333',
-      address: '456 Science Blvd, Boston, MA 02101',
-      rating: 4.9,
-      reviews: 567,
-      verified: true,
-      status: 'active',
-      logo: 'LL',
-    },
-    {
-      id: 'PRV-003',
-      name: 'MediPharm Plus',
-      category: 'pharmacy',
-      email: 'support@medipharmplus.com',
-      phone: '+1 (555) 333-4444',
-      address: '789 Health St, Los Angeles, CA 90001',
-      rating: 4.6,
-      reviews: 189,
-      verified: true,
-      status: 'active',
-      logo: 'MP',
-    },
-    {
-      id: 'PRV-004',
-      name: 'Wellness Counseling Center',
-      category: 'counseling',
-      email: 'hello@wellnesscounseling.com',
-      phone: '+1 (555) 444-5555',
-      address: '321 Therapy Ave, Chicago, IL 60601',
-      rating: 4.7,
-      reviews: 123,
-      verified: true,
-      status: 'active',
-      logo: 'WC',
-    },
-    {
-      id: 'PRV-005',
-      name: 'QuickRide Medical Transport',
-      category: 'transport',
-      email: 'ride@quickridemedical.com',
-      phone: '+1 (555) 555-6666',
-      address: '654 Transit Way, Miami, FL 33101',
-      rating: 4.5,
-      reviews: 432,
-      verified: false,
-      status: 'active',
-      logo: 'QR',
-    },
-    {
-      id: 'PRV-006',
-      name: 'New Life Fertility Clinic',
-      category: 'fertility-clinic',
-      email: 'care@newlifefertility.com',
-      phone: '+1 (555) 666-7777',
-      address: '987 Care Dr, Seattle, WA 98101',
-      rating: 4.9,
-      reviews: 678,
-      verified: true,
-      status: 'active',
-      logo: 'NL',
-    },
-  ];
+  // const providers = [
+  //   {
+  //     id: 'PRV-001',
+  //     name: 'Hope Fertility Center',
+  //     category: 'fertility-clinic',
+  //     email: 'contact@hopefertility.com',
+  //     phone: '+1 (555) 111-2222',
+  //     address: '123 Medical Plaza, New York, NY 10001',
+  //     rating: 4.8,
+  //     reviews: 245,
+  //     verified: true,
+  //     status: 'active',
+  //     logo: 'HF',
+  //   },
+  //   {
+  //     id: 'PRV-002',
+  //     name: 'LifeCare Laboratory',
+  //     category: 'lab',
+  //     email: 'info@lifecarelab.com',
+  //     phone: '+1 (555) 222-3333',
+  //     address: '456 Science Blvd, Boston, MA 02101',
+  //     rating: 4.9,
+  //     reviews: 567,
+  //     verified: true,
+  //     status: 'active',
+  //     logo: 'LL',
+  //   },
+  //   {
+  //     id: 'PRV-003',
+  //     name: 'MediPharm Plus',
+  //     category: 'pharmacy',
+  //     email: 'support@medipharmplus.com',
+  //     phone: '+1 (555) 333-4444',
+  //     address: '789 Health St, Los Angeles, CA 90001',
+  //     rating: 4.6,
+  //     reviews: 189,
+  //     verified: true,
+  //     status: 'active',
+  //     logo: 'MP',
+  //   },
+  //   {
+  //     id: 'PRV-004',
+  //     name: 'Wellness Counseling Center',
+  //     category: 'counseling',
+  //     email: 'hello@wellnesscounseling.com',
+  //     phone: '+1 (555) 444-5555',
+  //     address: '321 Therapy Ave, Chicago, IL 60601',
+  //     rating: 4.7,
+  //     reviews: 123,
+  //     verified: true,
+  //     status: 'active',
+  //     logo: 'WC',
+  //   },
+  //   {
+  //     id: 'PRV-005',
+  //     name: 'QuickRide Medical Transport',
+  //     category: 'transport',
+  //     email: 'ride@quickridemedical.com',
+  //     phone: '+1 (555) 555-6666',
+  //     address: '654 Transit Way, Miami, FL 33101',
+  //     rating: 4.5,
+  //     reviews: 432,
+  //     verified: false,
+  //     status: 'active',
+  //     logo: 'QR',
+  //   },
+  //   {
+  //     id: 'PRV-006',
+  //     name: 'New Life Fertility Clinic',
+  //     category: 'fertility-clinic',
+  //     email: 'care@newlifefertility.com',
+  //     phone: '+1 (555) 666-7777',
+  //     address: '987 Care Dr, Seattle, WA 98101',
+  //     rating: 4.9,
+  //     reviews: 678,
+  //     verified: true,
+  //     status: 'active',
+  //     logo: 'NL',
+  //   },
+  // ];
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const res = await GetProviders();
+        console.log(res.data.data.providers);
+        if (res.data?.status && Array.isArray(res.data.data?.providers)) {
+          const normalizedProviders = res.data.data.providers.map((p: any) => ({
+            // REQUIRED FOR REACT
+            id: p._id,
+
+            // BASIC INFO
+            name: p.name,
+            email: p.email,
+            logo: p.providerLogo
+              ? p.providerLogo
+              : p.name?.slice(0, 2).toUpperCase(),
+
+            // CONTACT
+            phone: `${p.countryCode ?? ''} ${p.mobileNumber ?? ''}`,
+
+            // ADDRESS (convert OBJECT → STRING ✅)
+            address: `${p.address?.fullAddress ?? ''}, ${p.address?.city ?? ''}, ${p.address?.country ?? ''}`,
+
+            // STATUS
+            verified: p.isVerified,
+            status: p.isActive ? 'active' : 'inactive',
+
+            // CATEGORY (derive or fallback)
+            category: p.services?.length ? 'lab' : 'all',
+
+            // RAW DATA (optional, for view page)
+            raw: p,
+          }));
+
+          setProviders(normalizedProviders);
+        } else {
+          setProviders([]);
+        }
+      } catch (error) {
+        console.error("Failed to fetch services", error);
+      }
+    };
+
+    fetchServices();
+  }, []);
 
   // Filter providers
-  const filteredProviders = providers.filter((provider) => {
-    const matchesCategory = selectedCategory === 'all' || provider.category === selectedCategory;
-    const matchesSearch = provider.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          provider.email.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  const filteredProviders = Array.isArray(providers)
+    ? providers.filter((provider) => {
+      const matchesCategory =
+        selectedCategory === 'all' || provider.category === selectedCategory;
+
+      const matchesSearch =
+        provider.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        provider.email?.toLowerCase().includes(searchQuery.toLowerCase());
+
+      return matchesCategory && matchesSearch;
+    })
+    : [];
+
 
   const getCategoryColor = (category: string) => {
     switch (category) {
@@ -144,6 +207,24 @@ export default function Provider({ onAddProvider, onEditProvider }: ProviderMana
     active: providers.filter(p => p.status === 'active').length,
   };
 
+  const filteredList = providers.filter((provider) => {
+    const matchesCategory =
+      selectedCategory === 'all' || provider.category === selectedCategory;
+
+    const matchesSearch =
+      provider.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      provider.email?.toLowerCase().includes(searchQuery.toLowerCase());
+
+    return matchesCategory && matchesSearch;
+  });
+
+  const totalPages = Math.ceil(filteredList.length / ITEMS_PER_PAGE);
+
+  const paginatedProviders = filteredList.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
   return (
     <div className="space-y-6">
       {/* Page Header */}
@@ -152,7 +233,7 @@ export default function Provider({ onAddProvider, onEditProvider }: ProviderMana
           <h2 className="text-3xl font-bold text-gray-900 mb-2">Provider Management</h2>
           <p className="text-gray-600 font-medium">Manage all service providers and their listings</p>
         </div>
-        <button 
+        <button
           onClick={handleAddProvider}
           className="flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-pink-500 to-pink-600 text-white font-semibold hover:from-pink-600 hover:to-pink-700 transition-all shadow-lg"
         >
@@ -240,11 +321,10 @@ export default function Provider({ onAddProvider, onEditProvider }: ProviderMana
                         setSelectedCategory(category.id);
                         setShowCategoryFilter(false);
                       }}
-                      className={`w-full px-4 py-2 text-left text-sm font-semibold transition-colors ${
-                        selectedCategory === category.id
-                          ? 'bg-pink-50 text-pink-600'
-                          : 'text-gray-700 hover:bg-gray-50'
-                      }`}
+                      className={`w-full px-4 py-2 text-left text-sm font-semibold transition-colors ${selectedCategory === category.id
+                        ? 'bg-pink-50 text-pink-600'
+                        : 'text-gray-700 hover:bg-gray-50'
+                        }`}
                     >
                       {category.label}
                     </button>
@@ -306,157 +386,229 @@ export default function Provider({ onAddProvider, onEditProvider }: ProviderMana
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
-              {filteredProviders.map((provider) => (
-                <tr key={provider.id} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-6 py-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl flex items-center justify-center">
-                        <span className="text-sm font-bold text-white">{provider.logo}</span>
-                      </div>
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <p className="text-sm font-bold text-gray-900">{provider.name}</p>
-                          {provider.verified && (
-                            <div className="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center">
-                              <CheckCircle className="w-3 h-3 text-white" />
-                            </div>
+              {providers
+                .filter((provider) => {
+                  const matchesCategory =
+                    selectedCategory === 'all' || provider.category === selectedCategory;
+
+                  const matchesSearch =
+                    provider.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    provider.email?.toLowerCase().includes(searchQuery.toLowerCase());
+
+                  return matchesCategory && matchesSearch;
+                })
+                .map((provider) => (
+                  <tr key={provider.id} className="hover:bg-gray-50 transition-colors">
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                        <div
+                          className={`w-12 h-12 rounded-xl flex items-center justify-center overflow-hidden ${!provider.logo || imageErrorIds[provider.id]
+                            ? 'bg-gradient-to-br from-pink-500 to-pink-600'
+                            : ''
+                            }`}
+                        >
+                          {provider.logo && !imageErrorIds[provider.id] ? (
+                            <img
+                              src={
+                                provider.logo.startsWith('http')
+                                  ? provider.logo
+                                  : `${IMAGE_BASE_URL}${provider.logo}`
+                              }
+                              alt={provider.name}
+                              className="w-full h-full object-cover"
+                              onError={() =>
+                                setImageErrorIds((prev) => ({
+                                  ...prev,
+                                  [provider.id]: true,
+                                }))
+                              }
+                            />
+                          ) : (
+                            <span className="text-sm font-bold text-white">
+                              {provider.name?.slice(0, 2).toUpperCase()}
+                            </span>
                           )}
                         </div>
-                        <p className="text-xs font-semibold text-gray-500">{provider.id}</p>
+
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <p className="text-sm font-bold text-gray-900">{provider.name}</p>
+                            {provider.verified && (
+                              <div className="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center">
+                                <CheckCircle className="w-3 h-3 text-white" />
+                              </div>
+                            )}
+                          </div>
+                          {/* <p className="text-xs font-semibold text-gray-500">{provider.id}</p> */}
+                        </div>
                       </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <span className={`px-3 py-1 rounded-full text-xs font-bold ${getCategoryColor(provider.category)}`}>
-                      {getCategoryLabel(provider.category)}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="space-y-1">
+                    </td>
+                    <td className="px-6 py-4">
+                      <span className={`px-3 py-1 rounded-full text-xs font-bold ${getCategoryColor(provider.category)}`}>
+                        {getCategoryLabel(provider.category)}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-2">
+                          <Mail className="w-3.5 h-3.5 text-gray-400" />
+                          <span className="text-sm font-semibold text-gray-600">{provider.email}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Phone className="w-3.5 h-3.5 text-gray-400" />
+                          <span className="text-sm font-semibold text-gray-600">{provider.phone}</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="flex items-start gap-2">
+                        <MapPin className="w-3.5 h-3.5 text-gray-400 flex-shrink-0 mt-0.5" />
+                        <span className="text-sm font-semibold text-gray-600">{provider.address}</span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
                       <div className="flex items-center gap-2">
-                        <Mail className="w-3.5 h-3.5 text-gray-400" />
-                        <span className="text-sm font-semibold text-gray-600">{provider.email}</span>
+                        <button className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors">
+                          <Eye className="w-4 h-4 text-gray-600" />
+                        </button>
+                        <button
+                          onClick={() => onEditProvider?.(provider)}
+                          className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-blue-50 transition-colors"
+                        >
+                          <Edit className="w-4 h-4 text-blue-600" />
+                        </button>
+                        <button className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-red-50 transition-colors">
+                          <Trash2 className="w-4 h-4 text-red-600" />
+                        </button>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Phone className="w-3.5 h-3.5 text-gray-400" />
-                        <span className="text-sm font-semibold text-gray-600">{provider.phone}</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="flex items-start gap-2">
-                      <MapPin className="w-3.5 h-3.5 text-gray-400 flex-shrink-0 mt-0.5" />
-                      <span className="text-sm font-semibold text-gray-600">{provider.address}</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="flex items-center gap-2">
-                      <button className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors">
-                        <Eye className="w-4 h-4 text-gray-600" />
-                      </button>
-                      <button 
-                        onClick={() => onEditProvider?.(provider)}
-                        className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-blue-50 transition-colors"
-                      >
-                        <Edit className="w-4 h-4 text-blue-600" />
-                      </button>
-                      <button className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-red-50 transition-colors">
-                        <Trash2 className="w-4 h-4 text-red-600" />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>
 
         {/* Mobile/Tablet Cards */}
         <div className="lg:hidden divide-y divide-gray-200">
-          {filteredProviders.map((provider) => (
-            <div key={provider.id} className="p-4">
-              <div className="flex items-start gap-3 mb-3">
-                <div className="w-14 h-14 bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <span className="text-base font-bold text-white">{provider.logo}</span>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <h3 className="text-sm font-bold text-gray-900 truncate">{provider.name}</h3>
-                    {provider.verified && (
-                      <div className="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
-                        <CheckCircle className="w-3 h-3 text-white" />
-                      </div>
-                    )}
+          {providers
+            .filter((provider) => {
+              const matchesCategory =
+                selectedCategory === 'all' || provider.category === selectedCategory;
+
+              const matchesSearch =
+                provider.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                provider.email?.toLowerCase().includes(searchQuery.toLowerCase());
+
+              return matchesCategory && matchesSearch;
+            })
+            .map((provider) => (
+
+              <div key={provider.id} className="p-4">
+                <div className="flex items-start gap-3 mb-3">
+                  <div className="w-14 h-14 bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <span className="text-base font-bold text-white">{provider.logo}</span>
                   </div>
-                  <p className="text-xs font-semibold text-gray-500 mb-2">{provider.id}</p>
-                  <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${getCategoryColor(provider.category)}`}>
-                    {getCategoryLabel(provider.category)}
-                  </span>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <h3 className="text-sm font-bold text-gray-900 truncate">{provider.name}</h3>
+                      {provider.verified && (
+                        <div className="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                          <CheckCircle className="w-3 h-3 text-white" />
+                        </div>
+                      )}
+                    </div>
+                    <p className="text-xs font-semibold text-gray-500 mb-2">{provider.id}</p>
+                    <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${getCategoryColor(provider.category)}`}>
+                      {getCategoryLabel(provider.category)}
+                    </span>
+                  </div>
                 </div>
-              </div>
 
-              <div className="space-y-2 mb-3">
-                <div className="flex items-center gap-2">
-                  <Mail className="w-4 h-4 text-gray-400 flex-shrink-0" />
-                  <span className="text-xs font-semibold text-gray-600 truncate">{provider.email}</span>
+                <div className="space-y-2 mb-3">
+                  <div className="flex items-center gap-2">
+                    <Mail className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                    <span className="text-xs font-semibold text-gray-600 truncate">{provider.email}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Phone className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                    <span className="text-xs font-semibold text-gray-600">{provider.phone}</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <MapPin className="w-4 h-4 text-gray-400 flex-shrink-0 mt-0.5" />
+                    <span className="text-xs font-semibold text-gray-600">{provider.address}</span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Phone className="w-4 h-4 text-gray-400 flex-shrink-0" />
-                  <span className="text-xs font-semibold text-gray-600">{provider.phone}</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <MapPin className="w-4 h-4 text-gray-400 flex-shrink-0 mt-0.5" />
-                  <span className="text-xs font-semibold text-gray-600">{provider.address}</span>
-                </div>
-              </div>
 
-              <div className="flex items-center gap-2 pt-3 border-t border-gray-100">
-                <button className="flex-1 px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-xs font-semibold text-gray-700 transition-colors flex items-center justify-center gap-2">
-                  <Eye className="w-4 h-4" />
-                  View
-                </button>
-                <button 
-                  onClick={() => onEditProvider?.(provider)}
-                  className="flex-1 px-3 py-2 rounded-lg bg-blue-50 hover:bg-blue-100 text-xs font-semibold text-blue-600 transition-colors flex items-center justify-center gap-2"
-                >
-                  <Edit className="w-4 h-4" />
-                  Edit
-                </button>
-                <button className="px-3 py-2 rounded-lg bg-red-50 hover:bg-red-100 transition-colors">
-                  <Trash2 className="w-4 h-4 text-red-600" />
-                </button>
+                <div className="flex items-center gap-2 pt-3 border-t border-gray-100">
+                  <button className="flex-1 px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-xs font-semibold text-gray-700 transition-colors flex items-center justify-center gap-2">
+                    <Eye className="w-4 h-4" />
+                    View
+                  </button>
+                  <button
+                    onClick={() => onEditProvider?.(provider)}
+                    className="flex-1 px-3 py-2 rounded-lg bg-blue-50 hover:bg-blue-100 text-xs font-semibold text-blue-600 transition-colors flex items-center justify-center gap-2"
+                  >
+                    <Edit className="w-4 h-4" />
+                    Edit
+                  </button>
+                  <button className="px-3 py-2 rounded-lg bg-red-50 hover:bg-red-100 transition-colors">
+                    <Trash2 className="w-4 h-4 text-red-600" />
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
 
         {/* Empty State */}
-        {filteredProviders.length === 0 && (
-          <div className="p-12 text-center">
-            <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Building2 className="w-8 h-8 text-gray-400" />
+        {!loading &&
+          providers.filter((provider) => {
+            const matchesCategory =
+              selectedCategory === 'all' || provider.category === selectedCategory;
+
+            const matchesSearch =
+              provider.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+              provider.email?.toLowerCase().includes(searchQuery.toLowerCase());
+
+            return matchesCategory && matchesSearch;
+          }).length === 0 && (
+
+            <div className="p-12 text-center">
+              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Building2 className="w-8 h-8 text-gray-400" />
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">No providers found</h3>
+              <p className="text-gray-600 font-medium mb-4">
+                Try adjusting your filters or search query
+              </p>
+              <button
+                onClick={() => {
+                  setSelectedCategory('all');
+                  setSearchQuery('');
+                }}
+                className="px-6 py-2 rounded-xl bg-gradient-to-r from-pink-500 to-pink-600 text-white font-semibold hover:from-pink-600 hover:to-pink-700 transition-all"
+              >
+                Clear Filters
+              </button>
             </div>
-            <h3 className="text-lg font-bold text-gray-900 mb-2">No providers found</h3>
-            <p className="text-gray-600 font-medium mb-4">
-              Try adjusting your filters or search query
-            </p>
-            <button
-              onClick={() => {
-                setSelectedCategory('all');
-                setSearchQuery('');
-              }}
-              className="px-6 py-2 rounded-xl bg-gradient-to-r from-pink-500 to-pink-600 text-white font-semibold hover:from-pink-600 hover:to-pink-700 transition-all"
-            >
-              Clear Filters
-            </button>
-          </div>
-        )}
+          )}
 
         {/* Pagination */}
         {filteredProviders.length > 0 && (
           <div className="p-4 border-t border-gray-200 flex items-center justify-between">
             <p className="text-sm font-semibold text-gray-600">
-              Showing {filteredProviders.length} of {providers.length} providers
+              Showing {
+                providers.filter((provider) => {
+                  const matchesCategory =
+                    selectedCategory === 'all' || provider.category === selectedCategory;
+
+                  const matchesSearch =
+                    provider.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    provider.email?.toLowerCase().includes(searchQuery.toLowerCase());
+
+                  return matchesCategory && matchesSearch;
+                }).length
+              } of {providers.length}
+
             </p>
             <div className="flex items-center gap-2">
               <button className="px-4 py-2 rounded-lg border border-gray-200 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-colors">

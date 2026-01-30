@@ -15,3 +15,4 @@ export const UPLOAD = '/upload';
 export const SERVICES = '/service';
 
 export const PROVIDER = '/providers';
+export const GET_PROVIDER = '/admin/providers';

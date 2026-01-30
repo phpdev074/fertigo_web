@@ -1,6 +1,7 @@
 "use client";
 import { motion } from 'framer-motion';
 import { Mail, Lock, Eye, EyeOff, LogIn, Shield } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { useState, FormEvent } from 'react';
 
 const AdminLoginScreen = () => {
@@ -9,6 +10,7 @@ const AdminLoginScreen = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [errors, setErrors] = useState({ email: '', password: '' });
+  const router = useRouter();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,6 +34,7 @@ const AdminLoginScreen = () => {
     
     if (!newErrors.email && !newErrors.password) {
       console.log('Login submitted:', { email, password, rememberMe });
+      router.push('/main');
       // Handle login logic here
     }
   };
@@ -199,6 +202,7 @@ const AdminLoginScreen = () => {
                 className="w-full bg-gradient-to-r from-pink-500 to-pink-600 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-3 group"
               >
                 <span>Sign In</span>
+                
                 <LogIn className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </form>
