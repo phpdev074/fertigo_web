@@ -1,19 +1,29 @@
 "use client";
 import { motion } from 'motion/react';
-import { 
-  Users, UserX, Search, Filter, MoreVertical, Eye, Edit, 
-  Ban, Trash2, UserCheck, Mail, Phone, Calendar, Shield,
-  Download, Plus, ChevronDown
+import {
+  Users, UserX, Search, Filter, Eye, Ban, Trash2, UserCheck, Mail, Phone, ChevronDown
 } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { fetchAllUsers } from '../../api/api_client';
 
 export default function UserManagementScreen() {
   const [activeTab, setActiveTab] = useState<'all' | 'blocked'>('all');
   const [selectedRole, setSelectedRole] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [showRoleFilter, setShowRoleFilter] = useState(false);
+  const [users, setUsers] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+  // const [userData, setUserData ] = useState();
+  const [userData, setUserData] = useState({
+    users: [],
+    pagination: { page: 1, totalPages: 1, total: 0 },
+  });
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [selectedUser, setSelectedUser] = useState<any | null>(null);
+  const [showUserModal, setShowUserModal] = useState(false);
 
-  // User roles for filter
+console.log(selectedUser, "--selectedUser")
+
   const userRoles = [
     { id: 'all', label: 'All Roles', color: 'gray' },
     { id: 'patient', label: 'Patient', color: 'blue' },
@@ -22,96 +32,49 @@ export default function UserManagementScreen() {
     { id: 'admin', label: 'Super Admin', color: 'green' },
   ];
 
-  // Mock user data - only patients
-  const allUsers = [
-    {
-      id: 'USR-001',
-      name: 'Sarah Johnson',
-      email: 'sarah.johnson@email.com',
-      phone: '+1 (555) 123-4567',
-      role: 'patient',
-      status: 'active',
-      joinDate: 'Dec 15, 2024',
-      lastActive: '2 hours ago',
-      bookings: 12,
-      avatar: 'SJ',
-      verified: true,
-    },
-    {
-      id: 'USR-003',
-      name: 'Michael Brown',
-      email: 'michael.brown@email.com',
-      phone: '+1 (555) 345-6789',
-      role: 'patient',
-      status: 'active',
-      joinDate: 'Dec 28, 2024',
-      lastActive: '5 mins ago',
-      bookings: 3,
-      avatar: 'MB',
-      verified: false,
-    },
-    {
-      id: 'USR-005',
-      name: 'Jessica Wilson',
-      email: 'jessica.wilson@email.com',
-      phone: '+1 (555) 567-8901',
-      role: 'patient',
-      status: 'blocked',
-      joinDate: 'Sep 05, 2024',
-      lastActive: '2 weeks ago',
-      bookings: 8,
-      avatar: 'JW',
-      verified: true,
-    },
-    {
-      id: 'USR-006',
-      name: 'David Martinez',
-      email: 'david.martinez@email.com',
-      phone: '+1 (555) 678-9012',
-      role: 'patient',
-      status: 'blocked',
-      joinDate: 'Aug 22, 2024',
-      lastActive: '1 month ago',
-      bookings: 2,
-      avatar: 'DM',
-      verified: false,
-    },
-    {
-      id: 'USR-009',
-      name: 'Amanda Taylor',
-      email: 'amanda.taylor@email.com',
-      phone: '+1 (555) 901-2345',
-      role: 'patient',
-      status: 'active',
-      joinDate: 'Jan 10, 2025',
-      lastActive: '30 mins ago',
-      bookings: 7,
-      avatar: 'AT',
-      verified: true,
-    },
-    {
-      id: 'USR-010',
-      name: 'James Anderson',
-      email: 'james.anderson@email.com',
-      phone: '+1 (555) 012-3456',
-      role: 'patient',
-      status: 'active',
-      joinDate: 'Dec 01, 2024',
-      lastActive: '1 hour ago',
-      bookings: 15,
-      avatar: 'JA',
-      verified: true,
-    },
-  ];
+  const loadUsers = async (pageNumber: number = 1) => {
+    setLoading(true);
+    try {
+      const response = await fetchAllUsers({ page: pageNumber });
+      if (response.data.success) {
+        setUserData(response.data.data);
+        setUsers(response.data.data.users);
+        setPage(response.data.data.pagination.page);
+        setTotalPages(response.data.data.pagination.totalPages);
+      }
+    } catch (error) {
+      console.error('Failed to fetch users:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  // Filter users based on active tab and selected role
-  const filteredUsers = allUsers.filter((user) => {
-    const matchesTab = activeTab === 'all' ? user.status === 'active' : user.status === 'blocked';
-    const matchesRole = selectedRole === 'all' || user.role === selectedRole;
-    const matchesSearch = user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          user.email.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesTab && matchesRole && matchesSearch;
-  });
+  useEffect(() => {
+    loadUsers(page);
+  }, [page]);
+
+  // Filter users based on active tab, role, and search
+  const filteredUsers = users
+    .filter((user) => {
+      const isActive = user.isActive ?? true;
+      const matchesTab = activeTab === 'all' ? isActive : !isActive;
+      const matchesRole = selectedRole === 'all' || user.role === selectedRole;
+      const matchesSearch = user.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        user.email?.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesTab && matchesRole && matchesSearch;
+    })
+    .map((user) => ({
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      phone: `${user.countryCode || ''}${user.mobileNumber || ''}`,
+      role: user.role,
+      status: user.isActive ? 'active' : 'blocked',
+      joinDate: new Date(user.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+      bookings: user.serviceType?.length || 0,
+      avatar: user.name ? user.name.split(' ').map(n => n[0]).join('').toUpperCase() : 'NA',
+      verified: user.isVerified ?? false,
+    }));
 
   const getRoleColor = (role: string) => {
     switch (role) {
@@ -128,11 +91,16 @@ export default function UserManagementScreen() {
     return roleObj ? roleObj.label : role;
   };
 
+  const handlePageChange = (newPage: number) => {
+    if (newPage < 1 || newPage > totalPages) return;
+    loadUsers(newPage);
+  };
+
   const stats = {
-    total: allUsers.filter(u => u.status === 'active').length,
-    blocked: allUsers.filter(u => u.status === 'blocked').length,
-    patients: allUsers.filter(u => u.role === 'patient' && u.status === 'active').length,
-    providers: allUsers.filter(u => u.role === 'provider' && u.status === 'active').length,
+    total: userData?.pagination?.total || 0,
+    blocked: 0,
+    patients: 0,
+    providers: 0,
   };
 
   return (
@@ -145,12 +113,9 @@ export default function UserManagementScreen() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="bg-white rounded-2xl p-4 md:p-6 shadow-sm border border-gray-100"
-        >
+        {/* Total Patients */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
+          className="bg-white rounded-2xl p-4 md:p-6 shadow-sm border border-gray-100">
           <div className="flex items-center gap-3 mb-2">
             <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
               <Users className="w-5 h-5 text-blue-600" />
@@ -160,12 +125,9 @@ export default function UserManagementScreen() {
           <p className="text-sm font-semibold text-gray-600">Total Patients</p>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="bg-white rounded-2xl p-4 md:p-6 shadow-sm border border-gray-100"
-        >
+        {/* Blocked Patients */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+          className="bg-white rounded-2xl p-4 md:p-6 shadow-sm border border-gray-100">
           <div className="flex items-center gap-3 mb-2">
             <div className="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center">
               <UserX className="w-5 h-5 text-red-600" />
@@ -175,12 +137,9 @@ export default function UserManagementScreen() {
           <p className="text-sm font-semibold text-gray-600">Blocked Patients</p>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="bg-white rounded-2xl p-4 md:p-6 shadow-sm border border-gray-100"
-        >
+        {/* Active Patients */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
+          className="bg-white rounded-2xl p-4 md:p-6 shadow-sm border border-gray-100">
           <div className="flex items-center gap-3 mb-2">
             <div className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center">
               <UserCheck className="w-5 h-5 text-purple-600" />
@@ -191,7 +150,6 @@ export default function UserManagementScreen() {
         </motion.div>
       </div>
 
-      {/* Main Content Card */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -202,12 +160,14 @@ export default function UserManagementScreen() {
         <div className="border-b border-gray-200">
           <div className="flex items-center gap-2 p-2">
             <button
-              onClick={() => setActiveTab('all')}
-              className={`flex-1 md:flex-none md:px-6 py-3 rounded-xl font-semibold transition-all ${
-                activeTab === 'all'
+              onClick={() => {
+                setActiveTab('all');
+                loadUsers(1); // Always fetch first page when switching tab
+              }}
+              className={`flex-1 md:flex-none md:px-6 py-3 rounded-xl font-semibold transition-all ${activeTab === 'all'
                   ? 'bg-gradient-to-r from-pink-500 to-pink-600 text-white shadow-lg'
                   : 'text-gray-600 hover:bg-gray-100'
-              }`}
+                }`}
             >
               <span className="flex items-center justify-center gap-2">
                 <Users className="w-5 h-5" />
@@ -215,12 +175,14 @@ export default function UserManagementScreen() {
               </span>
             </button>
             <button
-              onClick={() => setActiveTab('blocked')}
-              className={`flex-1 md:flex-none md:px-6 py-3 rounded-xl font-semibold transition-all ${
-                activeTab === 'blocked'
+              onClick={() => {
+                setActiveTab('blocked');
+                loadUsers(1); // Fetch API for blocked users
+              }}
+              className={`flex-1 md:flex-none md:px-6 py-3 rounded-xl font-semibold transition-all ${activeTab === 'blocked'
                   ? 'bg-gradient-to-r from-pink-500 to-pink-600 text-white shadow-lg'
                   : 'text-gray-600 hover:bg-gray-100'
-              }`}
+                }`}
             >
               <span className="flex items-center justify-center gap-2">
                 <UserX className="w-5 h-5" />
@@ -246,7 +208,7 @@ export default function UserManagementScreen() {
             </div>
 
             {/* Role Filter */}
-            <div className="relative">
+            {/* <div className="relative">
               <button
                 onClick={() => setShowRoleFilter(!showRoleFilter)}
                 className="w-full md:w-auto flex items-center justify-between gap-3 px-4 py-2.5 rounded-xl border border-gray-200 hover:bg-gray-50 transition-colors bg-white"
@@ -280,7 +242,7 @@ export default function UserManagementScreen() {
                   ))}
                 </div>
               )}
-            </div>
+            </div> */}
           </div>
 
           {/* Active Filters Display */}
@@ -352,7 +314,7 @@ export default function UserManagementScreen() {
                             </div>
                           )}
                         </div>
-                        <p className="text-xs font-semibold text-gray-500">{user.id}</p>
+                        {/* <p className="text-xs font-semibold text-gray-500">{user.id}</p> */}
                       </div>
                     </div>
                   </td>
@@ -381,9 +343,22 @@ export default function UserManagementScreen() {
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
-                      <button className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors">
+                      {/* <button className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors">
+                        <Eye className="w-4 h-4 text-gray-600" />
+                      </button> */}
+
+                      <button
+                        onClick={() => {
+                          setSelectedUser(user);
+                          setShowUserModal(true);
+                        }}
+                        className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors"
+                      >
                         <Eye className="w-4 h-4 text-gray-600" />
                       </button>
+
+
+
                       <button className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-yellow-50 transition-colors">
                         <Ban className="w-4 h-4 text-yellow-600" />
                       </button>
@@ -444,10 +419,23 @@ export default function UserManagementScreen() {
               </div>
 
               <div className="flex items-center gap-2 pt-3 border-t border-gray-100">
-                <button className="flex-1 px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-xs font-semibold text-gray-700 transition-colors flex items-center justify-center gap-2">
+                {/* <button className="flex-1 px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-xs font-semibold text-gray-700 transition-colors flex items-center justify-center gap-2">
+                  <Eye className="w-4 h-4" />
+                  View
+                </button> */}
+
+                <button
+                  onClick={() => {
+                    setSelectedUser(user);
+                    setShowUserModal(true);
+                  }}
+                  className="flex-1 px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-xs font-semibold text-gray-700 transition-colors flex items-center justify-center gap-2"
+                >
                   <Eye className="w-4 h-4" />
                   View
                 </button>
+
+
                 <button className="px-3 py-2 rounded-lg bg-yellow-50 hover:bg-yellow-100 transition-colors">
                   <Ban className="w-4 h-4 text-yellow-600" />
                 </button>
@@ -482,7 +470,7 @@ export default function UserManagementScreen() {
         )}
 
         {/* Pagination */}
-        {filteredUsers.length > 0 && (
+        {/* {filteredUsers.length > 0 && (
           <div className="p-4 border-t border-gray-200 flex items-center justify-between">
             <p className="text-sm font-semibold text-gray-600">
               Showing {filteredUsers.length} of {activeTab === 'all' ? stats.total : stats.blocked} users
@@ -503,7 +491,81 @@ export default function UserManagementScreen() {
             </div>
           </div>
         )}
+         */}
+
+        {filteredUsers.length > 0 && (
+          <div className="p-4 border-t border-gray-200 flex items-center justify-between">
+            <p className="text-sm font-semibold text-gray-600">
+              Showing {filteredUsers.length} of {activeTab === 'all' ? stats.total : stats.blocked} users
+            </p>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => handlePageChange(page - 1)}
+                className="px-4 py-2 rounded-lg border border-gray-200 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-colors"
+              >
+                Previous
+              </button>
+              {Array.from({ length: totalPages }, (_, i) => (
+                <button
+                  key={i + 1}
+                  onClick={() => handlePageChange(i + 1)}
+                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${page === i + 1
+                      ? 'bg-gradient-to-r from-pink-500 to-pink-600 text-white'
+                      : 'border border-gray-200 text-gray-600 hover:bg-gray-50'
+                    }`}
+                >
+                  {i + 1}
+                </button>
+              ))}
+              <button
+                onClick={() => handlePageChange(page + 1)}
+                className="px-4 py-2 rounded-lg border border-gray-200 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-colors"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        )}
+
       </motion.div>
+
+
+
+{showUserModal && selectedUser && (
+  <div
+    className="fixed inset-0 flex items-center justify-center z-50"
+    onClick={() => setShowUserModal(false)} 
+  >
+
+    <div
+      className="relative bg-white rounded-2xl w-11/12 md:w-1/2 p-6 z-10"
+      onClick={(e) => e.stopPropagation()} 
+    >
+      <button
+        onClick={() => setShowUserModal(false)}
+        className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 font-bold text-xl"
+      >
+        ×
+      </button>
+
+      <h2 className="text-xl font-bold mb-4 text-black">{selectedUser.name}</h2>
+      <div className="space-y-2 text-sm">
+<p className="text-gray-800">
+  <span className="font-semibold text-black-600">Email:</span> {selectedUser.email}
+</p>
+        <p className="text-gray-800"><span className="font-semibold">Phone:</span> {selectedUser.phone}</p>
+        <p className="text-gray-800"><span className="font-semibold">Role:</span> {getRoleLabel(selectedUser.role)}</p>
+        <p className="text-gray-800"><span className="font-semibold">Status:</span> {selectedUser.status}</p>
+        <p className="text-gray-800"><span className="font-semibold">Verified:</span> {selectedUser.verified ? 'Yes' : 'No'}</p>
+        <p className="text-gray-800"><span className="font-semibold">Joined:</span> {selectedUser.joinDate}</p>
+        <p className="text-gray-800"><span className="font-semibold">Bookings:</span> {selectedUser.bookings}</p>
+      </div>
+    </div>
+  </div>
+)}
+
+
+
     </div>
   );
 }

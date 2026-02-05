@@ -14,4 +14,14 @@ export const GetProviders = () =>
         baseURL: BASE_URL,
         method: GET,
         url: GET_PROVIDER,
-    })    
+    })
+
+
+export const UserLogin = (payload: any) => {
+    axios({
+        baseURL: BASE_URL,
+        method: 'post',
+        url: '/user/login',
+        data: payload
+    })
+}

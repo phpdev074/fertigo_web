@@ -2,6 +2,7 @@
 // export const IMAGE_BASE_URL = 'http://85.31.234.205:5200';
 
 export const BASE_URL = 'https://api.fertigoapp.com';
+// export const BASE_URL = 'http://localhost:5200'
 export const IMAGE_BASE_URL = 'https://api.fertigoapp.com';
 
 export const POST = 'POST';

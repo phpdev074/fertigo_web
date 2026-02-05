@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { Mail, Lock, Eye, EyeOff, LogIn, Shield } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState, FormEvent } from 'react';
+import { UserLogin } from '../app/api/api_client'
+
 
 const AdminLoginScreen = () => {
   const [email, setEmail] = useState('admin@fertigo.com');
@@ -12,31 +14,49 @@ const AdminLoginScreen = () => {
   const [errors, setErrors] = useState({ email: '', password: '' });
   const router = useRouter();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     // Simple validation
     const newErrors = { email: '', password: '' };
-    
+
     if (!email) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       newErrors.email = 'Email is invalid';
     }
-    
+
     if (!password) {
       newErrors.password = 'Password is required';
     } else if (password.length < 6) {
       newErrors.password = 'Password must be at least 6 characters';
     }
-    
+
     setErrors(newErrors);
-    
-    if (!newErrors.email && !newErrors.password) {
-      console.log('Login submitted:', { email, password, rememberMe });
+    if (newErrors.email || newErrors.password) return;
+
       router.push('/main');
-      // Handle login logic here
-    }
+    //  login block 
+    // try {
+    //   let res = await UserLogin({
+    //     email,
+    //     password
+    //   });
+    //   console.log('Login success:', res.data.status);
+
+    //   if (res.data.status == true) {
+    //     localStorage.setItem('token', res.data.data.token);
+    //     localStorage.setItem('role', res.data.data.role);
+    //     router.push('/main');
+    //   }
+    //   else {
+    //     alert('Login failed. Please try again');
+    //   }
+    // } catch (error) {
+    //   console.error('Login failed:', error);
+    //   alert('Login failed. Please try again');
+    // }
+
   };
 
   return (
@@ -81,9 +101,9 @@ const AdminLoginScreen = () => {
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
                 <svg className="w-6 h-6 text-purple-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                  <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-                  <line x1="12" y1="22.08" x2="12" y2="12"/>
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                  <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                  <line x1="12" y1="22.08" x2="12" y2="12" />
                 </svg>
               </div>
               <div>
@@ -133,11 +153,10 @@ const AdminLoginScreen = () => {
                     id="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className={`w-full pl-12 pr-4 py-4 text-black border-2 rounded-xl font-medium transition-all focus:outline-none focus:ring-4 ${
-                      errors.email
-                        ? 'border-red-300 focus:border-red-500 focus:ring-red-100'
-                        : 'border-gray-200 focus:border-pink-500 focus:ring-pink-100'
-                    }`}
+                    className={`w-full pl-12 pr-4 py-4 text-black border-2 rounded-xl font-medium transition-all focus:outline-none focus:ring-4 ${errors.email
+                      ? 'border-red-300 focus:border-red-500 focus:ring-red-100'
+                      : 'border-gray-200 focus:border-pink-500 focus:ring-pink-100'
+                      }`}
                     placeholder="admin@fertigo.com"
                   />
                 </div>
@@ -160,11 +179,10 @@ const AdminLoginScreen = () => {
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className={`w-full pl-12 pr-12 py-4 border-2 text-black rounded-xl font-medium transition-all focus:outline-none focus:ring-4 ${
-                      errors.password
-                        ? 'border-red-300 focus:border-red-500 focus:ring-red-100'
-                        : 'border-gray-200 focus:border-pink-500 focus:ring-pink-100'
-                    }`}
+                    className={`w-full pl-12 pr-12 py-4 border-2 text-black rounded-xl font-medium transition-all focus:outline-none focus:ring-4 ${errors.password
+                      ? 'border-red-300 focus:border-red-500 focus:ring-red-100'
+                      : 'border-gray-200 focus:border-pink-500 focus:ring-pink-100'
+                      }`}
                     placeholder="••••••••"
                   />
                   <button
@@ -202,7 +220,7 @@ const AdminLoginScreen = () => {
                 className="w-full bg-gradient-to-r from-pink-500 to-pink-600 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-3 group"
               >
                 <span>Sign In</span>
-                
+
                 <LogIn className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </form>

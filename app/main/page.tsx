@@ -1,18 +1,42 @@
 "use client";
 import { motion } from 'motion/react';
-import { 
+import {
   Users, Building2, Calendar, TrendingUp, TrendingDown, FileText
 } from 'lucide-react';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { userCounts } from "../api/api_client"
 
 export default function DashboardPage() {
+  const [stats, setStats] = useState({
+    total: 0,
+    patients: 0,
+    providers: 0,
+  });
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const response = await userCounts();
+        if (response.data.status == true) {
+          const data = response.data.data;
+          setStats(data);
+          console.log(data)
+        }
+      } catch (err) {
+        console.error("Failed to fetch dashboard stats:", err);
+      }
+    };
+
+    fetchStats();
+  }, []);
 
   const userTypeData = [
-    { name: 'Patients', value: 1245, color: '#ec4899' },
-    { name: 'Providers', value: 328, color: '#8b5cf6' },
+    { name: 'Patients', value: stats.patients, color: '#ec4899' },
+    { name: 'Providers', value: stats.providers, color: '#8b5cf6' },
     // { name: 'Clinics', value: 156, color: '#06b6d4' },
   ];
+
 
   return (
     <>
@@ -39,7 +63,7 @@ export default function DashboardPage() {
               12.5%
             </span>
           </div>
-          <h3 className="text-3xl font-bold text-gray-900 mb-1">1,729</h3>
+          <h3 className="text-3xl font-bold text-gray-900 mb-1">{stats.total}</h3>
           <p className="text-sm font-semibold text-gray-600">Total Users</p>
         </motion.div>
 
@@ -58,7 +82,7 @@ export default function DashboardPage() {
               8.3%
             </span>
           </div>
-          <h3 className="text-3xl font-bold text-gray-900 mb-1">484</h3>
+          <h3 className="text-3xl font-bold text-gray-900 mb-1">{stats.providers}</h3>
           <p className="text-sm font-semibold text-gray-600">Total Providers</p>
         </motion.div>
 
@@ -77,7 +101,7 @@ export default function DashboardPage() {
               3.2%
             </span>
           </div>
-          <h3 className="text-3xl font-bold text-gray-900 mb-1">89</h3>
+          <h3 className="text-3xl font-bold text-gray-900 mb-1">0</h3>
           <p className="text-sm font-semibold text-gray-600">Bookings Today</p>
         </motion.div>
       </div>
@@ -111,17 +135,17 @@ export default function DashboardPage() {
               <Tooltip />
             </PieChart>
           </ResponsiveContainer>
-            <div className="space-y-3 mt-4">
-                    {userTypeData.map((item) => (
-                      <div key={item.name} className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }} />
-                          <span className="text-sm font-semibold text-gray-600">{item.name}</span>
-                        </div>
-                        <span className="text-sm font-bold text-gray-900">{item.value.toLocaleString()}</span>
-                      </div>
-                    ))}
-                  </div>
+          <div className="space-y-3 mt-4">
+            {userTypeData.map((item) => (
+              <div key={item.name} className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }} />
+                  <span className="text-sm font-semibold text-gray-600">{item.name}</span>
+                </div>
+                <span className="text-sm font-bold text-gray-900">{item.value.toLocaleString()}</span>
+              </div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </>
