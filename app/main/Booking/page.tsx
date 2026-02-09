@@ -1,12 +1,13 @@
 "use client";
 import { motion } from 'motion/react';
-import { 
-  Calendar, Search, Filter, ChevronDown, Download, Eye, Edit, 
+import {
+  Calendar, Search, Filter, ChevronDown, Download, Eye, Edit,
   X, Check, Clock, XCircle, CheckCircle, AlertCircle, MoreVertical,
   User, Building2, DollarSign, MapPin, Phone, Mail, FileText,
   RefreshCw, TrendingUp, Activity, CreditCard
 } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { BookingHistory, BookignCounts, Service } from '@/app/api/api_client';
 
 export default function BookingHistoryScreen() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -16,6 +17,19 @@ export default function BookingHistoryScreen() {
   const [showServiceFilter, setShowServiceFilter] = useState(false);
   const [selectedDateRange, setSelectedDateRange] = useState('all');
   const [showDateFilter, setShowDateFilter] = useState(false);
+  const [bookings, setBookings] = useState<any[]>([]);
+  const [bookingCounts, setBookingCounts] = useState<any>({
+    Total: 0,
+    Pending: 0,
+    Confirmed: 0,
+    Completed: 0,
+    Cancelled: 0,
+  });
+  const [services, setServices] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [pagination, setPagination] = useState<any>(null)
+
 
   // Filter options
   const statusOptions = [
@@ -23,18 +37,17 @@ export default function BookingHistoryScreen() {
     { id: 'pending', label: 'Pending', color: 'yellow' },
     { id: 'confirmed', label: 'Confirmed', color: 'blue' },
     { id: 'completed', label: 'Completed', color: 'green' },
-    { id: 'cancelled', label: 'Cancelled', color: 'red' },
-    { id: 'no-show', label: 'No Show', color: 'orange' },
+    { id: 'cancelled', label: 'Cancelled', color: 'red' }
   ];
 
   const serviceOptions = [
     { id: 'all', label: 'All Services' },
-    { id: 'lab', label: 'Laboratory Tests' },
-    { id: 'consultation', label: 'Consultations' },
-    { id: 'imaging', label: 'Imaging Services' },
-    { id: 'procedure', label: 'Procedures' },
-    { id: 'counseling', label: 'Counseling' },
+    ...services.map((s) => ({
+      id: s._id,
+      label: s.name,
+    })),
   ];
+
 
   const dateRangeOptions = [
     { id: 'all', label: 'All Time' },
@@ -46,251 +59,99 @@ export default function BookingHistoryScreen() {
     { id: 'year', label: 'This Year' },
   ];
 
-  // Mock bookings data
-  const allBookings = [
-    {
-      id: 'BK-2024-001',
-      bookingDate: 'Dec 28, 2024',
-      bookingTime: '10:30 AM',
-      patient: {
-        name: 'Sarah Johnson',
-        email: 'sarah.johnson@email.com',
-        phone: '+1 (555) 123-4567',
-        id: 'USR-001',
-      },
-      provider: {
-        name: 'LifeCare Laboratory',
-        location: 'Downtown Medical Center',
-        id: 'PRV-045',
-      },
-      service: {
-        name: 'Blood Tests - Complete Panel',
-        category: 'Laboratory Tests',
-        type: 'lab',
-      },
-      amount: 185,
-      status: 'completed',
-      paymentStatus: 'paid',
-      createdAt: 'Dec 20, 2024',
-      completedAt: 'Dec 28, 2024',
-      notes: 'Regular checkup - All tests completed successfully',
-    },
-    {
-      id: 'BK-2024-002',
-      bookingDate: 'Dec 29, 2024',
-      bookingTime: '02:00 PM',
-      patient: {
-        name: 'Emily Davis',
-        email: 'emily.davis@email.com',
-        phone: '+1 (555) 234-5678',
-        id: 'USR-002',
-      },
-      provider: {
-        name: 'FertAssist Clinic',
-        location: 'Medical Plaza, Suite 300',
-        id: 'PRV-023',
-      },
-      service: {
-        name: 'Initial Fertility Consultation',
-        category: 'Consultations',
-        type: 'consultation',
-      },
-      amount: 250,
-      status: 'confirmed',
-      paymentStatus: 'paid',
-      createdAt: 'Dec 22, 2024',
-      completedAt: null,
-      notes: 'First consultation - patient requested female doctor',
-    },
-    {
-      id: 'BK-2024-003',
-      bookingDate: 'Dec 29, 2024',
-      bookingTime: '11:00 AM',
-      patient: {
-        name: 'Michael Brown',
-        email: 'michael.brown@email.com',
-        phone: '+1 (555) 345-6789',
-        id: 'USR-003',
-      },
-      provider: {
-        name: 'Hope Medical Imaging',
-        location: 'Westside Health Complex',
-        id: 'PRV-067',
-      },
-      service: {
-        name: 'Ultrasound Scan - Pelvic',
-        category: 'Imaging Services',
-        type: 'imaging',
-      },
-      amount: 220,
-      status: 'pending',
-      paymentStatus: 'pending',
-      createdAt: 'Dec 28, 2024',
-      completedAt: null,
-      notes: 'Awaiting confirmation from provider',
-    },
-    {
-      id: 'BK-2024-004',
-      bookingDate: 'Dec 27, 2024',
-      bookingTime: '09:00 AM',
-      patient: {
-        name: 'Jessica Wilson',
-        email: 'jessica.wilson@email.com',
-        phone: '+1 (555) 456-7890',
-        id: 'USR-004',
-      },
-      provider: {
-        name: 'LifeCare Laboratory',
-        location: 'Downtown Medical Center',
-        id: 'PRV-045',
-      },
-      service: {
-        name: 'Hormone Level Testing',
-        category: 'Laboratory Tests',
-        type: 'lab',
-      },
-      amount: 150,
-      status: 'completed',
-      paymentStatus: 'paid',
-      createdAt: 'Dec 18, 2024',
-      completedAt: 'Dec 27, 2024',
-      notes: 'Follow-up test - Results sent to patient',
-    },
-    {
-      id: 'BK-2024-005',
-      bookingDate: 'Dec 26, 2024',
-      bookingTime: '03:30 PM',
-      patient: {
-        name: 'David Martinez',
-        email: 'david.martinez@email.com',
-        phone: '+1 (555) 567-8901',
-        id: 'USR-005',
-      },
-      provider: {
-        name: 'FertCare Center',
-        location: 'Central Medical District',
-        id: 'PRV-089',
-      },
-      service: {
-        name: 'IUI Procedure',
-        category: 'Procedures',
-        type: 'procedure',
-      },
-      amount: 580,
-      status: 'cancelled',
-      paymentStatus: 'refunded',
-      createdAt: 'Dec 15, 2024',
-      completedAt: null,
-      notes: 'Cancelled by patient - Full refund processed',
-    },
-    {
-      id: 'BK-2024-006',
-      bookingDate: 'Dec 30, 2024',
-      bookingTime: '01:00 PM',
-      patient: {
-        name: 'Amanda Foster',
-        email: 'amanda.foster@email.com',
-        phone: '+1 (555) 678-9012',
-        id: 'USR-006',
-      },
-      provider: {
-        name: 'Wellness Fertility Counseling',
-        location: 'Therapy Center - Floor 2',
-        id: 'PRV-034',
-      },
-      service: {
-        name: 'Emotional Support Session',
-        category: 'Counseling',
-        type: 'counseling',
-      },
-      amount: 120,
-      status: 'confirmed',
-      paymentStatus: 'paid',
-      createdAt: 'Dec 25, 2024',
-      completedAt: null,
-      notes: 'Couples counseling session',
-    },
-    {
-      id: 'BK-2024-007',
-      bookingDate: 'Dec 25, 2024',
-      bookingTime: '10:00 AM',
-      patient: {
-        name: 'Robert Chen',
-        email: 'robert.chen@email.com',
-        phone: '+1 (555) 789-0123',
-        id: 'USR-007',
-      },
-      provider: {
-        name: 'Hope Medical Imaging',
-        location: 'Westside Health Complex',
-        id: 'PRV-067',
-      },
-      service: {
-        name: 'HSG (Hysterosalpingogram)',
-        category: 'Imaging Services',
-        type: 'imaging',
-      },
-      amount: 350,
-      status: 'no-show',
-      paymentStatus: 'paid',
-      createdAt: 'Dec 10, 2024',
-      completedAt: null,
-      notes: 'Patient did not show up - No refund per policy',
-    },
-    {
-      id: 'BK-2024-008',
-      bookingDate: 'Dec 30, 2024',
-      bookingTime: '04:00 PM',
-      patient: {
-        name: 'Lisa Anderson',
-        email: 'lisa.anderson@email.com',
-        phone: '+1 (555) 890-1234',
-        id: 'USR-008',
-      },
-      provider: {
-        name: 'FertAssist Clinic',
-        location: 'Medical Plaza, Suite 300',
-        id: 'PRV-023',
-      },
-      service: {
-        name: 'Follow-up Consultation',
-        category: 'Consultations',
-        type: 'consultation',
-      },
-      amount: 120,
-      status: 'pending',
-      paymentStatus: 'pending',
-      createdAt: 'Dec 28, 2024',
-      completedAt: null,
-      notes: 'Review test results with doctor',
-    },
-  ];
+  const normalizedBookings = bookings.map((b) => ({
+    id: b._id,
+    bookingDate: new Date(b.bookingDate).toLocaleDateString(),
+    bookingTime: `${b.startTime} - ${b.endTime}`,
+    createdAt: new Date(b.createdAt).toLocaleDateString(),
 
-  // Filter bookings
-  const filteredBookings = allBookings.filter((booking) => {
-    const matchesSearch = 
+    patient: {
+      name: b.patientInfo?.patientName,
+      phone: b.patientInfo?.patientContact,
+    },
+
+    provider: {
+      name: b.Provider?.name,
+      location: b.Provider?.address?.fullAddress,
+    },
+
+    service: {
+      name: b.service?.name,
+      type: b.service?._id,
+      category: b.service?.name,
+    },
+
+    amount: b.serviceFee,
+    status: b.requestStatus,
+    paymentStatus: b.paymentStatus,
+    notes: b.note,
+  }));
+
+
+  useEffect(() => {
+    const fetchAll = async () => {
+      try {
+        setLoading(true);
+
+        const [historyRes, countsRes, serviceRes] = await Promise.all([
+          BookingHistory({
+            page,
+            serviceId: selectedService === 'all' ? '' : selectedService,
+            status: selectedStatus === 'all' ? '' : selectedStatus,
+            dateRange: selectedDateRange === 'all' ? '' : selectedDateRange,
+          }),
+          BookignCounts(),
+          Service({}),
+        ]);
+
+        setBookings(historyRes?.data?.data?.history || []);
+        setBookingCounts(countsRes?.data.data || {});
+        setServices(serviceRes?.data.data || []);
+        setPagination(historyRes?.data?.data?.pagination || {})
+
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAll();
+  }, [showStatusFilter, selectedStatus, selectedDateRange, selectedService, page]);
+
+
+  const goToPage = (p: number) => {
+    if (!pagination) return;
+    if (p < 1 || p > pagination.totalPages) return;
+    setPage(p);
+  };
+
+
+  const filteredBookings = normalizedBookings.filter((booking) => {
+    const matchesSearch =
       booking.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      booking.patient.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      booking.provider.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      booking.service.name.toLowerCase().includes(searchQuery.toLowerCase());
-    
-    const matchesStatus = selectedStatus === 'all' || booking.status === selectedStatus;
-    const matchesService = selectedService === 'all' || booking.service.type === selectedService;
-    
+      booking.patient.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      booking.provider.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      booking.service.name?.toLowerCase().includes(searchQuery.toLowerCase());
+
+    const matchesStatus =
+      selectedStatus === 'all' || booking.status === selectedStatus;
+
+    const matchesService =
+      selectedService === 'all' || booking.service.type === selectedService;
+
     return matchesSearch && matchesStatus && matchesService;
   });
 
-  // Calculate stats
+
   const stats = {
-    total: allBookings.length,
-    pending: allBookings.filter(b => b.status === 'pending').length,
-    confirmed: allBookings.filter(b => b.status === 'confirmed').length,
-    completed: allBookings.filter(b => b.status === 'completed').length,
-    cancelled: allBookings.filter(b => b.status === 'cancelled').length,
-    revenue: allBookings
-      .filter(b => b.paymentStatus === 'paid')
-      .reduce((sum, b) => sum + b.amount, 0),
+    total: bookingCounts?.Total || 0,
+    pending: bookingCounts?.Pending || 0,
+    confirmed: bookingCounts?.Confirmed || 0,
+    completed: bookingCounts?.Completed || 0,
+    cancelled: bookingCounts?.Cancelled || 0,
   };
+
 
   const getStatusIcon = (status: string) => {
     switch (status) {
@@ -455,11 +316,10 @@ export default function BookingHistoryScreen() {
                         setSelectedStatus(option.id);
                         setShowStatusFilter(false);
                       }}
-                      className={`w-full px-4 py-2 text-left text-sm font-semibold transition-colors ${
-                        selectedStatus === option.id
-                          ? 'bg-pink-50 text-pink-600'
-                          : 'text-gray-700 hover:bg-gray-50'
-                      }`}
+                      className={`w-full px-4 py-2 text-left text-sm font-semibold transition-colors ${selectedStatus === option.id
+                        ? 'bg-pink-50 text-pink-600'
+                        : 'text-gray-700 hover:bg-gray-50'
+                        }`}
                     >
                       {option.label}
                     </button>
@@ -492,11 +352,10 @@ export default function BookingHistoryScreen() {
                         setSelectedService(option.id);
                         setShowServiceFilter(false);
                       }}
-                      className={`w-full px-4 py-2 text-left text-sm font-semibold transition-colors ${
-                        selectedService === option.id
-                          ? 'bg-pink-50 text-pink-600'
-                          : 'text-gray-700 hover:bg-gray-50'
-                      }`}
+                      className={`w-full px-4 py-2 text-left text-sm font-semibold transition-colors ${selectedService === option.id
+                        ? 'bg-pink-50 text-pink-600'
+                        : 'text-gray-700 hover:bg-gray-50'
+                        }`}
                     >
                       {option.label}
                     </button>
@@ -529,11 +388,10 @@ export default function BookingHistoryScreen() {
                         setSelectedDateRange(option.id);
                         setShowDateFilter(false);
                       }}
-                      className={`w-full px-4 py-2 text-left text-sm font-semibold transition-colors ${
-                        selectedDateRange === option.id
-                          ? 'bg-pink-50 text-pink-600'
-                          : 'text-gray-700 hover:bg-gray-50'
-                      }`}
+                      className={`w-full px-4 py-2 text-left text-sm font-semibold transition-colors ${selectedDateRange === option.id
+                        ? 'bg-pink-50 text-pink-600'
+                        : 'text-gray-700 hover:bg-gray-50'
+                        }`}
                     >
                       {option.label}
                     </button>
@@ -774,25 +632,61 @@ export default function BookingHistoryScreen() {
         )}
 
         {/* Pagination */}
-        {filteredBookings.length > 0 && (
+        {/* Pagination */}
+        {pagination && pagination.totalRecords > 0 && (
           <div className="p-4 border-t border-gray-200 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-sm font-semibold text-gray-600">
-              Showing {filteredBookings.length} of {stats.total} bookings
+              Showing{" "}
+              {(pagination.page - 1) * pagination.limit + 1} –{" "}
+              {Math.min(
+                pagination.page * pagination.limit,
+                pagination.totalRecords
+              )}{" "}
+              of {pagination.totalRecords} bookings
             </p>
+
             <div className="flex items-center gap-2">
-              <button className="px-4 py-2 rounded-lg border border-gray-200 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-colors">
+              {/* Previous */}
+              <button
+                onClick={() => goToPage(pagination.page - 1)}
+                disabled={pagination.page === 1}
+                className={`px-4 py-2 rounded-lg border text-sm font-semibold
+          ${pagination.page === 1
+                    ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                    : "border-gray-200 text-gray-600 hover:bg-gray-50"
+                  }`}
+              >
                 Previous
               </button>
-              <button className="px-4 py-2 rounded-lg bg-gradient-to-r from-pink-500 to-pink-600 text-white text-sm font-semibold">
-                1
-              </button>
-              <button className="px-4 py-2 rounded-lg border border-gray-200 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-colors">
-                2
-              </button>
-              <button className="px-4 py-2 rounded-lg border border-gray-200 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-colors">
-                3
-              </button>
-              <button className="px-4 py-2 rounded-lg border border-gray-200 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-colors">
+
+              {/* Pages */}
+              {Array.from({ length: pagination.totalPages }).map((_, i) => {
+                const p = i + 1;
+                return (
+                  <button
+                    key={p}
+                    onClick={() => goToPage(p)}
+                    className={`px-4 py-2 rounded-lg text-sm font-semibold
+              ${pagination.page === p
+                        ? "bg-gradient-to-r from-pink-500 to-pink-600 text-white"
+                        : "border border-gray-200 text-gray-600 hover:bg-gray-50"
+                      }`}
+                  >
+                    {p}
+                  </button>
+                );
+              })}
+
+              {/* Next */}
+              <button
+                onClick={() => goToPage(pagination.page + 1)}
+                disabled={pagination.page === pagination.totalPages}
+                className={`px-4 py-2 rounded-lg border text-sm font-semibold
+          ${pagination.page === pagination.totalPages
+                    ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                    : "border-gray-200 text-gray-600 hover:bg-gray-50"
+                  }`}
+              >
                 Next
               </button>
             </div>

@@ -22,7 +22,6 @@ export default function UserManagementScreen() {
   const [selectedUser, setSelectedUser] = useState<any | null>(null);
   const [showUserModal, setShowUserModal] = useState(false);
 
-  console.log(selectedUser, "--selectedUser")
 
   const userRoles = [
     { id: 'all', label: 'All Roles', color: 'gray' },
@@ -72,6 +71,7 @@ export default function UserManagementScreen() {
       status: user.isActive ? 'active' : 'blocked',
       joinDate: new Date(user.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
       bookings: user.serviceType?.length || 0,
+      // avatar: user.name ? user.name.split(' ').map(n => n[0]).join('').toUpperCase() : 'NA',
       avatar: user.name && user.name.length > 0 ? user.name[0].toUpperCase() : 'NA',
       verified: user.isVerified ?? false,
     }));
@@ -165,8 +165,8 @@ export default function UserManagementScreen() {
                 loadUsers(1); // Always fetch first page when switching tab
               }}
               className={`flex-1 md:flex-none md:px-6 py-3 rounded-xl font-semibold transition-all ${activeTab === 'all'
-                ? 'bg-gradient-to-r from-pink-500 to-pink-600 text-white shadow-lg'
-                : 'text-gray-600 hover:bg-gray-100'
+                  ? 'bg-gradient-to-r from-pink-500 to-pink-600 text-white shadow-lg'
+                  : 'text-gray-600 hover:bg-gray-100'
                 }`}
             >
               <span className="flex items-center justify-center gap-2">
@@ -180,8 +180,8 @@ export default function UserManagementScreen() {
                 loadUsers(1); // Fetch API for blocked users
               }}
               className={`flex-1 md:flex-none md:px-6 py-3 rounded-xl font-semibold transition-all ${activeTab === 'blocked'
-                ? 'bg-gradient-to-r from-pink-500 to-pink-600 text-white shadow-lg'
-                : 'text-gray-600 hover:bg-gray-100'
+                  ? 'bg-gradient-to-r from-pink-500 to-pink-600 text-white shadow-lg'
+                  : 'text-gray-600 hover:bg-gray-100'
                 }`}
             >
               <span className="flex items-center justify-center gap-2">
@@ -510,8 +510,8 @@ export default function UserManagementScreen() {
                   key={i + 1}
                   onClick={() => handlePageChange(i + 1)}
                   className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${page === i + 1
-                    ? 'bg-gradient-to-r from-pink-500 to-pink-600 text-white'
-                    : 'border border-gray-200 text-gray-600 hover:bg-gray-50'
+                      ? 'bg-gradient-to-r from-pink-500 to-pink-600 text-white'
+                      : 'border border-gray-200 text-gray-600 hover:bg-gray-50'
                     }`}
                 >
                   {i + 1}
@@ -531,38 +531,38 @@ export default function UserManagementScreen() {
 
 
 
-      {showUserModal && selectedUser && (
-        <div
-          className="fixed inset-0 flex items-center justify-center z-50"
-          onClick={() => setShowUserModal(false)}
-        >
+{showUserModal && selectedUser && (
+  <div
+    className="fixed inset-0 flex items-center justify-center z-50"
+    onClick={() => setShowUserModal(false)} 
+  >
 
-          <div
-            className="relative bg-white rounded-2xl w-11/12 md:w-1/2 p-6 z-10"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setShowUserModal(false)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 font-bold text-xl"
-            >
-              ×
-            </button>
+    <div
+      className="relative bg-white rounded-2xl w-11/12 md:w-1/2 p-6 z-10"
+      onClick={(e) => e.stopPropagation()} 
+    >
+      <button
+        onClick={() => setShowUserModal(false)}
+        className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 font-bold text-xl"
+      >
+        ×
+      </button>
 
-            <h2 className="text-xl font-bold mb-4 text-black">{selectedUser.name}</h2>
-            <div className="space-y-2 text-sm">
-              <p className="text-gray-800">
-                <span className="font-semibold text-black-600">Email:</span> {selectedUser.email}
-              </p>
-              <p className="text-gray-800"><span className="font-semibold">Phone:</span> {selectedUser.phone}</p>
-              <p className="text-gray-800"><span className="font-semibold">Role:</span> {getRoleLabel(selectedUser.role)}</p>
-              <p className="text-gray-800"><span className="font-semibold">Status:</span> {selectedUser.status}</p>
-              <p className="text-gray-800"><span className="font-semibold">Verified:</span> {selectedUser.verified ? 'Yes' : 'No'}</p>
-              <p className="text-gray-800"><span className="font-semibold">Joined:</span> {selectedUser.joinDate}</p>
-              <p className="text-gray-800"><span className="font-semibold">Bookings:</span> {selectedUser.bookings}</p>
-            </div>
-          </div>
-        </div>
-      )}
+      <h2 className="text-xl font-bold mb-4 text-black">{selectedUser.name}</h2>
+      <div className="space-y-2 text-sm">
+<p className="text-gray-800">
+  <span className="font-semibold text-black-600">Email:</span> {selectedUser.email}
+</p>
+        <p className="text-gray-800"><span className="font-semibold">Phone:</span> {selectedUser.phone}</p>
+        <p className="text-gray-800"><span className="font-semibold">Role:</span> {getRoleLabel(selectedUser.role)}</p>
+        <p className="text-gray-800"><span className="font-semibold">Status:</span> {selectedUser.status}</p>
+        <p className="text-gray-800"><span className="font-semibold">Verified:</span> {selectedUser.verified ? 'Yes' : 'No'}</p>
+        <p className="text-gray-800"><span className="font-semibold">Joined:</span> {selectedUser.joinDate}</p>
+        <p className="text-gray-800"><span className="font-semibold">Bookings:</span> {selectedUser.bookings}</p>
+      </div>
+    </div>
+  </div>
+)}
 
 
 

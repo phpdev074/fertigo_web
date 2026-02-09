@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { GetProviders } from '@/app/api/ApiHelper/providerHelper';
+import { GetProviders } from '@/app/api/api_client';
 import { IMAGE_BASE_URL } from '@/app/api/api';
 
 interface ProviderManagementScreenProps {
@@ -22,15 +22,18 @@ export default function Provider({ onAddProvider, onEditProvider }: ProviderMana
   const [providers, setProviders] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [imageErrorIds, setImageErrorIds] = useState<Record<string, boolean>>({});
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalItems, setTotalItems] = useState(0);
+  const [totalProviders, setTotalProviders] = useState(0);
+  const [activeProviders, setActiveProviders] = useState(0);
+
 
   const router = useRouter();
 
   const handleAddProvider = () => {
     router.push('/main/AddProvider');
   }
-
-  const ITEMS_PER_PAGE = 5;
-
   const [currentPage, setCurrentPage] = useState(1);
 
   // Categories for filter
@@ -43,147 +46,61 @@ export default function Provider({ onAddProvider, onEditProvider }: ProviderMana
     { id: 'transport', label: 'Transport' },
   ];
 
-  // Mock provider data
-  // const providers = [
-  //   {
-  //     id: 'PRV-001',
-  //     name: 'Hope Fertility Center',
-  //     category: 'fertility-clinic',
-  //     email: 'contact@hopefertility.com',
-  //     phone: '+1 (555) 111-2222',
-  //     address: '123 Medical Plaza, New York, NY 10001',
-  //     rating: 4.8,
-  //     reviews: 245,
-  //     verified: true,
-  //     status: 'active',
-  //     logo: 'HF',
-  //   },
-  //   {
-  //     id: 'PRV-002',
-  //     name: 'LifeCare Laboratory',
-  //     category: 'lab',
-  //     email: 'info@lifecarelab.com',
-  //     phone: '+1 (555) 222-3333',
-  //     address: '456 Science Blvd, Boston, MA 02101',
-  //     rating: 4.9,
-  //     reviews: 567,
-  //     verified: true,
-  //     status: 'active',
-  //     logo: 'LL',
-  //   },
-  //   {
-  //     id: 'PRV-003',
-  //     name: 'MediPharm Plus',
-  //     category: 'pharmacy',
-  //     email: 'support@medipharmplus.com',
-  //     phone: '+1 (555) 333-4444',
-  //     address: '789 Health St, Los Angeles, CA 90001',
-  //     rating: 4.6,
-  //     reviews: 189,
-  //     verified: true,
-  //     status: 'active',
-  //     logo: 'MP',
-  //   },
-  //   {
-  //     id: 'PRV-004',
-  //     name: 'Wellness Counseling Center',
-  //     category: 'counseling',
-  //     email: 'hello@wellnesscounseling.com',
-  //     phone: '+1 (555) 444-5555',
-  //     address: '321 Therapy Ave, Chicago, IL 60601',
-  //     rating: 4.7,
-  //     reviews: 123,
-  //     verified: true,
-  //     status: 'active',
-  //     logo: 'WC',
-  //   },
-  //   {
-  //     id: 'PRV-005',
-  //     name: 'QuickRide Medical Transport',
-  //     category: 'transport',
-  //     email: 'ride@quickridemedical.com',
-  //     phone: '+1 (555) 555-6666',
-  //     address: '654 Transit Way, Miami, FL 33101',
-  //     rating: 4.5,
-  //     reviews: 432,
-  //     verified: false,
-  //     status: 'active',
-  //     logo: 'QR',
-  //   },
-  //   {
-  //     id: 'PRV-006',
-  //     name: 'New Life Fertility Clinic',
-  //     category: 'fertility-clinic',
-  //     email: 'care@newlifefertility.com',
-  //     phone: '+1 (555) 666-7777',
-  //     address: '987 Care Dr, Seattle, WA 98101',
-  //     rating: 4.9,
-  //     reviews: 678,
-  //     verified: true,
-  //     status: 'active',
-  //     logo: 'NL',
-  //   },
-  // ];
-
   useEffect(() => {
-    const fetchServices = async () => {
+    const fetchProviders = async () => {
       try {
-        const res = await GetProviders();
-        console.log(res.data.data.providers);
-        if (res.data?.status && Array.isArray(res.data.data?.providers)) {
-          const normalizedProviders = res.data.data.providers.map((p: any) => ({
-            // REQUIRED FOR REACT
-            id: p._id,
+        setLoading(true);
 
-            // BASIC INFO
+        const res = await GetProviders({ page });
+
+        if (res.data?.status) {
+          const { providers, pagination, counts } = res.data.data;
+
+          const normalizedProviders = providers.map((p: any) => ({
+            id: p._id,
             name: p.name,
             email: p.email,
             logo: p.providerLogo
               ? p.providerLogo
               : p.name?.slice(0, 2).toUpperCase(),
-
-            // CONTACT
             phone: `${p.countryCode ?? ''} ${p.mobileNumber ?? ''}`,
-
-            // ADDRESS (convert OBJECT → STRING ✅)
             address: `${p.address?.fullAddress ?? ''}, ${p.address?.city ?? ''}, ${p.address?.country ?? ''}`,
-
-            // STATUS
             verified: p.isVerified,
             status: p.isActive ? 'active' : 'inactive',
-
-            // CATEGORY (derive or fallback)
             category: p.services?.length ? 'lab' : 'all',
-
-            // RAW DATA (optional, for view page)
             raw: p,
           }));
 
           setProviders(normalizedProviders);
-        } else {
-          setProviders([]);
+          setTotalPages(pagination.totalPages);
+          setTotalItems(pagination.total);
+
+          setTotalProviders(counts.totalProviders);
+          setActiveProviders(counts.activeProviders);
+
         }
       } catch (error) {
-        console.error("Failed to fetch services", error);
+        console.error('Failed to fetch providers', error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchServices();
-  }, []);
+    fetchProviders();
+  }, [page]);
 
-  // Filter providers
-  const filteredProviders = Array.isArray(providers)
-    ? providers.filter((provider) => {
-      const matchesCategory =
-        selectedCategory === 'all' || provider.category === selectedCategory;
 
-      const matchesSearch =
-        provider.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        provider.email?.toLowerCase().includes(searchQuery.toLowerCase());
+  const filteredProviders = providers.filter((provider) => {
+    const matchesCategory =
+      selectedCategory === 'all' || provider.category === selectedCategory;
 
-      return matchesCategory && matchesSearch;
-    })
-    : [];
+    const matchesSearch =
+      provider.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      provider.email?.toLowerCase().includes(searchQuery.toLowerCase());
+
+    return matchesCategory && matchesSearch;
+  });
+
 
 
   const getCategoryColor = (category: string) => {
@@ -203,9 +120,10 @@ export default function Provider({ onAddProvider, onEditProvider }: ProviderMana
   };
 
   const stats = {
-    total: providers.length,
-    active: providers.filter(p => p.status === 'active').length,
+    total: totalProviders,
+    active: activeProviders,
   };
+
 
   const filteredList = providers.filter((provider) => {
     const matchesCategory =
@@ -218,12 +136,6 @@ export default function Provider({ onAddProvider, onEditProvider }: ProviderMana
     return matchesCategory && matchesSearch;
   });
 
-  const totalPages = Math.ceil(filteredList.length / ITEMS_PER_PAGE);
-
-  const paginatedProviders = filteredList.slice(
-    (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
-  );
 
   return (
     <div className="space-y-6">
@@ -592,40 +504,53 @@ export default function Provider({ onAddProvider, onEditProvider }: ProviderMana
             </div>
           )}
 
-        {/* Pagination */}
-        {filteredProviders.length > 0 && (
+
+        {totalPages > 1 && (
           <div className="p-4 border-t border-gray-200 flex items-center justify-between">
             <p className="text-sm font-semibold text-gray-600">
-              Showing {
-                providers.filter((provider) => {
-                  const matchesCategory =
-                    selectedCategory === 'all' || provider.category === selectedCategory;
-
-                  const matchesSearch =
-                    provider.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    provider.email?.toLowerCase().includes(searchQuery.toLowerCase());
-
-                  return matchesCategory && matchesSearch;
-                }).length
-              } of {providers.length}
-
+              Page {page} of {totalPages} • Total {totalItems} providers
             </p>
+
             <div className="flex items-center gap-2">
-              <button className="px-4 py-2 rounded-lg border border-gray-200 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-colors">
+              <button
+                disabled={page === 1}
+                onClick={() => setPage((p) => p - 1)}
+                className="px-4 py-2 rounded-lg border border-gray-200 text-sm font-semibold
+          disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+              >
                 Previous
               </button>
-              <button className="px-4 py-2 rounded-lg bg-gradient-to-r from-pink-500 to-pink-600 text-white text-sm font-semibold">
-                1
-              </button>
-              <button className="px-4 py-2 rounded-lg border border-gray-200 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-colors">
-                2
-              </button>
-              <button className="px-4 py-2 rounded-lg border border-gray-200 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-colors">
+
+              {[...Array(totalPages)].map((_, i) => {
+                const pageNumber = i + 1;
+                return (
+                  <button
+                    key={pageNumber}
+                    onClick={() => setPage(pageNumber)}
+                    className={`px-4 py-2 rounded-lg text-sm font-semibold
+              ${page === pageNumber
+                        ? 'bg-gradient-to-r from-pink-500 to-pink-600 text-white'
+                        : 'border border-gray-200 text-gray-600 hover:bg-gray-50'
+                      }`}
+                  >
+                    {pageNumber}
+                  </button>
+                );
+              })}
+
+              <button
+                disabled={page === totalPages}
+                onClick={() => setPage((p) => p + 1)}
+                className="px-4 py-2 rounded-lg border border-gray-200 text-sm font-semibold
+          disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+              >
                 Next
               </button>
             </div>
           </div>
         )}
+
+
       </motion.div>
     </div>
   );

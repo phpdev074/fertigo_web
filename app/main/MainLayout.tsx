@@ -123,7 +123,7 @@
 import { motion } from 'motion/react';
 import {
   Menu, X, Bell, Search, ChevronDown, Users, Building2, Calendar,
-  Home, Settings, LogOut, Mail, FileCode
+  Home, Settings, LogOut, Mail, FileCode, Activity
 } from 'lucide-react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -141,6 +141,7 @@ const navigationItems = [
   { id: 'provider-management', icon: Building2, label: 'Provider', path: '/main/Provider' },
   { id: 'booking-history', icon: Calendar, label: 'Booking History', path: '/main/Booking' },
   { id: 'contact-us', icon: Mail, label: 'Contact Us', path: '/main/ContactUs' },
+  { id: 'service', icon: Activity, label: 'Service', path: '/main/Service' },
   { id: 'content-management', icon: FileCode, label: 'Content', path: '/main/Content' },
   { id: 'setting', icon: Settings, label: 'Setting', path: '/main/Settings' },
 ];
