@@ -25,5 +25,34 @@ export const BookignCounts = () => {
 }
 
 export const Service = (data: any) => {
-  return instance.get(`/service?page=${data.page}`)
+    const query = data.page ? `?page=${data.page}` : '';
+  return instance.get(`/service?page=${query}`)
+} 
+
+export const imageUpload = (data: FormData) => {
+  return instance.post('/upload', data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+};
+
+
+export const createService = (data: any) => {
+  return instance.post(`/service`, data)
+} 
+
+export const updateService = (data: any) => {
+  const { id, ...payload } = data; 
+  
+  return instance.patch(`/service/${id}`, payload)
+} 
+
+export const GetProviderById = (data: any) => {
+  return instance.get(`/admin/single?userId=${data.id}`)
+} 
+
+export const updateProvider = (data: any) => {
+  console.log(data, "---vvvvv")
+  return instance.patch(`/admin/provider`, data)
 } 

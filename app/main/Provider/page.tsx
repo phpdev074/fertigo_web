@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { GetProviders } from '@/app/api/api_client';
+import { GetProviders, Service, GetProviderById } from '@/app/api/api_client';
 import { IMAGE_BASE_URL } from '@/app/api/api';
 
 interface ProviderManagementScreenProps {
@@ -27,24 +27,39 @@ export default function Provider({ onAddProvider, onEditProvider }: ProviderMana
   const [totalItems, setTotalItems] = useState(0);
   const [totalProviders, setTotalProviders] = useState(0);
   const [activeProviders, setActiveProviders] = useState(0);
-
+  const [services, setServices] = useState<any[]>([]);
+  const [editingProvider, setEditingProvider] = useState<any | null>(null);
+  const [showForm, setShowForm] = useState(false);
 
   const router = useRouter();
 
   const handleAddProvider = () => {
     router.push('/main/AddProvider');
   }
+
   const [currentPage, setCurrentPage] = useState(1);
 
   // Categories for filter
   const categories = [
-    { id: 'all', label: 'All Categories' },
-    { id: 'fertility-clinic', label: 'Fertility Clinic' },
-    { id: 'lab', label: 'Laboratory' },
-    { id: 'pharmacy', label: 'Pharmacy' },
-    { id: 'counseling', label: 'Counseling' },
-    { id: 'transport', label: 'Transport' },
+    { id: 'all', label: 'All Services' },
+    ...services.map((s) => ({
+      id: s._id,
+      label: s.name,
+    })),
   ];
+  const getServices = async () => {
+    try {
+      const res = await Service({});
+      setServices(res.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getServices();
+  }, [page]);
+
 
   useEffect(() => {
     const fetchProviders = async () => {
@@ -137,6 +152,10 @@ export default function Provider({ onAddProvider, onEditProvider }: ProviderMana
   });
 
 
+const handleEditProvider = (providerId: string) => {
+  router.push(`/main/AddProvider?id=${providerId}`);
+};
+
   return (
     <div className="space-y-6">
       {/* Page Header */}
@@ -153,6 +172,8 @@ export default function Provider({ onAddProvider, onEditProvider }: ProviderMana
           <span>Add Provider</span>
         </button>
       </div>
+
+
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -384,7 +405,9 @@ export default function Provider({ onAddProvider, onEditProvider }: ProviderMana
                           <Eye className="w-4 h-4 text-gray-600" />
                         </button>
                         <button
-                          onClick={() => onEditProvider?.(provider)}
+                          // onClick={() => onEditProvider?.(provider)}
+                          onClick={() => handleEditProvider(provider.id)}
+
                           className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-blue-50 transition-colors"
                         >
                           <Edit className="w-4 h-4 text-blue-600" />

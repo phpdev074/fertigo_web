@@ -17,12 +17,14 @@ import {
 import { useEffect, useState } from "react";
 import { GetServices } from "@/app/api/ApiHelper/serviceHelper";
 import { UploadProviderLogo } from "@/app/api/ApiHelper/uploadHelper";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import dynamic from "next/dynamic";
 import { CreateProvider } from "@/app/api/ApiHelper/providerHelper";
 import toast from "react-hot-toast";
 import { Country } from "country-state-city";
 import Swal from "sweetalert2";
+import { GetProviderById, updateProvider } from '@/app/api/api_client';
+
 
 const MapPickerModal = dynamic(() => import("../Map/MapPickerModal"), {
   ssr: false,
@@ -201,11 +203,137 @@ export default function AddProviderScreen({
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
   const [uploadingLogo, setUploadingLogo] = useState(false);
   const [openMap, setOpenMap] = useState(false);
+  const [providerData, setProviderData] = useState<any>(null);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const id = searchParams.get('id');
+  const isEditMode = Boolean(id);
 
   const isLocationSelected =
     typeof formData.mapLocation.lat === "number" &&
     typeof formData.mapLocation.lng === "number";
+
+
+  useEffect(() => {
+    if (!id) return;
+    const fetchProvider = async () => {
+      try {
+        const res = await GetProviderById({ id: id });
+        if (res?.data) {
+          setProviderData(res.data.data);
+          setServices(res.data.services || []);
+        }
+      } catch (error) {
+        console.error("Failed to fetch provider", error);
+      }
+    };
+
+    fetchProvider();
+  }, [id]);
+
+
+  useEffect(() => {
+    if (!providerData) return;
+
+    const provider = providerData;
+
+    // 1️⃣ Service IDs + prices
+    const treatmentTypes = provider.serviceType.map((s: any) => s.serviceId);
+
+    const treatmentPrices = provider.serviceType.reduce(
+      (acc: Record<string, string>, s: any) => {
+        acc[s.serviceId] = String(s.price);
+        return acc;
+      },
+      {}
+    );
+
+    // 2️⃣ Urgency mapping (API → UI)
+    const urgencyOptions = provider.urgencySupport.map((u: string) => {
+      if (u === "Same Day") return "same-day";
+      if (u === "Emergency") return "emergency";
+      if (u === "Next Day") return "next-day";
+      return "scheduled";
+    });
+
+    // 3️⃣ Treatment support
+    let treatmentType = "";
+    if (provider.treatmentSupport.includes("IVF") && provider.treatmentSupport.includes("IUI")) {
+      treatmentType = "both";
+    } else if (provider.treatmentSupport.includes("IVF")) {
+      treatmentType = "ivf";
+    } else if (provider.treatmentSupport.includes("IUI")) {
+      treatmentType = "iui";
+    }
+
+    // 4️⃣ Business hours
+    const businessHours = DAYS.reduce((acc: any, day) => {
+      const found = provider.operatingHours.find(
+        (d: any) => d.day === day.toLowerCase()
+      );
+
+      acc[day] = found
+        ? {
+          enabled: found.isAvailable,
+          startTime: found.slots?.[0]?.startTime || "09:00",
+          endTime: found.slots?.[0]?.endTime || "17:00",
+        }
+        : {
+          enabled: false,
+          startTime: "09:00",
+          endTime: "17:00",
+        };
+
+      return acc;
+    }, {});
+
+    // 5️⃣ Final form hydration
+    setFormData((prev) => ({
+      ...prev,
+
+      name: provider.name,
+      email: provider.email,
+      phone: provider.mobileNumber,
+      website: provider.webSiteUrl || "",
+      description: provider.providerDescription || "",
+
+      treatmentTypes,
+      treatmentPrices,
+
+      treatmentSupport: provider.treatmentSupport.length > 0,
+      treatmentType,
+
+      urgencySupport: provider.urgencySupport.length > 0,
+      urgencyOptions,
+
+      languagesSupported: provider.languageSupport.join(", "),
+
+      address: provider.address.fullAddress,
+      city: provider.address.city,
+      country: provider.address.country,
+      postalCode: provider.address.postalCode,
+      countryCode: provider.countryCode,
+
+      mapLocation: provider.location
+        ? {
+          lat: provider.location.lat,
+          lng: provider.location.lng,
+        }
+        : { lat: null, lng: null },
+
+      businessHours,
+
+      verified: provider.isVerified,
+    }));
+
+    // 6️⃣ Logo
+    if (provider.providerLogo) {
+      setLogoPreview(provider.providerLogo);
+      setLogoUrl(provider.providerLogo);
+    }
+  }, [providerData]);
+
+
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -418,35 +546,51 @@ export default function AddProviderScreen({
     };
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    try {
-      const payload = buildProviderPayload();
-      console.log("Submitting payload:", payload);
+  try {
+    const payload = buildProviderPayload();
 
-      const res = await CreateProvider(payload);
+    const finalPayload = isEditMode
+      ? { userId: id, ...payload }
+      : payload;
 
-      if (res.data?.status) {
-        // success
-        toast.success("Provider created successfully 🎉");
-        router.push("/main/Provider");
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "Provider already exists",
-          text: res.data?.message || "Mobile number already exists",
-          confirmButtonColor: "#EC4899",
-        });
-      }
-    } catch (error: any) {
-      console.error("Create provider error:", error);
-      alert(
-        error?.response?.data?.message ||
-        "Something went wrong while creating provider",
+    console.log("Submitting payload:", finalPayload);
+
+    const res = isEditMode
+      ? await updateProvider(finalPayload)
+      : await CreateProvider(finalPayload);
+
+    if (res.data?.status) {
+      toast.success(
+        isEditMode
+          ? "Provider updated successfully 🎉"
+          : "Provider created successfully 🎉"
       );
+      router.push("/main/Provider");
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Action failed",
+        text: res.data?.message || "Something went wrong",
+        confirmButtonColor: "#EC4899",
+      });
     }
-  };
+  } catch (error: any) {
+    console.error("Submit error:", error);
+    Swal.fire({
+      icon: "error",
+      title: "Request failed",
+      text:
+        error?.response?.data?.message ||
+        "Something went wrong while saving provider",
+      confirmButtonColor: "#EC4899",
+    });
+  }
+};
+
+
 
   return (
     <div className="h-full bg-gradient-to-br from-gray-50 to-gray-100 p-4 lg:p-8">
@@ -795,7 +939,7 @@ export default function AddProviderScreen({
                               setFormData((prev) => ({
                                 ...prev,
                                 urgencySupport: checked,
-                                urgencyOptions: checked ? prev.urgencyOptions : [], 
+                                urgencyOptions: checked ? prev.urgencyOptions : [],
                               }));
                             }}
 
@@ -1330,7 +1474,7 @@ export default function AddProviderScreen({
                   >
                     {uploadingLogo
                       ? "Uploading logo..."
-                      : provider
+                      : isEditMode
                         ? "Update Provider"
                         : "Add Provider"}
                   </button>
