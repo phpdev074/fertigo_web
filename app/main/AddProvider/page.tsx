@@ -17,7 +17,7 @@ import {
 import { useEffect, useState } from "react";
 import { GetServices } from "@/app/api/ApiHelper/serviceHelper";
 import { UploadProviderLogo } from "@/app/api/ApiHelper/uploadHelper";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import { CreateProvider } from "@/app/api/ApiHelper/providerHelper";
 import toast from "react-hot-toast";
@@ -205,14 +205,21 @@ export default function AddProviderScreen({
   const [openMap, setOpenMap] = useState(false);
   const [providerData, setProviderData] = useState<any>(null);
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const id = searchParams.get('id');
+  // const searchParams = useSearchParams();
+  // const id = searchParams.get('id');
+  const [id, setId] = useState<string | null>(null);
   const isEditMode = Boolean(id);
+
 
   const isLocationSelected =
     typeof formData.mapLocation.lat === "number" &&
     typeof formData.mapLocation.lng === "number";
 
+
+    useEffect(() => {
+  const params = new URLSearchParams(window.location.search);
+  setId(params.get('id'));
+}, []);
 
   useEffect(() => {
     if (!id) return;
