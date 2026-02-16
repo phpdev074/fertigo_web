@@ -5,7 +5,7 @@ export const UserLogin = (data: any) => {
 };
 
 export const fetchAllUsers = (data: any) => {
-  return instance.get(`/user/users?page=${data.page}`);
+  return instance.get(`/user/users?page=${data.page}?search=${data.search}&is_blocked=${data.blocked}`);
 };
 
 export const userCounts = () => {
@@ -53,6 +53,15 @@ export const GetProviderById = (data: any) => {
 } 
 
 export const updateProvider = (data: any) => {
-  console.log(data, "---vvvvv")
   return instance.patch(`/admin/provider`, data)
 } 
+
+
+export const UpdateUser = (data: any) => {
+  return instance.patch('/admin/update-user', data)
+}
+
+
+export const PatientCount = (data: any) => {
+  return instance.get('/admin/patient-counts',)
+}

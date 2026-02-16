@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, ChangeEvent, useEffect } from 'react';
-import { Search, Plus, Edit2, Eye, Activity, Image as ImageIcon, X } from 'lucide-react';
+import { Search, Plus, Edit2, Eye, Activity, Trash2, Image as ImageIcon, X } from 'lucide-react';
 import { Service, imageUpload, createService, updateService } from '@/app/api/api_client';
 import { IMAGE_BASE_URL } from '@/app/api/api';
 
@@ -138,8 +138,7 @@ export default function ServiceManagement() {
             </div>
 
             {/* Table */}
-            <div className="bg-white border rounded-xl overflow-hidden">
-
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                 {/* Tabs Header */}
                 <div className="border-b border-gray-200">
                     <div className="flex items-center gap-2 p-2">
@@ -261,6 +260,12 @@ export default function ServiceManagement() {
                                             >
                                                 <Edit2 className="w-4 h-4 text-blue-600" />
                                             </button>
+
+                        <button className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-red-50 transition-colors">
+                          <Trash2 className="w-4 h-4 text-red-600" />
+                        </button>
+
+
                                         </div>
                                     </td>
                                 </tr>
@@ -328,6 +333,11 @@ export default function ServiceManagement() {
                             >
                                 <Edit2 className="w-4 h-4 text-blue-600" />
                             </button>
+
+                        <button className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-red-50 transition-colors">
+                          <Trash2 className="w-4 h-4 text-red-600" />
+                        </button>
+
                         </div>
                     </div>
                 ))}
