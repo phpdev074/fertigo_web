@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const instance = axios.create({
-  // baseURL: "https://api.fertigoapp.com",
-  baseURL: "http://localhost:5200",
+  baseURL: "https://api.fertigoapp.com",
+  // baseURL: "http://localhost:5200",
   headers: {
     Accept: "application/json",
   },
