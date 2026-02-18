@@ -5,7 +5,7 @@ export const UserLogin = (data: any) => {
 };
 
 export const fetchAllUsers = (data: any) => {
-  return instance.get(`/user/users?page=${data.page}?search=${data.search}&is_blocked=${data.blocked}`);
+  return instance.get(`/user/users?page=${data.page}&search=${data.search}&is_blocked=${data.blocked}`);
 };
 
 export const userCounts = () => {

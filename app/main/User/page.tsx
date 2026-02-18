@@ -12,6 +12,7 @@ export default function UserManagementScreen() {
   const [searchQuery, setSearchQuery] = useState('');
   const [users, setUsers] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
+  const [debouncedSearch, setDebouncedSearch] = useState(searchQuery);
   const [userData, setUserData] = useState({
     users: [],
     pagination: { page: 1, totalPages: 1, total: 0 },
@@ -41,15 +42,14 @@ export default function UserManagementScreen() {
   const loadUsers = async (pageNumber: number = 1, tab: 'all' | 'blocked' = 'all') => {
     setLoading(true);
     try {
-
       const params: any = {
         page: pageNumber,
         search: searchQuery || '',
-        blocked: tab === 'blocked' ? 'yes' : 'no',
+        blocked: tab === 'blocked' ? 'yes' : '',
       };
 
       const response = await fetchAllUsers(params);
-            let hit_api = await PatientCount({})
+      let hit_api = await PatientCount({})
       if (response.data.success) {
         setUserData(response.data.data);
         setUsers(response.data.data.users);
@@ -57,9 +57,9 @@ export default function UserManagementScreen() {
         setTotalPages(response.data.data.pagination.totalPages);
       }
 
-if (hit_api.data.data) {
-     setCounts(hit_api.data.data);
-}
+      if (hit_api.data.data) {
+        setCounts(hit_api.data.data);
+      }
 
     } catch (error) {
       console.error('Failed to fetch users:', error);
@@ -68,20 +68,26 @@ if (hit_api.data.data) {
     }
   };
 
-  useEffect(() => {
-    loadUsers(1);
-  }, [searchQuery]);
+useEffect(() => {
+  const handler = setTimeout(() => {
+    setDebouncedSearch(searchQuery); // update debounced value after 500ms
+  }, 500);
+
+  // Cleanup: cancel previous timeout if searchQuery changes
+  return () => {
+    clearTimeout(handler);
+  };
+}, [searchQuery]);
 
 
   useEffect(() => {
-    loadUsers(page);
-  }, [page]);
-
+    loadUsers(page, activeTab);
+  }, [page, activeTab, debouncedSearch]);
 
   const handleTabChange = (tab: 'all' | 'blocked') => {
     console.log('Selected tab:', tab);
-    setActiveTab(tab);
     loadUsers(1, tab);
+    setActiveTab(tab);
   };
 
 
@@ -368,7 +374,7 @@ if (hit_api.data.data) {
 
                       <button
                         onClick={() => openConfirmModal(
-                            !user.blocked ? 'block' : 'unblock',
+                          !user.blocked ? 'block' : 'unblock',
                           user
                         )}
                         className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-yellow-50 transition-colors"
