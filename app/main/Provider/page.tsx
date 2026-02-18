@@ -36,7 +36,7 @@ export default function Provider({ onAddProvider, onEditProvider }: ProviderMana
   const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
   const [confirmAction, setConfirmAction] = useState<ConfirmAction | null>(null);
   const [providerData, setProviderData] = useState<any | null>(null);
- const [showProviderModal, setShowProviderModal] = useState(false);
+  const [showProviderModal, setShowProviderModal] = useState(false);
   const [modalLoading, setModalLoading] = useState(false);
 
 
@@ -194,26 +194,26 @@ export default function Provider({ onAddProvider, onEditProvider }: ProviderMana
 
 
   const handleViewProvider = async (id: string) => {
-  try {
-    setModalLoading(true);
-    setShowProviderModal(true); // Add this line to open the modal
-    let find_data = await GetProviderById({ id: id });
-    
-    if (find_data.data.data) {
-      setProviderData(find_data.data.data);
+    try {
+      setModalLoading(true);
+      setShowProviderModal(true); // Add this line to open the modal
+      let find_data = await GetProviderById({ id: id });
+
+      if (find_data.data.data) {
+        setProviderData(find_data.data.data);
+      }
+    } catch (error) {
+      console.error('Failed to fetch provider details', error);
+    } finally {
+      setModalLoading(false);
     }
-  } catch (error) {
-    console.error('Failed to fetch provider details', error);
-  } finally {
-    setModalLoading(false);
-  }
-};
+  };
 
 
-const getServiceName = (serviceId: string) => {
-  const service = services.find(s => s._id === serviceId);
-  return service?.name || 'Unknown Service';
-};
+  const getServiceName = (serviceId: string) => {
+    const service = services.find(s => s._id === serviceId);
+    return service?.name || 'Unknown Service';
+  };
 
 
 
@@ -549,7 +549,9 @@ const getServiceName = (serviceId: string) => {
                 </div>
 
                 <div className="flex items-center gap-2 pt-3 border-t border-gray-100">
-                  <button className="flex-1 px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-xs font-semibold text-gray-700 transition-colors flex items-center justify-center gap-2">
+                  <button
+                    onClick={() => handleViewProvider(provider.id)}
+                    className="flex-1 px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-xs font-semibold text-gray-700 transition-colors flex items-center justify-center gap-2">
                     <Eye className="w-4 h-4" />
                     View
                   </button>
@@ -560,7 +562,17 @@ const getServiceName = (serviceId: string) => {
                     <Edit className="w-4 h-4" />
                     Edit
                   </button>
-                  <button className="px-3 py-2 rounded-lg bg-red-50 hover:bg-red-100 transition-colors">
+                  <button
+
+                    onClick={() => {
+                      setConfirmAction({
+                        type: "delete",
+                        item: provider,
+                      });
+                      setShowConfirmModal(true);
+                    }}
+
+                    className="px-3 py-2 rounded-lg bg-red-50 hover:bg-red-100 transition-colors">
                     <Trash2 className="w-4 h-4 text-red-600" />
                   </button>
                 </div>
@@ -639,301 +651,301 @@ const getServiceName = (serviceId: string) => {
 
 
 
-{/* Provider Details Modal */}
-{showProviderModal && providerData && (
-  <div 
-    className="fixed inset-0 flex items-center justify-center bg-black/40 z-50 p-4 overflow-y-auto"
-    onClick={() => setShowProviderModal(false)}
-  >
-    <div 
-      className="bg-white rounded-2xl shadow-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto"
-      onClick={(e) => e.stopPropagation()}
-    >
-      {/* Modal Header */}
-      <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl flex items-center justify-center">
-            {providerData.providerLogo ? (
-              <img 
-                src={`${IMAGE_BASE_URL}${providerData.providerLogo}`}
-                alt={providerData.name}
-                className="w-full h-full object-cover rounded-xl"
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none';
-                  e.currentTarget.parentElement!.innerHTML = '<span class="text-white font-bold">' + providerData.name?.slice(0, 2).toUpperCase() + '</span>';
-                }}
-              />
-            ) : (
-              <span className="text-white font-bold">{providerData.name?.slice(0, 2).toUpperCase()}</span>
-            )}
-          </div>
-          <div>
-            <h3 className="text-xl font-bold text-gray-900">{providerData.name}</h3>
-            <p className="text-sm text-gray-500">Provider Details</p>
-          </div>
-        </div>
-        <button
-          onClick={() => setShowProviderModal(false)}
-          className="w-8 h-8 rounded-lg hover:bg-gray-100 flex items-center justify-center transition-colors"
-        >
-          <X className="w-5 h-5 text-gray-600" />
-        </button>
-      </div>
-
-      {/* Modal Content */}
-      <div className="p-6 space-y-6">
-        {modalLoading ? (
-          <div className="flex items-center justify-center py-12">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-pink-600"></div>
-          </div>
-        ) : (
-          <>
-            {/* Status Badges */}
-            <div className="flex flex-wrap gap-3">
-              {providerData.isActive && (
-                <span className="px-3 py-1.5 bg-green-100 text-green-700 rounded-full text-xs font-bold flex items-center gap-1.5">
-                  <Check className="w-3.5 h-3.5" />
-                  Active
-                </span>
-              )}
-              {providerData.isVerified && (
-                <span className="px-3 py-1.5 bg-blue-100 text-blue-700 rounded-full text-xs font-bold flex items-center gap-1.5">
-                  <CheckCircle className="w-3.5 h-3.5" />
-                  Verified
-                </span>
-              )}
-              {providerData.providerVerificationStatus && (
-                <span className="px-3 py-1.5 bg-purple-100 text-purple-700 rounded-full text-xs font-bold">
-                  Provider Verified
-                </span>
-              )}
-              {!providerData.isActive && (
-                <span className="px-3 py-1.5 bg-red-100 text-red-700 rounded-full text-xs font-bold flex items-center gap-1.5">
-                  <AlertCircle className="w-3.5 h-3.5" />
-                  Inactive
-                </span>
-              )}
-            </div>
-
-            {/* Basic Information */}
-            <div className="bg-gray-50 rounded-xl p-6">
-              <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <Building2 className="w-5 h-5 text-pink-600" />
-                Basic Information
-              </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <p className="text-xs font-semibold text-gray-500 mb-1">Provider ID</p>
-                  <p className="text-sm font-mono bg-white p-2 rounded-lg border border-gray-200">
-                    {providerData._id}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-xs font-semibold text-gray-500 mb-1">Role</p>
-                  <p className="text-sm font-bold text-gray-900 capitalize bg-white p-2 rounded-lg border border-gray-200">
-                    {providerData.role}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-xs font-semibold text-gray-500 mb-1">Email</p>
-                  <p className="text-sm font-bold text-gray-900 flex items-center gap-2 bg-white p-2 rounded-lg border border-gray-200">
-                    <Mail className="w-4 h-4 text-gray-400" />
-                    {providerData.email}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-xs font-semibold text-gray-500 mb-1">Phone</p>
-                  <p className="text-sm font-bold text-gray-900 flex items-center gap-2 bg-white p-2 rounded-lg border border-gray-200">
-                    <Phone className="w-4 h-4 text-gray-400" />
-                    {providerData.countryCode} {providerData.mobileNumber}
-                  </p>
-                </div>
-                <div className="md:col-span-2">
-                  <p className="text-xs font-semibold text-gray-500 mb-1">Description</p>
-                  <p className="text-sm text-gray-700 bg-white p-3 rounded-lg border border-gray-200">
-                    {providerData.providerDescription || 'No description provided'}
-                  </p>
-                </div>
-                {providerData.webSiteUrl && (
-                  <div className="md:col-span-2">
-                    <p className="text-xs font-semibold text-gray-500 mb-1">Website</p>
-                    <a 
-                      href={providerData.webSiteUrl} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-sm font-bold text-pink-600 hover:underline flex items-center gap-2 bg-white p-2 rounded-lg border border-gray-200"
-                    >
-                      <Globe className="w-4 h-4" />
-                      {providerData.webSiteUrl}
-                    </a>
+        {/* Provider Details Modal */}
+        {showProviderModal && providerData && (
+          <div
+            className="fixed inset-0 flex items-center justify-center bg-black/40 z-50 p-4 overflow-y-auto"
+            onClick={() => setShowProviderModal(false)}
+          >
+            <div
+              className="bg-white rounded-2xl shadow-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal Header */}
+              <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl flex items-center justify-center">
+                    {providerData.providerLogo ? (
+                      <img
+                        src={`${IMAGE_BASE_URL}${providerData.providerLogo}`}
+                        alt={providerData.name}
+                        className="w-full h-full object-cover rounded-xl"
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                          e.currentTarget.parentElement!.innerHTML = '<span class="text-white font-bold">' + providerData.name?.slice(0, 2).toUpperCase() + '</span>';
+                        }}
+                      />
+                    ) : (
+                      <span className="text-white font-bold">{providerData.name?.slice(0, 2).toUpperCase()}</span>
+                    )}
                   </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900">{providerData.name}</h3>
+                    <p className="text-sm text-gray-500">Provider Details</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setShowProviderModal(false)}
+                  className="w-8 h-8 rounded-lg hover:bg-gray-100 flex items-center justify-center transition-colors"
+                >
+                  <X className="w-5 h-5 text-gray-600" />
+                </button>
+              </div>
+
+              {/* Modal Content */}
+              <div className="p-6 space-y-6">
+                {modalLoading ? (
+                  <div className="flex items-center justify-center py-12">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-pink-600"></div>
+                  </div>
+                ) : (
+                  <>
+                    {/* Status Badges */}
+                    <div className="flex flex-wrap gap-3">
+                      {providerData.isActive && (
+                        <span className="px-3 py-1.5 bg-green-100 text-green-700 rounded-full text-xs font-bold flex items-center gap-1.5">
+                          <Check className="w-3.5 h-3.5" />
+                          Active
+                        </span>
+                      )}
+                      {providerData.isVerified && (
+                        <span className="px-3 py-1.5 bg-blue-100 text-blue-700 rounded-full text-xs font-bold flex items-center gap-1.5">
+                          <CheckCircle className="w-3.5 h-3.5" />
+                          Verified
+                        </span>
+                      )}
+                      {providerData.providerVerificationStatus && (
+                        <span className="px-3 py-1.5 bg-purple-100 text-purple-700 rounded-full text-xs font-bold">
+                          Provider Verified
+                        </span>
+                      )}
+                      {!providerData.isActive && (
+                        <span className="px-3 py-1.5 bg-red-100 text-red-700 rounded-full text-xs font-bold flex items-center gap-1.5">
+                          <AlertCircle className="w-3.5 h-3.5" />
+                          Inactive
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Basic Information */}
+                    <div className="bg-gray-50 rounded-xl p-6">
+                      <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                        <Building2 className="w-5 h-5 text-pink-600" />
+                        Basic Information
+                      </h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                          <p className="text-xs font-semibold text-gray-500 mb-1">Provider ID</p>
+                          <p className="text-sm font-mono bg-white p-2 rounded-lg border border-gray-200">
+                            {providerData._id}
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-xs font-semibold text-gray-500 mb-1">Role</p>
+                          <p className="text-sm font-bold text-gray-900 capitalize bg-white p-2 rounded-lg border border-gray-200">
+                            {providerData.role}
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-xs font-semibold text-gray-500 mb-1">Email</p>
+                          <p className="text-sm font-bold text-gray-900 flex items-center gap-2 bg-white p-2 rounded-lg border border-gray-200">
+                            <Mail className="w-4 h-4 text-gray-400" />
+                            {providerData.email}
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-xs font-semibold text-gray-500 mb-1">Phone</p>
+                          <p className="text-sm font-bold text-gray-900 flex items-center gap-2 bg-white p-2 rounded-lg border border-gray-200">
+                            <Phone className="w-4 h-4 text-gray-400" />
+                            {providerData.countryCode} {providerData.mobileNumber}
+                          </p>
+                        </div>
+                        <div className="md:col-span-2">
+                          <p className="text-xs font-semibold text-gray-500 mb-1">Description</p>
+                          <p className="text-sm text-gray-700 bg-white p-3 rounded-lg border border-gray-200">
+                            {providerData.providerDescription || 'No description provided'}
+                          </p>
+                        </div>
+                        {providerData.webSiteUrl && (
+                          <div className="md:col-span-2">
+                            <p className="text-xs font-semibold text-gray-500 mb-1">Website</p>
+                            <a
+                              href={providerData.webSiteUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-sm font-bold text-pink-600 hover:underline flex items-center gap-2 bg-white p-2 rounded-lg border border-gray-200"
+                            >
+                              <Globe className="w-4 h-4" />
+                              {providerData.webSiteUrl}
+                            </a>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Address & Location */}
+                    {providerData.address && (
+                      <div className="bg-gray-50 rounded-xl p-6">
+                        <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                          <MapPin className="w-5 h-5 text-pink-600" />
+                          Address & Location
+                        </h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div className="md:col-span-2">
+                            <p className="text-xs font-semibold text-gray-500 mb-1">Full Address</p>
+                            <p className="text-sm font-bold text-gray-900 bg-white p-3 rounded-lg border border-gray-200">
+                              {providerData.address.fullAddress}
+                            </p>
+                          </div>
+                          <div>
+                            <p className="text-xs font-semibold text-gray-500 mb-1">City</p>
+                            <p className="text-sm font-bold text-gray-900 bg-white p-2 rounded-lg border border-gray-200">
+                              {providerData.address.city}
+                            </p>
+                          </div>
+                          <div>
+                            <p className="text-xs font-semibold text-gray-500 mb-1">Country</p>
+                            <p className="text-sm font-bold text-gray-900 bg-white p-2 rounded-lg border border-gray-200">
+                              {providerData.address.country}
+                            </p>
+                          </div>
+                          <div>
+                            <p className="text-xs font-semibold text-gray-500 mb-1">Postal Code</p>
+                            <p className="text-sm font-bold text-gray-900 bg-white p-2 rounded-lg border border-gray-200">
+                              {providerData.address.postalCode}
+                            </p>
+                          </div>
+                          {providerData.location && (
+                            <div>
+                              <p className="text-xs font-semibold text-gray-500 mb-1">Coordinates</p>
+                              <p className="text-sm font-bold text-gray-900 bg-white p-2 rounded-lg border border-gray-200">
+                                Lat: {providerData.location.lat}, Lng: {providerData.location.lng}
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Services */}
+                    {providerData.serviceType && providerData.serviceType.length > 0 && (
+                      <div className="bg-gray-50 rounded-xl p-6">
+                        <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                          <Star className="w-5 h-5 text-pink-600" />
+                          Services
+                        </h4>
+                        <div className="space-y-3">
+                          {providerData.serviceType.map((service: any, index: number) => (
+                            <div key={index} className="bg-white p-4 rounded-lg border border-gray-200 flex items-center justify-between">
+                              <div>
+                                <p className="font-bold text-gray-900">{getServiceName(service.serviceId)}</p>
+                                <p className="text-xs text-gray-500">Service ID: {service.serviceId}</p>
+                              </div>
+                              <div className="text-right">
+                                <p className="text-lg font-bold text-pink-600">${service.price}</p>
+                                <p className="text-xs text-gray-500">Price</p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Languages */}
+                    {providerData.languageSupport && providerData.languageSupport.length > 0 && (
+                      <div className="bg-gray-50 rounded-xl p-6">
+                        <h4 className="text-lg font-bold text-gray-900 mb-4">Languages Supported</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {providerData.languageSupport.map((lang: string, index: number) => (
+                            <span key={index} className="px-3 py-1.5 bg-white border border-gray-200 rounded-full text-sm font-semibold text-gray-700">
+                              {lang}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Operating Hours */}
+                    {providerData.operatingHours && providerData.operatingHours.length > 0 && (
+                      <div className="bg-gray-50 rounded-xl p-6">
+                        <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                          <Clock className="w-5 h-5 text-pink-600" />
+                          Operating Hours
+                        </h4>
+                        <div className="space-y-3">
+                          {providerData.operatingHours.map((day: any, index: number) => (
+                            <div key={index} className="bg-white p-3 rounded-lg border border-gray-200">
+                              <div className="flex items-center justify-between mb-2">
+                                <span className="font-bold text-gray-900 capitalize">{(day.day)}</span>
+                                {day.isAvailable ? (
+                                  <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">
+                                    Available
+                                  </span>
+                                ) : (
+                                  <span className="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs font-semibold">
+                                    Closed
+                                  </span>
+                                )}
+                              </div>
+                              {day.isAvailable && day.slots && day.slots.length > 0 && (
+                                <div className="space-y-1">
+                                  {day.slots.map((slot: any, slotIndex: number) => (
+                                    <p key={slotIndex} className="text-sm text-gray-600">
+                                      {slot.startTime} - {slot.endTime}
+                                    </p>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Timestamps */}
+                    <div className="bg-gray-50 rounded-xl p-6">
+                      <h4 className="text-lg font-bold text-gray-900 mb-4">System Information</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <p className="text-xs font-semibold text-gray-500 mb-1">Created At</p>
+                          <p className="text-sm font-bold text-gray-900 bg-white p-2 rounded-lg border border-gray-200">
+                            {(providerData.createdAt)}
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-xs font-semibold text-gray-500 mb-1">Updated At</p>
+                          <p className="text-sm font-bold text-gray-900 bg-white p-2 rounded-lg border border-gray-200">
+                            {(providerData.updatedAt)}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex justify-end gap-3 pt-4 border-t border-gray-200">
+                      <button
+                        onClick={() => setShowProviderModal(false)}
+                        className="px-6 py-2.5 rounded-xl border border-gray-200 text-gray-700 font-semibold text-sm hover:bg-gray-50 transition-all"
+                      >
+                        Close
+                      </button>
+                      <button
+                        onClick={() => {
+                          setShowProviderModal(false);
+                          router.push(`/main/AddProvider?id=${providerData._id}`);
+                        }}
+                        className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-pink-500 to-pink-600 text-white font-semibold text-sm hover:from-pink-600 hover:to-pink-700 transition-all flex items-center gap-2"
+                      >
+                        <Edit className="w-4 h-4" />
+                        Edit Provider
+                      </button>
+                    </div>
+                  </>
                 )}
               </div>
             </div>
-
-            {/* Address & Location */}
-            {providerData.address && (
-              <div className="bg-gray-50 rounded-xl p-6">
-                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                  <MapPin className="w-5 h-5 text-pink-600" />
-                  Address & Location
-                </h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="md:col-span-2">
-                    <p className="text-xs font-semibold text-gray-500 mb-1">Full Address</p>
-                    <p className="text-sm font-bold text-gray-900 bg-white p-3 rounded-lg border border-gray-200">
-                      {providerData.address.fullAddress}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-gray-500 mb-1">City</p>
-                    <p className="text-sm font-bold text-gray-900 bg-white p-2 rounded-lg border border-gray-200">
-                      {providerData.address.city}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-gray-500 mb-1">Country</p>
-                    <p className="text-sm font-bold text-gray-900 bg-white p-2 rounded-lg border border-gray-200">
-                      {providerData.address.country}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-gray-500 mb-1">Postal Code</p>
-                    <p className="text-sm font-bold text-gray-900 bg-white p-2 rounded-lg border border-gray-200">
-                      {providerData.address.postalCode}
-                    </p>
-                  </div>
-                  {providerData.location && (
-                    <div>
-                      <p className="text-xs font-semibold text-gray-500 mb-1">Coordinates</p>
-                      <p className="text-sm font-bold text-gray-900 bg-white p-2 rounded-lg border border-gray-200">
-                        Lat: {providerData.location.lat}, Lng: {providerData.location.lng}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
-
-            {/* Services */}
-            {providerData.serviceType && providerData.serviceType.length > 0 && (
-              <div className="bg-gray-50 rounded-xl p-6">
-                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                  <Star className="w-5 h-5 text-pink-600" />
-                  Services
-                </h4>
-                <div className="space-y-3">
-                  {providerData.serviceType.map((service: any, index: number) => (
-                    <div key={index} className="bg-white p-4 rounded-lg border border-gray-200 flex items-center justify-between">
-                      <div>
-                        <p className="font-bold text-gray-900">{getServiceName(service.serviceId)}</p>
-                        <p className="text-xs text-gray-500">Service ID: {service.serviceId}</p>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-lg font-bold text-pink-600">${service.price}</p>
-                        <p className="text-xs text-gray-500">Price</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Languages */}
-            {providerData.languageSupport && providerData.languageSupport.length > 0 && (
-              <div className="bg-gray-50 rounded-xl p-6">
-                <h4 className="text-lg font-bold text-gray-900 mb-4">Languages Supported</h4>
-                <div className="flex flex-wrap gap-2">
-                  {providerData.languageSupport.map((lang: string, index: number) => (
-                    <span key={index} className="px-3 py-1.5 bg-white border border-gray-200 rounded-full text-sm font-semibold text-gray-700">
-                      {lang}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Operating Hours */}
-            {providerData.operatingHours && providerData.operatingHours.length > 0 && (
-              <div className="bg-gray-50 rounded-xl p-6">
-                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                  <Clock className="w-5 h-5 text-pink-600" />
-                  Operating Hours
-                </h4>
-                <div className="space-y-3">
-                  {providerData.operatingHours.map((day: any, index: number) => (
-                    <div key={index} className="bg-white p-3 rounded-lg border border-gray-200">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="font-bold text-gray-900 capitalize">{(day.day)}</span>
-                        {day.isAvailable ? (
-                          <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">
-                            Available
-                          </span>
-                        ) : (
-                          <span className="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs font-semibold">
-                            Closed
-                          </span>
-                        )}
-                      </div>
-                      {day.isAvailable && day.slots && day.slots.length > 0 && (
-                        <div className="space-y-1">
-                          {day.slots.map((slot: any, slotIndex: number) => (
-                            <p key={slotIndex} className="text-sm text-gray-600">
-                              {slot.startTime} - {slot.endTime}
-                            </p>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Timestamps */}
-            <div className="bg-gray-50 rounded-xl p-6">
-              <h4 className="text-lg font-bold text-gray-900 mb-4">System Information</h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <p className="text-xs font-semibold text-gray-500 mb-1">Created At</p>
-                  <p className="text-sm font-bold text-gray-900 bg-white p-2 rounded-lg border border-gray-200">
-                    {(providerData.createdAt)}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-xs font-semibold text-gray-500 mb-1">Updated At</p>
-                  <p className="text-sm font-bold text-gray-900 bg-white p-2 rounded-lg border border-gray-200">
-                    {(providerData.updatedAt)}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex justify-end gap-3 pt-4 border-t border-gray-200">
-              <button
-                onClick={() => setShowProviderModal(false)}
-                className="px-6 py-2.5 rounded-xl border border-gray-200 text-gray-700 font-semibold text-sm hover:bg-gray-50 transition-all"
-              >
-                Close
-              </button>
-              <button
-                onClick={() => {
-                  setShowProviderModal(false);
-                  router.push(`/main/AddProvider?id=${providerData._id}`);
-                }}
-                className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-pink-500 to-pink-600 text-white font-semibold text-sm hover:from-pink-600 hover:to-pink-700 transition-all flex items-center gap-2"
-              >
-                <Edit className="w-4 h-4" />
-                Edit Provider
-              </button>
-            </div>
-          </>
+          </div>
         )}
-      </div>
-    </div>
-  </div>
-)}
 
 
 

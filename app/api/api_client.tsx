@@ -65,3 +65,9 @@ export const UpdateUser = (data: any) => {
 export const PatientCount = (data: any) => {
   return instance.get('/admin/patient-counts',)
 }
+
+
+export const DeleteService = (data: any) => {
+  return instance.delete(`/service/${data.id}`,)
+}
+

@@ -2,9 +2,8 @@
 
 import { useState, ChangeEvent, useEffect } from 'react';
 import { Search, Plus, Edit2, Eye, Activity, Trash2, Image as ImageIcon, X } from 'lucide-react';
-import { Service, imageUpload, createService, updateService } from '@/app/api/api_client';
+import { Service, imageUpload, createService, updateService, DeleteService } from '@/app/api/api_client';
 import { IMAGE_BASE_URL } from '@/app/api/api';
-
 
 type ServiceItem = {
     _id: string;
@@ -14,12 +13,18 @@ type ServiceItem = {
     updatedAt: string;
 };
 
+interface ConfirmAction {
+    [key: string]: any
+}
+
 export default function ServiceManagement() {
     const [services, setServices] = useState<ServiceItem[]>([]);
     const [search, setSearch] = useState('');
     const [editingService, setEditingService] = useState<ServiceItem | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [page, setPage] = useState(1);
+    const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
+    const [confirmAction, setConfirmAction] = useState<ConfirmAction | null>(null);
     const [pagination, setPagination] = useState({
         page: 1,
         limit: 10,
@@ -106,6 +111,22 @@ export default function ServiceManagement() {
 
         } catch (err) {
             console.error(err);
+        }
+    };
+
+
+
+    const handleDelete = async (id: string) => {
+        try {
+            let data = await DeleteService({
+                id: id,
+            })
+            await getServices();
+            setShowConfirmModal(false);
+            setConfirmAction(null);
+
+        } catch (error) {
+            console.log(error)
         }
     };
 
@@ -240,12 +261,12 @@ export default function ServiceManagement() {
                                     {/* Actions */}
                                     <td className="px-6 py-4">
                                         <div className="flex items-center justify-end gap-2">
-                                            <button
+                                            {/* <button
                                                 onClick={() => alert(JSON.stringify(service, null, 2))}
                                                 className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors"
                                             >
                                                 <Eye className="w-4 h-4 text-gray-600" />
-                                            </button>
+                                            </button> */}
 
                                             <button
                                                 onClick={() => {
@@ -261,9 +282,19 @@ export default function ServiceManagement() {
                                                 <Edit2 className="w-4 h-4 text-blue-600" />
                                             </button>
 
-                        <button className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-red-50 transition-colors">
-                          <Trash2 className="w-4 h-4 text-red-600" />
-                        </button>
+                                            <button
+
+                                                onClick={() => {
+                                                    setConfirmAction({
+                                                        type: "delete",
+                                                        item: service,
+                                                    });
+                                                    setShowConfirmModal(true);
+                                                }}
+
+                                                className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-red-50 transition-colors">
+                                                <Trash2 className="w-4 h-4 text-red-600" />
+                                            </button>
 
 
                                         </div>
@@ -316,12 +347,12 @@ export default function ServiceManagement() {
                         </div>
 
                         <div className="flex gap-2">
-                            <button
+                            {/* <button
                                 onClick={() => alert(JSON.stringify(service, null, 2))}
                                 className="w-8 h-8 flex items-center justify-center rounded-lg bg-gray-100"
                             >
                                 <Eye className="w-4 h-4 text-gray-600" />
-                            </button>
+                            </button> */}
 
                             <button
                                 onClick={() => {
@@ -334,9 +365,19 @@ export default function ServiceManagement() {
                                 <Edit2 className="w-4 h-4 text-blue-600" />
                             </button>
 
-                        <button className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-red-50 transition-colors">
-                          <Trash2 className="w-4 h-4 text-red-600" />
-                        </button>
+                            <button
+
+                                onClick={() => {
+                                    setConfirmAction({
+                                        type: "delete",
+                                        item: service,
+                                    });
+                                    setShowConfirmModal(true);
+                                }}
+
+                                className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-red-50 transition-colors">
+                                <Trash2 className="w-4 h-4 text-red-600" />
+                            </button>
 
                         </div>
                     </div>
@@ -348,6 +389,68 @@ export default function ServiceManagement() {
                     </p>
                 )}
             </div>
+
+
+            {showConfirmModal && confirmAction && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black/40 z-50"
+
+                    onClick={() => {
+                        setShowConfirmModal(false);
+                        setConfirmAction(null);
+                    }}
+                >
+                    <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-6">
+
+                        {/* Icon */}
+                        <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center bg-red-100">
+                            <Trash2 className="w-8 h-8 text-red-600" />
+                        </div>
+
+                        {/* Title */}
+                        <h3 className="text-xl font-bold text-gray-900 text-center mb-2">
+                            Delete Service
+                        </h3>
+
+                        {/* Message */}
+                        <p className="text-gray-600 text-center mb-6">
+                            Are you sure you want to delete{" "}
+                            <span className="font-bold text-gray-900">
+                                {confirmAction.item.name}
+                            </span>
+                            ? This action cannot be undone.
+                        </p>
+
+                        {/* Provider Preview */}
+                        <div className="bg-gray-50 rounded-xl p-4 mb-6">
+                            <p className="text-sm font-bold text-gray-900">
+                                {confirmAction.item.name}
+                            </p>
+                        </div>
+
+                        {/* Buttons */}
+                        <div className="flex gap-3">
+                            <button
+                                onClick={() => {
+                                    setShowConfirmModal(false);
+                                    setConfirmAction(null);
+                                }}
+                                className="flex-1 px-4 py-2.5 rounded-xl border border-gray-200 text-gray-700 font-semibold text-sm hover:bg-gray-50 transition-all"
+                            >
+                                Cancel
+                            </button>
+
+                            <button
+                                onClick={() => handleDelete(confirmAction.item._id)}
+                                className="flex-1 px-4 py-2.5 rounded-xl font-semibold text-sm transition-all bg-red-600 text-white hover:bg-red-700 flex items-center justify-center gap-2"
+                            >
+                                <Trash2 className="w-4 h-4" />
+                                Delete
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            )}
 
 
 
