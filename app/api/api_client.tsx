@@ -71,3 +71,24 @@ export const DeleteService = (data: any) => {
   return instance.delete(`/service/${data.id}`,)
 }
 
+
+export const AdminTicket = (data: any) => {
+  return instance.get(`/admin/ticket?status=${data.status}&page=${data.page}`,)
+}
+
+
+export const TicketReply = (data: any) => {
+  return instance.post(`/admin/ticket-reply`, data)
+}
+
+
+export const UpdateTicket = (data: any) => {
+  return instance.post(`/admin/update-ticket-status`, data)
+}
+
+
+export const TicketCounts = (data: any) => {
+  return instance.get(`/admin/ticket-counts`,)
+}
+
+

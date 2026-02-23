@@ -29,6 +29,9 @@ export default function BookingHistoryScreen() {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [pagination, setPagination] = useState<any>(null)
+  const [selectedBooking, setSelectedBooking] = useState<any>(null);
+  const [showBookingModal, setShowBookingModal] = useState(false);
+
 
 
   // Filter options
@@ -66,8 +69,8 @@ export default function BookingHistoryScreen() {
     createdAt: new Date(b.createdAt).toLocaleDateString(),
 
     patient: {
-      name: b.patientInfo?.patientName,
-      phone: b.patientInfo?.patientContact,
+      name: b.patientName,
+      phone: b.patientContact,
     },
 
     provider: {
@@ -477,7 +480,10 @@ export default function BookingHistoryScreen() {
                 <tr key={booking.id} className="hover:bg-gray-50 transition-colors">
                   <td className="px-6 py-4">
                     <div>
-                      <p className="text-sm font-bold text-gray-900">{booking.id}</p>
+                      {/* <p className="text-sm font-bold text-gray-900">{booking.id}</p> */}
+                      <p className="text-sm font-bold text-gray-900">
+                        {booking.id.slice(0, 6)}...{booking.id.slice(-4)}
+                      </p>
                       <p className="text-xs font-semibold text-gray-500">Created: {booking.createdAt}</p>
                     </div>
                   </td>
@@ -516,12 +522,19 @@ export default function BookingHistoryScreen() {
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
-                      <button className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors">
+                      <button
+
+                        onClick={() => {
+                          setSelectedBooking(booking);
+                          setShowBookingModal(true);
+                        }}
+
+                        className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors">
                         <Eye className="w-4 h-4 text-gray-600" />
                       </button>
-                      <button className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors">
+                      {/* <button className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors">
                         <MoreVertical className="w-4 h-4 text-gray-600" />
-                      </button>
+                      </button> */}
                     </div>
                   </td>
                 </tr>
@@ -529,6 +542,195 @@ export default function BookingHistoryScreen() {
             </tbody>
           </table>
         </div>
+
+{/* Booking Details Modal */}
+{showBookingModal && selectedBooking && (
+  <div 
+    className="fixed inset-0 z-50 overflow-y-auto"
+    aria-labelledby="modal-title" 
+    role="dialog" 
+    aria-modal="true"
+  >
+    {/* Background overlay with blur effect */}
+    <div 
+      className="fixed inset-0 bg-gray-900/30 backdrop-blur-sm transition-opacity"
+      onClick={() => setShowBookingModal(false)}
+    />
+
+    {/* Modal container - centers the modal */}
+    <div className="flex min-h-screen items-center justify-center p-4">
+      {/* Click away handler - this catches clicks outside the modal content */}
+      <div 
+        className="fixed inset-0" 
+        onClick={() => setShowBookingModal(false)}
+      />
+      
+      {/* Modal content - clicks here don't close the modal */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 20 }}
+        transition={{ duration: 0.2 }}
+        className="relative bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+        onClick={(e) => e.stopPropagation()} // Prevent clicks inside modal from closing it
+      >
+        {/* Modal Header */}
+        <div className="p-6 border-b border-gray-200 flex items-center justify-between sticky top-0 bg-white z-10">
+          <div>
+            <h3 className="text-xl font-bold text-gray-900">Booking Details</h3>
+            <p className="text-sm font-semibold text-gray-500 mt-1">
+              ID: {selectedBooking.id}
+            </p>
+          </div>
+          <button
+            onClick={() => setShowBookingModal(false)}
+            className="w-10 h-10 rounded-lg hover:bg-gray-100 flex items-center justify-center transition-colors"
+          >
+            <X className="w-5 h-5 text-gray-500" />
+          </button>
+        </div>
+
+        {/* Modal Content */}
+        <div className="p-6 space-y-6">
+          {/* Status Badges */}
+          <div className="flex items-center gap-3 flex-wrap">
+            <span className={`px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2 ${getStatusColor(selectedBooking.status)}`}>
+              {getStatusIcon(selectedBooking.status)}
+              {selectedBooking.status}
+            </span>
+            <span className={`px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2 ${getPaymentStatusColor(selectedBooking.paymentStatus)}`}>
+              <CreditCard className="w-4 h-4" />
+              Payment: {selectedBooking.paymentStatus}
+            </span>
+          </div>
+
+          {/* Patient Information */}
+          <div className="bg-gray-50 rounded-xl p-4">
+            <h4 className="text-sm font-bold text-gray-700 mb-3 flex items-center gap-2">
+              <User className="w-4 h-4" />
+              Patient Information
+            </h4>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <p className="text-xs font-semibold text-gray-500 mb-1">Name</p>
+                <p className="text-sm font-bold text-gray-900">{selectedBooking.patient.name}</p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-500 mb-1">Phone</p>
+                <p className="text-sm font-bold text-gray-900 flex items-center gap-1">
+                  <Phone className="w-3 h-3" />
+                  {selectedBooking.patient.phone}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Provider Information */}
+          <div className="bg-gray-50 rounded-xl p-4">
+            <h4 className="text-sm font-bold text-gray-700 mb-3 flex items-center gap-2">
+              <Building2 className="w-4 h-4" />
+              Provider Information
+            </h4>
+            <div className="space-y-3">
+              <div>
+                <p className="text-xs font-semibold text-gray-500 mb-1">Name</p>
+                <p className="text-sm font-bold text-gray-900">{selectedBooking.provider.name}</p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-500 mb-1">Location</p>
+                <p className="text-sm font-bold text-gray-900 flex items-center gap-1">
+                  <MapPin className="w-3 h-3" />
+                  {selectedBooking.provider.location}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Service Details */}
+          <div className="bg-gray-50 rounded-xl p-4">
+            <h4 className="text-sm font-bold text-gray-700 mb-3 flex items-center gap-2">
+              <Activity className="w-4 h-4" />
+              Service Details
+            </h4>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <p className="text-xs font-semibold text-gray-500 mb-1">Service</p>
+                <p className="text-sm font-bold text-gray-900">{selectedBooking.service.name}</p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-500 mb-1">Category</p>
+                <p className="text-sm font-bold text-gray-900">{selectedBooking.service.category}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Booking Schedule */}
+          <div className="bg-gray-50 rounded-xl p-4">
+            <h4 className="text-sm font-bold text-gray-700 mb-3 flex items-center gap-2">
+              <Calendar className="w-4 h-4" />
+              Booking Schedule
+            </h4>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <p className="text-xs font-semibold text-gray-500 mb-1">Date</p>
+                <p className="text-sm font-bold text-gray-900">{selectedBooking.bookingDate}</p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-500 mb-1">Time</p>
+                <p className="text-sm font-bold text-gray-900">{selectedBooking.bookingTime}</p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-500 mb-1">Created On</p>
+                <p className="text-sm font-bold text-gray-900">{selectedBooking.createdAt}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Payment Information */}
+          <div className="bg-gray-50 rounded-xl p-4">
+            <h4 className="text-sm font-bold text-gray-700 mb-3 flex items-center gap-2">
+              <DollarSign className="w-4 h-4" />
+              Payment Information
+            </h4>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <p className="text-xs font-semibold text-gray-500 mb-1">Amount</p>
+                <p className="text-lg font-bold text-gray-900">${selectedBooking.amount}</p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-500 mb-1">Payment Status</p>
+                <p className={`text-sm font-bold inline-block px-3 py-1 rounded-full ${getPaymentStatusColor(selectedBooking.paymentStatus)}`}>
+                  {selectedBooking.paymentStatus}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Notes */}
+          {selectedBooking.notes && (
+            <div className="bg-gray-50 rounded-xl p-4">
+              <h4 className="text-sm font-bold text-gray-700 mb-3 flex items-center gap-2">
+                <FileText className="w-4 h-4" />
+                Additional Notes
+              </h4>
+              <p className="text-sm font-medium text-gray-600">{selectedBooking.notes}</p>
+            </div>
+          )}
+        </div>
+
+        {/* Modal Footer */}
+        <div className="p-6 border-t border-gray-200 flex justify-end gap-3 sticky bottom-0 bg-white">
+          <button
+            onClick={() => setShowBookingModal(false)}
+            className="px-6 py-2.5 rounded-xl border border-gray-200 text-gray-700 font-semibold hover:bg-gray-50 transition-colors"
+          >
+            Close
+          </button>
+        </div>
+      </motion.div>
+    </div>
+  </div>
+)}
 
         {/* Mobile/Tablet Cards */}
         <div className="lg:hidden divide-y divide-gray-200">

@@ -1,18 +1,65 @@
 "use client";
 import { motion } from 'motion/react';
-import { 
+import {
   MessageSquare, Search, Filter, ChevronDown, Eye, Reply,
   X, Clock, CheckCircle, AlertCircle, MoreVertical,
   User, Mail, Calendar, FileText, RefreshCw, Send
 } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { AdminTicket, TicketReply, UpdateTicket, TicketCounts } from '@/app/api/api_client';
+
 
 export default function ContactUsScreen() {
+  interface TicketsCountsType {
+    total: number;
+    open: number;
+    pending: number;
+    resolved: number;
+  }
+
+  interface Message {
+    role: 'user' | 'admin';
+    message: string;
+    created_at: string;
+    _id: string;
+  }
+
+  interface Ticket {
+    messages: Message[];
+    [key: string]: any;
+  }
+
+  type Inquiry = {
+    _id: string;
+    messages: Message[];
+    [key: string]: any;
+  }
+
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedStatus, setSelectedStatus] = useState('all');
   const [showStatusFilter, setShowStatusFilter] = useState(false);
   const [selectedDateRange, setSelectedDateRange] = useState('all');
   const [showDateFilter, setShowDateFilter] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [TicketsCounts, setTicketsCounts] = useState<TicketsCountsType>({
+    total: 0,
+    open: 0,
+    pending: 0,
+    resolved: 0,
+  });
+  const [allMessages, setTickets] = useState<Ticket[]>([]);
+  const [pagination, setPagination] = useState<{
+    page: number;
+    pageSize: number;
+    totalItems: number;
+    totalPages: number;
+  } | null>(null);
+  const [selectedMessage, setSelectedMessage] = useState<Ticket | null>(null);
+  const [showModal, setShowModal] = useState(false);
+  const [showReplyModal, setShowReplyModal] = useState(false);
+  const [replyText, setReplyText] = useState('');;
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
 
   // Filter options
   const statusOptions = [
@@ -31,131 +78,74 @@ export default function ContactUsScreen() {
     { id: 'year', label: 'This Year' },
   ];
 
-  // Mock contact messages data
-  const allMessages = [
-    {
-      id: 'MSG-001',
-      name: 'Sarah Johnson',
-      email: 'sarah.johnson@email.com',
-      subject: 'Question about IVF services',
-      message: 'Hi, I would like to know more about the IVF services available in my area. Can you provide me with a list of certified providers near downtown?',
-      date: 'Jan 18, 2026',
-      time: '10:30 AM',
-      status: 'pending',
-      repliedAt: null,
-      repliedBy: null,
-    },
-    {
-      id: 'MSG-002',
-      name: 'Michael Chen',
-      email: 'michael.chen@email.com',
-      subject: 'Appointment booking issue',
-      message: 'I am having trouble booking an appointment through the app. The payment page keeps showing an error. Please help!',
-      date: 'Jan 18, 2026',
-      time: '09:15 AM',
-      status: 'replied',
-      repliedAt: 'Jan 18, 2026 11:30 AM',
-      repliedBy: 'Admin Team',
-    },
-    {
-      id: 'MSG-003',
-      name: 'Emily Davis',
-      email: 'emily.davis@email.com',
-      subject: 'Provider verification status',
-      message: 'I submitted a provider application last week. Could you please update me on the verification status?',
-      date: 'Jan 17, 2026',
-      time: '03:45 PM',
-      status: 'pending',
-      repliedAt: null,
-      repliedBy: null,
-    },
-    {
-      id: 'MSG-004',
-      name: 'David Martinez',
-      email: 'david.martinez@email.com',
-      subject: 'Feedback on app experience',
-      message: 'I love the FertiGo app! The interface is very user-friendly and I found a great clinic near me. Just wanted to say thank you!',
-      date: 'Jan 17, 2026',
-      time: '02:20 PM',
-      status: 'resolved',
-      repliedAt: 'Jan 17, 2026 04:15 PM',
-      repliedBy: 'Support Team',
-    },
-    {
-      id: 'MSG-005',
-      name: 'Jessica Wilson',
-      email: 'jessica.wilson@email.com',
-      subject: 'Account deletion request',
-      message: 'I would like to delete my account and all associated data. Please process this request as soon as possible.',
-      date: 'Jan 16, 2026',
-      time: '01:10 PM',
-      status: 'pending',
-      repliedAt: null,
-      repliedBy: null,
-    },
-    {
-      id: 'MSG-006',
-      name: 'Robert Anderson',
-      email: 'robert.anderson@email.com',
-      subject: 'Partnership inquiry',
-      message: 'Our fertility clinic is interested in partnering with FertiGo. Who should I contact to discuss this opportunity?',
-      date: 'Jan 16, 2026',
-      time: '11:30 AM',
-      status: 'replied',
-      repliedAt: 'Jan 16, 2026 02:45 PM',
-      repliedBy: 'Business Team',
-    },
-    {
-      id: 'MSG-007',
-      name: 'Amanda Foster',
-      email: 'amanda.foster@email.com',
-      subject: 'Technical bug report',
-      message: 'The search filter is not working properly on mobile. When I select a service category, it shows no results even though there are providers available.',
-      date: 'Jan 15, 2026',
-      time: '04:55 PM',
-      status: 'resolved',
-      repliedAt: 'Jan 15, 2026 06:20 PM',
-      repliedBy: 'Tech Support',
-    },
-    {
-      id: 'MSG-008',
-      name: 'Lisa Thompson',
-      email: 'lisa.thompson@email.com',
-      subject: 'Payment refund request',
-      message: 'I was charged twice for the same booking. Can you please process a refund for the duplicate transaction?',
-      date: 'Jan 15, 2026',
-      time: '10:20 AM',
-      status: 'pending',
-      repliedAt: null,
-      repliedBy: null,
-    },
-  ];
 
-  // Filter messages
-  const filteredMessages = allMessages.filter((message) => {
-    const matchesSearch = 
-      message.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      message.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      message.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      message.message.toLowerCase().includes(searchQuery.toLowerCase());
-    
-    const matchesStatus = selectedStatus === 'all' || message.status === selectedStatus;
-    
-    return matchesSearch && matchesStatus;
-  });
 
-  // Calculate stats
-  const stats = {
-    total: allMessages.length,
-    pending: allMessages.filter(m => m.status === 'pending').length,
-    replied: allMessages.filter(m => m.status === 'replied').length,
-    resolved: allMessages.filter(m => m.status === 'resolved').length,
+  let get_counts = async function getData(data: any) {
+    try {
+      setLoading(true);
+      const res = await TicketCounts(data);
+      if (res.data.data) {
+        setTicketsCounts(res.data.data)
+      }
+    } catch (error) {
+      console.error("Failed to fetch user data:", error);
+    }
+    finally {
+      setLoading(false);
+    }
   };
+
+
+  let tickets_listing = async function getData(data: any) {
+    try {
+      setLoading(true);
+      const res = await AdminTicket(data);
+      if (res.data.data) {
+        setTickets(res.data.data.tickets);
+        setPagination(res.data.data.pagination);
+      }
+    } catch (error) {
+      console.error("Failed to fetch user data:", error);
+    }
+    finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    get_counts({});
+  }, []);
+
+
+
+  useEffect(() => {
+
+    const apiStatusMap = {
+      all: '',
+      pending: 'pending',
+      replied: 'open',
+      resolved: 'resolved',
+    };
+
+    const apiStatus = apiStatusMap[selectedStatus as keyof typeof apiStatusMap];
+
+    tickets_listing({ status: apiStatus, page: '' });
+  }, [selectedStatus]);
+
+
+  const stats = {
+    total: TicketsCounts.total,
+    pending: TicketsCounts.pending,
+    replied: TicketsCounts.open,
+    resolved: TicketsCounts.resolved
+  };
+
+
 
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'pending': return <Clock className="w-4 h-4" />;
-      case 'replied': return <CheckCircle className="w-4 h-4" />;
+      case 'open': return <CheckCircle className="w-4 h-4" />;
       case 'resolved': return <CheckCircle className="w-4 h-4" />;
       default: return <AlertCircle className="w-4 h-4" />;
     }
@@ -169,6 +159,44 @@ export default function ContactUsScreen() {
       default: return 'bg-gray-100 text-gray-700';
     }
   };
+
+
+  // Add this function inside your component
+  const handleReplySubmit = async () => {
+    if (!replyText.trim()) return;
+
+    setIsSubmitting(true);
+    try {
+
+      await TicketReply({
+        ticket_id: selectedMessage?._id,
+        reply_message: replyText
+      })
+
+      tickets_listing({ status: '', page: '' });
+      setShowReplyModal(false);
+      setReplyText('');
+    } catch (error) {
+      console.error('Failed to send reply:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+
+  const handleMarkAsResolved = async (ticketId: string) => {
+    try {
+
+      let status = await UpdateTicket({
+        ticket_id: ticketId,
+        new_status: "resolved"
+      })
+
+      setOpenDropdownId(null);
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div className="space-y-6">
@@ -256,7 +284,7 @@ export default function ContactUsScreen() {
               <Search className="w-5 h-5 text-gray-400" />
               <input
                 type="text"
-                placeholder="Search by name, email, subject, or message..."
+                placeholder="Search by subject"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="bg-transparent border-none outline-none text-sm font-medium text-gray-900 w-full placeholder:text-gray-400"
@@ -287,11 +315,10 @@ export default function ContactUsScreen() {
                         setSelectedStatus(option.id);
                         setShowStatusFilter(false);
                       }}
-                      className={`w-full px-4 py-2 text-left text-sm font-semibold transition-colors ${
-                        selectedStatus === option.id
-                          ? 'bg-pink-50 text-pink-600'
-                          : 'text-gray-700 hover:bg-gray-50'
-                      }`}
+                      className={`w-full px-4 py-2 text-left text-sm font-semibold transition-colors ${selectedStatus === option.id
+                        ? 'bg-pink-50 text-pink-600'
+                        : 'text-gray-700 hover:bg-gray-50'
+                        }`}
                     >
                       {option.label}
                     </button>
@@ -324,11 +351,10 @@ export default function ContactUsScreen() {
                         setSelectedDateRange(option.id);
                         setShowDateFilter(false);
                       }}
-                      className={`w-full px-4 py-2 text-left text-sm font-semibold transition-colors ${
-                        selectedDateRange === option.id
-                          ? 'bg-pink-50 text-pink-600'
-                          : 'text-gray-700 hover:bg-gray-50'
-                      }`}
+                      className={`w-full px-4 py-2 text-left text-sm font-semibold transition-colors ${selectedDateRange === option.id
+                        ? 'bg-pink-50 text-pink-600'
+                        : 'text-gray-700 hover:bg-gray-50'
+                        }`}
                     >
                       {option.label}
                     </button>
@@ -398,24 +424,37 @@ export default function ContactUsScreen() {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
-              {filteredMessages.map((message) => (
+              {allMessages.map((message) => (
                 <tr key={message.id} className="hover:bg-gray-50 transition-colors">
                   <td className="px-6 py-4">
-                    <p className="text-sm font-bold text-gray-900">{message.id}</p>
+                    <p className="text-sm font-bold text-gray-900">{message._id.slice(0, 8)}...</p>
                   </td>
                   <td className="px-6 py-4">
-                    <p className="text-sm font-bold text-gray-900">{message.name}</p>
+                    <p className="text-sm font-bold text-gray-900">{message.sender.name}</p>
                   </td>
                   <td className="px-6 py-4">
                     <p className="text-sm font-bold text-gray-900">{message.subject}</p>
                   </td>
                   <td className="px-6 py-4">
-                    <p className="text-sm font-semibold text-gray-600 line-clamp-2">{message.message}</p>
+                    <p className="text-sm font-semibold text-gray-600 line-clamp-2">{message.messages[0].message}</p>
                   </td>
                   <td className="px-6 py-4">
                     <div>
-                      <p className="text-sm font-bold text-gray-900">{message.date}</p>
-                      <p className="text-xs font-semibold text-gray-500">{message.time}</p>
+                      <div>
+                        <p className="text-sm font-bold text-gray-900">
+                          {new Date(message.created_at).toLocaleDateString(undefined, {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric',
+                          })}
+                        </p>
+                        <p className="text-xs font-semibold text-gray-500">
+                          {new Date(message.created_at).toLocaleTimeString(undefined, {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                          })}
+                        </p>
+                      </div>
                     </div>
                   </td>
                   <td className="px-6 py-4">
@@ -426,15 +465,72 @@ export default function ContactUsScreen() {
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
-                      <button className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors">
+                      <button
+                        onClick={() => {
+                          setSelectedMessage(message);
+                          setShowModal(true);
+                        }}
+                        className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors">
                         <Eye className="w-4 h-4 text-gray-600" />
                       </button>
-                      <button className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-pink-100 transition-colors">
+                      <button
+
+                        onClick={() => {
+                          setSelectedMessage(message);
+                          setReplyText('');
+                          setShowReplyModal(true);
+                        }}
+
+                        className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-pink-100 transition-colors">
                         <Reply className="w-4 h-4 text-pink-600" />
                       </button>
-                      <button className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors">
+                      <button
+                        onClick={() => setOpenDropdownId(openDropdownId === message._id ? null : message._id)}
+
+                        className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors">
                         <MoreVertical className="w-4 h-4 text-gray-600" />
                       </button>
+
+
+                      {openDropdownId === message._id && (
+                        <>
+                          {/* Backdrop to handle outside clicks */}
+                          <div
+                            className="fixed inset-0 z-40"
+                            onClick={() => setOpenDropdownId(null)}
+                          />
+
+                          {/* Dropdown Menu */}
+                          <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-200 py-1 z-50">
+                            {/* Menu Header */}
+                            <div className="px-4 py-2 border-b border-gray-100">
+                              <p className="text-xs font-semibold text-gray-400">TICKET ACTIONS</p>
+                            </div>
+
+                            {/* Mark as Resolved Option */}
+                            <button
+                              onClick={() => {
+                                console.log("Mark as Resolved clicked for ticket ID:", message._id);
+                                handleMarkAsResolved(message._id);
+                                setOpenDropdownId(null);
+                              }}
+                              disabled={message.status === 'resolved'}
+                              className={`w-full px-4 py-2.5 text-left text-sm font-semibold transition-colors flex items-center gap-2
+          ${message.status === 'resolved'
+                                  ? 'bg-gray-50 text-gray-400 cursor-not-allowed'
+                                  : 'text-gray-700 hover:bg-gray-50'
+                                }`}
+                            >
+                              <CheckCircle className={`w-4 h-4 ${message.status === 'resolved' ? 'text-gray-400' : 'text-green-600'}`} />
+                              <span className="flex-1">Mark as Resolved</span>
+                              {message.status === 'resolved' && (
+                                <span className="text-xs text-gray-400">Current</span>
+                              )}
+                            </button>
+                          </div>
+                        </>
+                      )}
+
                     </div>
                   </td>
                 </tr>
@@ -445,12 +541,26 @@ export default function ContactUsScreen() {
 
         {/* Mobile/Tablet Cards */}
         <div className="lg:hidden divide-y divide-gray-200">
-          {filteredMessages.map((message) => (
+          {allMessages.map((message) => (
             <div key={message.id} className="p-4">
               <div className="flex items-start justify-between mb-3">
                 <div>
-                  <p className="text-sm font-bold text-gray-900 mb-1">{message.id}</p>
-                  <p className="text-xs font-semibold text-gray-500">{message.date} • {message.time}</p>
+                  <p className="text-sm font-bold text-gray-900 mb-1">{message._id.slice(0, 8)}...</p>
+                  <div>
+                    <p className="text-sm font-bold text-gray-900">
+                      {new Date(message.created_at).toLocaleDateString(undefined, {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric',
+                      })}
+                    </p>
+                    <p className="text-xs font-semibold text-gray-500">
+                      {new Date(message.created_at).toLocaleTimeString(undefined, {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                      })}
+                    </p>
+                  </div>
                 </div>
                 <span className={`px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 ${getStatusColor(message.status)}`}>
                   {getStatusIcon(message.status)}
@@ -463,7 +573,7 @@ export default function ContactUsScreen() {
                   <User className="w-4 h-4 text-gray-400 flex-shrink-0 mt-0.5" />
                   <div className="flex-1 min-w-0">
                     <p className="text-xs font-semibold text-gray-500">Name</p>
-                    <p className="text-sm font-bold text-gray-900">{message.name}</p>
+                    <p className="text-sm font-bold text-gray-900">{message.sender.name}</p>
                   </div>
                 </div>
 
@@ -477,38 +587,377 @@ export default function ContactUsScreen() {
 
                 <div className="bg-gray-50 rounded-lg p-3">
                   <p className="text-xs font-semibold text-gray-500 mb-1">Message</p>
-                  <p className="text-sm font-semibold text-gray-700">{message.message}</p>
+                  <p className="text-sm font-semibold text-gray-700">{message.messages[0].message}</p>
                 </div>
 
-                {message.repliedAt && (
+                {/* {message.repliedAt && (
                   <div className="bg-green-50 rounded-lg p-3 border border-green-200">
                     <p className="text-xs font-semibold text-green-700 mb-1">Reply Sent</p>
                     <p className="text-xs font-semibold text-green-600">
                       {message.repliedAt} by {message.repliedBy}
                     </p>
                   </div>
-                )}
+                )} */}
               </div>
 
               <div className="flex items-center gap-2 pt-3 border-t border-gray-100">
-                <button className="flex-1 px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-xs font-semibold text-gray-700 transition-colors flex items-center justify-center gap-2">
+                <button
+                  onClick={() => {
+                    setSelectedMessage(message);
+                    setShowModal(true);
+                  }}
+                  className="flex-1 px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-xs font-semibold text-gray-700 transition-colors flex items-center justify-center gap-2">
                   <Eye className="w-4 h-4" />
                   View
                 </button>
-                <button className="flex-1 px-3 py-2 rounded-lg bg-pink-50 hover:bg-pink-100 text-xs font-semibold text-pink-600 transition-colors flex items-center justify-center gap-2">
+                <button
+
+                  onClick={() => {
+                    setSelectedMessage(message);
+                    setReplyText('');
+                    setShowReplyModal(true);
+                  }}
+
+                  className="flex-1 px-3 py-2 rounded-lg bg-pink-50 hover:bg-pink-100 text-xs font-semibold text-pink-600 transition-colors flex items-center justify-center gap-2">
                   <Reply className="w-4 h-4" />
                   Reply
                 </button>
-                <button className="px-3 py-2 rounded-lg bg-blue-50 hover:bg-blue-100 transition-colors">
+                <button
+                  onClick={() => setOpenDropdownId(openDropdownId === message._id ? null : message._id)}
+
+                  className="px-3 py-2 rounded-lg bg-blue-50 hover:bg-blue-100 transition-colors">
                   <MoreVertical className="w-4 h-4 text-blue-600" />
                 </button>
+
+
+                {openDropdownId === message._id && (
+                  <>
+                    {/* Backdrop to handle outside clicks */}
+                    <div
+                      className="fixed inset-0 z-40"
+                      onClick={() => setOpenDropdownId(null)}
+                    />
+
+                    {/* Dropdown Menu */}
+                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-200 py-1 z-50">
+                      {/* Menu Header */}
+                      <div className="px-4 py-2 border-b border-gray-100">
+                        <p className="text-xs font-semibold text-gray-400">TICKET ACTIONS</p>
+                      </div>
+
+                      {/* Mark as Resolved Option */}
+                      <button
+                        onClick={() => {
+                          console.log("Mark as Resolved clicked for ticket ID:", message._id);
+                          handleMarkAsResolved(message._id);
+                          setOpenDropdownId(null);
+                        }}
+                        disabled={message.status === 'resolved'}
+                        className={`w-full px-4 py-2.5 text-left text-sm font-semibold transition-colors flex items-center gap-2
+          ${message.status === 'resolved'
+                            ? 'bg-gray-50 text-gray-400 cursor-not-allowed'
+                            : 'text-gray-700 hover:bg-gray-50'
+                          }`}
+                      >
+                        <CheckCircle className={`w-4 h-4 ${message.status === 'resolved' ? 'text-gray-400' : 'text-green-600'}`} />
+                        <span className="flex-1">Mark as Resolved</span>
+                        {message.status === 'resolved' && (
+                          <span className="text-xs text-gray-400">Current</span>
+                        )}
+                      </button>
+                    </div>
+                  </>
+                )}
+
               </div>
             </div>
           ))}
         </div>
 
+
+        {showModal && selectedMessage && (
+          <div
+            className="fixed inset-0 bg-black/40 bg-opacity-50 flex items-center justify-center z-50 p-4"
+            onClick={() => setShowModal(false)} // Click outside to close
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
+              className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+            >
+              {/* Header */}
+              <div className="p-6 border-b border-gray-200 flex items-center justify-between sticky top-0 bg-white">
+                <h3 className="text-xl font-bold text-gray-900">Message Details</h3>
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors"
+                >
+                  <X className="w-5 h-5 text-gray-600" />
+                </button>
+              </div>
+
+              {/* Content */}
+              <div className="p-6 space-y-6">
+                {/* Customer Info */}
+                <div className="bg-gray-50 rounded-xl p-4">
+                  <h4 className="text-sm font-bold text-gray-500 mb-3">Customer Information</h4>
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-3">
+                      <User className="w-5 h-5 text-gray-400" />
+                      <div>
+                        <p className="text-xs font-semibold text-gray-500">Name</p>
+                        <p className="text-sm font-bold text-gray-900">
+                          {selectedMessage.sender?.name || 'N/A'}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <Mail className="w-5 h-5 text-gray-400" />
+                      <div>
+                        <p className="text-xs font-semibold text-gray-500">Email</p>
+                        <p className="text-sm font-bold text-gray-900">
+                          {selectedMessage.sender?.email || 'N/A'}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Ticket Info Grid */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-gray-50 rounded-xl p-4">
+                    <p className="text-xs font-semibold text-gray-500 mb-1">Message ID</p>
+                    <p className="text-sm font-bold text-gray-900">{selectedMessage._id}</p>
+                  </div>
+                  <div className="bg-gray-50 rounded-xl p-4">
+                    <p className="text-xs font-semibold text-gray-500 mb-1">Subject</p>
+                    <p className="text-sm font-bold text-gray-900">{selectedMessage.subject}</p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-gray-50 rounded-xl p-4">
+                    <p className="text-xs font-semibold text-gray-500 mb-1">Status</p>
+                    <span className={`px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 w-fit ${selectedMessage.status === 'pending' ? 'bg-yellow-100 text-yellow-700' :
+                      selectedMessage.status === 'open' ? 'bg-green-100 text-green-700' :
+                        selectedMessage.status === 'resolved' ? 'bg-blue-100 text-blue-700' :
+                          'bg-gray-100 text-gray-700'
+                      }`}>
+                      {selectedMessage.status === 'pending' && <Clock className="w-3 h-3" />}
+                      {selectedMessage.status === 'open' && <CheckCircle className="w-3 h-3" />}
+                      {selectedMessage.status === 'resolved' && <CheckCircle className="w-3 h-3" />}
+                      {selectedMessage.status}
+                    </span>
+                  </div>
+                  <div className="bg-gray-50 rounded-xl p-4">
+                    <p className="text-xs font-semibold text-gray-500 mb-1">Created</p>
+                    <p className="text-sm font-bold text-gray-900">
+                      {new Date(selectedMessage.created_at).toLocaleDateString(undefined, {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                      })}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Message Thread */}
+                <div>
+                  <h4 className="text-sm font-bold text-gray-500 mb-3">Message Thread</h4>
+                  <div className="space-y-4">
+                    {selectedMessage.messages?.map((msg: any, index: number) => (
+                      <div
+                        key={msg._id || index}
+                        className={`p-4 rounded-xl ${msg.role === 'admin' || msg.sender_id !== selectedMessage.sender_id
+                          ? 'bg-pink-50 ml-4 border border-pink-200'
+                          : 'bg-gray-50 mr-4'
+                          }`}
+                      >
+                        <div className="flex items-center justify-between mb-2">
+                          <span className={`text-xs font-bold px-2 py-1 rounded-full ${msg.role === 'admin' || msg.sender_id !== selectedMessage.sender_id
+                            ? 'bg-pink-200 text-pink-700'
+                            : 'bg-gray-200 text-gray-700'
+                            }`}>
+                            {msg.role === 'admin' || msg.sender_id !== selectedMessage.sender_id
+                              ? 'Admin Reply'
+                              : 'Customer Message'}
+                          </span>
+                          <span className="text-xs font-semibold text-gray-500">
+                            {new Date(msg.created_at).toLocaleString(undefined, {
+                              month: 'short',
+                              day: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit'
+                            })}
+                          </span>
+                        </div>
+                        <p className="text-sm font-semibold text-gray-700 whitespace-pre-wrap">
+                          {msg.message}
+                        </p>
+
+                        {msg.role === 'admin' && (
+                          <div className="mt-2 text-xs text-gray-500">
+                            Replied by: Admin
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Assignment Info (if any) */}
+                {selectedMessage.assigned_to && (
+                  <div className="bg-gray-50 rounded-xl p-4">
+                    <p className="text-xs font-semibold text-gray-500 mb-1">Assigned To</p>
+                    <p className="text-sm font-bold text-gray-900">{selectedMessage.assigned_to}</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Footer Actions */}
+              <div className="p-6 border-t border-gray-200 flex justify-end gap-3 sticky bottom-0 bg-white">
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="px-6 py-2 rounded-xl border border-gray-200 text-gray-700 font-semibold hover:bg-gray-50 transition-colors"
+                >
+                  Close
+                </button>
+                <button
+                  onClick={() => {
+                    setReplyText('');
+                    setShowReplyModal(true);
+                  }}
+
+                  className="px-6 py-2 rounded-xl bg-gradient-to-r from-pink-500 to-pink-600 text-white font-semibold hover:from-pink-600 hover:to-pink-700 transition-all flex items-center gap-2"
+                >
+                  <Reply className="w-4 h-4" />
+                  Reply
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+
+
+        {showReplyModal && selectedMessage && (
+          <div
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+            onClick={() => setShowReplyModal(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+            >
+              {/* Header */}
+              <div className="p-6 border-b border-gray-200 flex items-center justify-between sticky top-0 bg-white">
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900">Reply to Message</h3>
+                  <p className="text-sm text-gray-500 mt-1">Send a response to {selectedMessage.sender?.name || 'customer'}</p>
+                </div>
+                <button
+                  onClick={() => setShowReplyModal(false)}
+                  className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors"
+                >
+                  <X className="w-5 h-5 text-gray-600" />
+                </button>
+              </div>
+
+              {/* Content */}
+              <div className="p-6 space-y-6">
+                {/* Original Message Preview */}
+                <div className="bg-gray-50 rounded-xl p-4 border-l-4 border-pink-400">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-bold text-gray-500">ORIGINAL MESSAGE</span>
+                    <span className="text-xs font-semibold text-gray-500">
+                      {new Date(selectedMessage.created_at).toLocaleString(undefined, {
+                        month: 'short',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                      })}
+                    </span>
+                  </div>
+                  <p className="text-sm font-semibold text-gray-700 whitespace-pre-wrap">
+                    {selectedMessage.messages?.[0]?.message || 'No message content'}
+                  </p>
+                  <div className="mt-2 flex items-center gap-2 text-xs text-gray-500">
+                    <User className="w-3 h-3" />
+                    <span>{selectedMessage.sender?.name} ({selectedMessage.sender?.email})</span>
+                  </div>
+                </div>
+
+                {/* Subject Line */}
+                <div className="bg-gray-50 rounded-xl p-4">
+                  <p className="text-xs font-semibold text-gray-500 mb-1">SUBJECT</p>
+                  <p className="text-sm font-bold text-gray-900">{selectedMessage.subject}</p>
+                </div>
+
+                {/* Reply Input */}
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="text-sm font-bold text-gray-700">Your Reply</label>
+                    <span className="text-xs text-gray-500">
+                      {replyText.length}/1000 characters
+                    </span>
+                  </div>
+                  <textarea
+                    value={replyText}
+                    onChange={(e) => setReplyText(e.target.value.slice(0, 1000))}
+                    placeholder="Type your reply here..."
+                    rows={6}
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent text-sm font-semibold text-gray-700 placeholder:text-gray-400 resize-none"
+                  />
+                </div>
+
+              </div>
+
+              {/* Footer Actions */}
+              <div className="p-6 border-t border-gray-200 flex items-center justify-between gap-3 sticky bottom-0 bg-white">
+                <div className="flex items-center gap-2">
+                  {/* Status Update Dropdown (Optional) */}
+
+                </div>
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => setShowReplyModal(false)}
+                    className="px-6 py-2 rounded-xl border border-gray-200 text-gray-700 font-semibold hover:bg-gray-50 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleReplySubmit}
+                    disabled={!replyText.trim() || isSubmitting}
+                    className="px-6 py-2 rounded-xl bg-gradient-to-r from-pink-500 to-pink-600 text-white font-semibold hover:from-pink-600 hover:to-pink-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <RefreshCw className="w-4 h-4 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" />
+                        Send Reply
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+
+            </motion.div>
+          </div>
+        )}
+
+
         {/* Empty State */}
-        {filteredMessages.length === 0 && (
+        {allMessages.length === 0 && (
           <div className="p-12 text-center">
             <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <MessageSquare className="w-8 h-8 text-gray-400" />
@@ -530,7 +979,7 @@ export default function ContactUsScreen() {
         )}
 
         {/* Pagination */}
-        {filteredMessages.length > 0 && (
+        {/* {filteredMessages.length > 0 && (
           <div className="p-4 border-t border-gray-200 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-sm font-semibold text-gray-600">
               Showing {filteredMessages.length} of {stats.total} messages
@@ -553,7 +1002,7 @@ export default function ContactUsScreen() {
               </button>
             </div>
           </div>
-        )}
+        )} */}
       </motion.div>
     </div>
   );

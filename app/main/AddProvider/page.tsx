@@ -208,18 +208,18 @@ export default function AddProviderScreen({
   // const searchParams = useSearchParams();
   // const id = searchParams.get('id');
   const [id, setId] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const isEditMode = Boolean(id);
-
 
   const isLocationSelected =
     typeof formData.mapLocation.lat === "number" &&
     typeof formData.mapLocation.lng === "number";
 
 
-    useEffect(() => {
-  const params = new URLSearchParams(window.location.search);
-  setId(params.get('id'));
-}, []);
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    setId(params.get('id'));
+  }, []);
 
   useEffect(() => {
     if (!id) return;
@@ -553,49 +553,52 @@ export default function AddProviderScreen({
     };
   };
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    try {
+      const payload = buildProviderPayload();
 
-  try {
-    const payload = buildProviderPayload();
+      const finalPayload = isEditMode
+        ? { userId: id, ...payload }
+        : payload;
 
-    const finalPayload = isEditMode
-      ? { userId: id, ...payload }
-      : payload;
+      console.log("Submitting payload:", finalPayload);
 
-    console.log("Submitting payload:", finalPayload);
+      const res = isEditMode
+        ? await updateProvider(finalPayload)
+        : await CreateProvider(finalPayload);
 
-    const res = isEditMode
-      ? await updateProvider(finalPayload)
-      : await CreateProvider(finalPayload);
-
-    if (res.data?.status) {
-      toast.success(
-        isEditMode
-          ? "Provider updated successfully 🎉"
-          : "Provider created successfully 🎉"
-      );
-      router.push("/main/Provider");
-    } else {
+      if (res.data?.status) {
+        toast.success(
+          isEditMode
+            ? "Provider updated successfully 🎉"
+            : "Provider created successfully 🎉"
+        );
+        router.push("/main/Provider");
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Action failed",
+          text: res.data?.message || "Something went wrong",
+          confirmButtonColor: "#EC4899",
+        });
+      }
+    } catch (error: any) {
+      console.error("Submit error:", error);
       Swal.fire({
         icon: "error",
-        title: "Action failed",
-        text: res.data?.message || "Something went wrong",
+        title: "Request failed",
+        text:
+          error?.response?.data?.message ||
+          "Something went wrong while saving provider",
         confirmButtonColor: "#EC4899",
       });
     }
-  } catch (error: any) {
-    console.error("Submit error:", error);
-    Swal.fire({
-      icon: "error",
-      title: "Request failed",
-      text:
-        error?.response?.data?.message ||
-        "Something went wrong while saving provider",
-      confirmButtonColor: "#EC4899",
-    });
-  }
-};
+    finally {
+      setIsSubmitting(false);
+    }
+  };
 
 
 
@@ -612,10 +615,19 @@ const handleSubmit = async (e: React.FormEvent) => {
           </button>
           <div>
             <h2 className="text-3xl font-bold text-gray-900">
-              {provider ? "Edit Provider" : "Add New Provider"}
+
+              {isSubmitting
+                ? isEditMode
+                  ? "Updating…"
+                  : "Adding…"
+                : isEditMode
+                  ? "Update Provider"
+                  : "Add Provider"}
+
+
             </h2>
             <p className="text-gray-600 mt-1 mb-2">
-              {provider
+              {isEditMode
                 ? "Update provider information"
                 : "Fill in the details to add a new service provider"}
             </p>
@@ -692,7 +704,8 @@ const handleSubmit = async (e: React.FormEvent) => {
                           onChange={(e) =>
                             handleInputChange("phone", e.target.value)
                           }
-                          placeholder="+1 (555) 123-4567"
+                          maxLength={10}
+                          placeholder="Enter 10 digit phone number"
                           className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 outline-none transition-all"
                         />
                       </div>
@@ -1469,7 +1482,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                 <div className="mt-6 pt-6 border-t border-gray-200 space-y-3">
                   <button
                     type="submit"
-                    disabled={uploadingLogo || !logoUrl}
+                    disabled={uploadingLogo || !logoUrl || isSubmitting}
                     className="
                               w-full py-3 rounded-xl
                               bg-gradient-to-r from-[#EC4899] to-[#EC4899]
@@ -1481,9 +1494,14 @@ const handleSubmit = async (e: React.FormEvent) => {
                   >
                     {uploadingLogo
                       ? "Uploading logo..."
-                      : isEditMode
-                        ? "Update Provider"
-                        : "Add Provider"}
+                      : isSubmitting
+                        ? isEditMode
+                          ? "Updating…"
+                          : "Adding…"
+                        : isEditMode
+                          ? "Update Provider"
+                          : "Add Provider"}
+
                   </button>
                   <button
                     type="button"

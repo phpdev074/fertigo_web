@@ -5,6 +5,8 @@ import {
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { fetchAllUsers, UpdateUser, PatientCount } from '../../api/api_client';
+import Loader from '@/app/components/PageLoader';
+import CardLoader from '@/app/components/CardLoader';
 
 export default function UserManagementScreen() {
   const [activeTab, setActiveTab] = useState<'all' | 'blocked'>('all');
@@ -30,6 +32,7 @@ export default function UserManagementScreen() {
   const [showUserModal, setShowUserModal] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [confirmAction, setConfirmAction] = useState<{ type: 'block' | 'delete' | 'unblock', user: any } | null>(null);
+
 
   const userRoles = [
     { id: 'all', label: 'All Roles', color: 'gray' },
@@ -68,16 +71,16 @@ export default function UserManagementScreen() {
     }
   };
 
-useEffect(() => {
-  const handler = setTimeout(() => {
-    setDebouncedSearch(searchQuery); // update debounced value after 500ms
-  }, 500);
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(searchQuery); // update debounced value after 500ms
+    }, 500);
 
-  // Cleanup: cancel previous timeout if searchQuery changes
-  return () => {
-    clearTimeout(handler);
-  };
-}, [searchQuery]);
+    // Cleanup: cancel previous timeout if searchQuery changes
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [searchQuery]);
 
 
   useEffect(() => {
@@ -85,9 +88,9 @@ useEffect(() => {
   }, [page, activeTab, debouncedSearch]);
 
   const handleTabChange = (tab: 'all' | 'blocked') => {
-    console.log('Selected tab:', tab);
-    loadUsers(1, tab);
-    setActiveTab(tab);
+    // console.log('Selected tab:', tab);
+    // loadUsers(1, tab);
+    // setActiveTab(tab);
   };
 
 
@@ -159,6 +162,7 @@ useEffect(() => {
 
   return (
     <div className="space-y-6">
+
       {/* Page Header */}
       <div>
         <h2 className="text-3xl font-bold text-gray-900 mb-2">Patient Management</h2>
@@ -204,19 +208,23 @@ useEffect(() => {
         </motion.div>
       </div>
 
+
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
         className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
       >
+
+
         {/* Tabs */}
         <div className="border-b border-gray-200">
           <div className="flex items-center gap-2 p-2">
             <button
               onClick={() => {
                 setActiveTab('all');
-                loadUsers(1);
+                // loadUsers(1);
                 handleTabChange('all')
               }}
               className={`flex-1 md:flex-none md:px-6 py-3 rounded-xl font-semibold transition-all ${activeTab === 'all'
@@ -247,6 +255,7 @@ useEffect(() => {
             </button>
           </div>
         </div>
+
 
         {/* Filters Bar */}
         <div className="p-4 border-b border-gray-200 space-y-3">
@@ -304,6 +313,12 @@ useEffect(() => {
         </div>
 
         {/* Desktop Table */}
+      
+      {loading ? (
+  <div className="p-12 flex justify-center">
+    <Loader />
+  </div>
+) : (
         <div className="hidden lg:block overflow-x-auto">
           <table className="w-full">
             <thead className="bg-gray-50">
@@ -395,6 +410,8 @@ useEffect(() => {
             </tbody>
           </table>
         </div>
+)}
+
 
         {/* Mobile/Tablet Cards */}
         <div className="lg:hidden divide-y divide-gray-200">
@@ -529,7 +546,12 @@ useEffect(() => {
             </div>
           </div>
         )}
+
+
+
       </motion.div>
+
+
 
       {/* User Detail Modal */}
       <AnimatePresence>

@@ -35,27 +35,25 @@ const AdminLoginScreen = () => {
     setErrors(newErrors);
     if (newErrors.email || newErrors.password) return;
 
-      router.push('/main');
-    //  login block 
-    // try {
-    //   let res = await UserLogin({
-    //     email,
-    //     password
-    //   });
-    //   console.log('Login success:', res.data.status);
+    try {
+      let res = await UserLogin({
+        email,
+        password
+      });
+      console.log('Login success:', res.data.status);
 
-    //   if (res.data.status == true) {
-    //     localStorage.setItem('token', res.data.data.token);
-    //     localStorage.setItem('role', res.data.data.role);
-    //     router.push('/main');
-    //   }
-    //   else {
-    //     alert('Login failed. Please try again');
-    //   }
-    // } catch (error) {
-    //   console.error('Login failed:', error);
-    //   alert('Login failed. Please try again');
-    // }
+      if (res.data.status == true) {
+        localStorage.setItem('token', res.data.data.token);
+        localStorage.setItem('role', res.data.data.role);
+        router.push('/main');
+      }
+      else {
+        alert('Login failed. Please try again');
+      }
+    } catch (error) {
+      console.error('Login failed:', error);
+      alert('Login failed. Please try again');
+    }
 
   };
 
