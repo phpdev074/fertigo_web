@@ -13,9 +13,11 @@ const AdminLoginScreen = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [errors, setErrors] = useState({ email: '', password: '' });
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (loading) return;
 
     // Simple validation
     const newErrors = { email: '', password: '' };
@@ -36,6 +38,7 @@ const AdminLoginScreen = () => {
     if (newErrors.email || newErrors.password) return;
 
     try {
+      setLoading(true);
       let res = await UserLogin({
         email,
         password
@@ -53,8 +56,9 @@ const AdminLoginScreen = () => {
     } catch (error) {
       console.error('Login failed:', error);
       alert('Login failed. Please try again');
+    } finally {
+      setLoading(false);
     }
-
   };
 
   return (
@@ -213,14 +217,55 @@ const AdminLoginScreen = () => {
               </div>
 
               {/* Submit Button */}
-              <button
+              {/* <button
                 type="submit"
                 className="w-full bg-gradient-to-r from-pink-500 to-pink-600 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-3 group"
               >
                 <span>Sign In</span>
 
                 <LogIn className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button> */}
+
+
+              <button
+                type="submit"
+                disabled={loading}
+                className={`w-full bg-gradient-to-r from-pink-500 to-pink-600 text-white font-bold py-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-3
+  ${loading ? 'opacity-70 cursor-not-allowed' : 'hover:shadow-xl group'}
+`}
+              >
+                {loading ? (
+                  <>
+                    <svg
+                      className="animate-spin h-5 w-5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v8H4z"
+                      ></path>
+                    </svg>
+                    <span>Signing In...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Sign In</span>
+                    <LogIn className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
               </button>
+
             </form>
 
             {/* Divider */}

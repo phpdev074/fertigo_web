@@ -24,6 +24,7 @@ import toast from "react-hot-toast";
 import { Country } from "country-state-city";
 import Swal from "sweetalert2";
 import { GetProviderById, updateProvider } from '@/app/api/api_client';
+import { IMAGE_BASE_URL } from '@/app/api/api';
 
 
 const MapPickerModal = dynamic(() => import("../Map/MapPickerModal"), {
@@ -335,7 +336,7 @@ export default function AddProviderScreen({
 
     // 6️⃣ Logo
     if (provider.providerLogo) {
-      setLogoPreview(provider.providerLogo);
+      setLogoPreview(`${IMAGE_BASE_URL}${provider.providerLogo}`);
       setLogoUrl(provider.providerLogo);
     }
   }, [providerData]);
