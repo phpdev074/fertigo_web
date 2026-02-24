@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { AdminTicket, TicketReply, UpdateTicket, TicketCounts } from '@/app/api/api_client';
+import Loader from '@/app/components/PageLoader';
 
 
 export default function ContactUsScreen() {
@@ -411,132 +412,136 @@ export default function ContactUsScreen() {
 
         {/* Desktop Table */}
         <div className="hidden lg:block overflow-x-auto">
-          <table className="w-full">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Message ID</th>
-                <th className="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Name</th>
-                <th className="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Subject</th>
-                <th className="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Message</th>
-                <th className="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Date</th>
-                <th className="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Status</th>
-                <th className="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200">
-              {allMessages.map((message) => (
-                <tr key={message.id} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-6 py-4">
-                    <p className="text-sm font-bold text-gray-900">{message._id.slice(0, 8)}...</p>
-                  </td>
-                  <td className="px-6 py-4">
-                    <p className="text-sm font-bold text-gray-900">{message.sender.name}</p>
-                  </td>
-                  <td className="px-6 py-4">
-                    <p className="text-sm font-bold text-gray-900">{message.subject}</p>
-                  </td>
-                  <td className="px-6 py-4">
-                    <p className="text-sm font-semibold text-gray-600 line-clamp-2">{message.messages[0].message}</p>
-                  </td>
-                  <td className="px-6 py-4">
-                    <div>
-                      <div>
-                        <p className="text-sm font-bold text-gray-900">
-                          {new Date(message.created_at).toLocaleDateString(undefined, {
-                            year: 'numeric',
-                            month: 'short',
-                            day: 'numeric',
-                          })}
-                        </p>
-                        <p className="text-xs font-semibold text-gray-500">
-                          {new Date(message.created_at).toLocaleTimeString(undefined, {
-                            hour: '2-digit',
-                            minute: '2-digit',
-                          })}
-                        </p>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <span className={`px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 w-fit ${getStatusColor(message.status)}`}>
-                      {getStatusIcon(message.status)}
-                      {message.status}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() => {
-                          setSelectedMessage(message);
-                          setShowModal(true);
-                        }}
-                        className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors">
-                        <Eye className="w-4 h-4 text-gray-600" />
-                      </button>
-                      <button
-
-                        onClick={() => {
-                          setSelectedMessage(message);
-                          setReplyText('');
-                          setShowReplyModal(true);
-                        }}
-
-                        className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-pink-100 transition-colors">
-                        <Reply className="w-4 h-4 text-pink-600" />
-                      </button>
-                      <button
-                        onClick={() => setOpenDropdownId(openDropdownId === message._id ? null : message._id)}
-
-                        className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors">
-                        <MoreVertical className="w-4 h-4 text-gray-600" />
-                      </button>
-
-
-                      {openDropdownId === message._id && (
-                        <>
-                          {/* Backdrop to handle outside clicks */}
-                          <div
-                            className="fixed inset-0 z-40"
-                            onClick={() => setOpenDropdownId(null)}
-                          />
-
-                          {/* Dropdown Menu */}
-                          <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-200 py-1 z-50">
-                            {/* Menu Header */}
-                            <div className="px-4 py-2 border-b border-gray-100">
-                              <p className="text-xs font-semibold text-gray-400">TICKET ACTIONS</p>
-                            </div>
-
-                            {/* Mark as Resolved Option */}
-                            <button
-                              onClick={() => {
-                                console.log("Mark as Resolved clicked for ticket ID:", message._id);
-                                handleMarkAsResolved(message._id);
-                                setOpenDropdownId(null);
-                              }}
-                              disabled={message.status === 'resolved'}
-                              className={`w-full px-4 py-2.5 text-left text-sm font-semibold transition-colors flex items-center gap-2
-          ${message.status === 'resolved'
-                                  ? 'bg-gray-50 text-gray-400 cursor-not-allowed'
-                                  : 'text-gray-700 hover:bg-gray-50'
-                                }`}
-                            >
-                              <CheckCircle className={`w-4 h-4 ${message.status === 'resolved' ? 'text-gray-400' : 'text-green-600'}`} />
-                              <span className="flex-1">Mark as Resolved</span>
-                              {message.status === 'resolved' && (
-                                <span className="text-xs text-gray-400">Current</span>
-                              )}
-                            </button>
-                          </div>
-                        </>
-                      )}
-
-                    </div>
-                  </td>
+          {loading ? (
+            <Loader />
+          ) : (
+            <table className="w-full">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Message ID</th>
+                  <th className="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Name</th>
+                  <th className="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Subject</th>
+                  <th className="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Message</th>
+                  <th className="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Date</th>
+                  <th className="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Status</th>
+                  <th className="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                {allMessages.map((message) => (
+                  <tr key={message.id} className="hover:bg-gray-50 transition-colors">
+                    <td className="px-6 py-4">
+                      <p className="text-sm font-bold text-gray-900">{message._id.slice(0, 8)}...</p>
+                    </td>
+                    <td className="px-6 py-4">
+                      <p className="text-sm font-bold text-gray-900">{message.sender.name}</p>
+                    </td>
+                    <td className="px-6 py-4">
+                      <p className="text-sm font-bold text-gray-900">{message.subject}</p>
+                    </td>
+                    <td className="px-6 py-4">
+                      <p className="text-sm font-semibold text-gray-600 line-clamp-2">{message.messages[0].message}</p>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div>
+                        <div>
+                          <p className="text-sm font-bold text-gray-900">
+                            {new Date(message.created_at).toLocaleDateString(undefined, {
+                              year: 'numeric',
+                              month: 'short',
+                              day: 'numeric',
+                            })}
+                          </p>
+                          <p className="text-xs font-semibold text-gray-500">
+                            {new Date(message.created_at).toLocaleTimeString(undefined, {
+                              hour: '2-digit',
+                              minute: '2-digit',
+                            })}
+                          </p>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <span className={`px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 w-fit ${getStatusColor(message.status)}`}>
+                        {getStatusIcon(message.status)}
+                        {message.status}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => {
+                            setSelectedMessage(message);
+                            setShowModal(true);
+                          }}
+                          className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors">
+                          <Eye className="w-4 h-4 text-gray-600" />
+                        </button>
+                        <button
+
+                          onClick={() => {
+                            setSelectedMessage(message);
+                            setReplyText('');
+                            setShowReplyModal(true);
+                          }}
+
+                          className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-pink-100 transition-colors">
+                          <Reply className="w-4 h-4 text-pink-600" />
+                        </button>
+                        <button
+                          onClick={() => setOpenDropdownId(openDropdownId === message._id ? null : message._id)}
+
+                          className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors">
+                          <MoreVertical className="w-4 h-4 text-gray-600" />
+                        </button>
+
+
+                        {openDropdownId === message._id && (
+                          <>
+                            {/* Backdrop to handle outside clicks */}
+                            <div
+                              className="fixed inset-0 z-40"
+                              onClick={() => setOpenDropdownId(null)}
+                            />
+
+                            {/* Dropdown Menu */}
+                            <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-200 py-1 z-50">
+                              {/* Menu Header */}
+                              <div className="px-4 py-2 border-b border-gray-100">
+                                <p className="text-xs font-semibold text-gray-400">TICKET ACTIONS</p>
+                              </div>
+
+                              {/* Mark as Resolved Option */}
+                              <button
+                                onClick={() => {
+                                  console.log("Mark as Resolved clicked for ticket ID:", message._id);
+                                  handleMarkAsResolved(message._id);
+                                  setOpenDropdownId(null);
+                                }}
+                                disabled={message.status === 'resolved'}
+                                className={`w-full px-4 py-2.5 text-left text-sm font-semibold transition-colors flex items-center gap-2
+          ${message.status === 'resolved'
+                                    ? 'bg-gray-50 text-gray-400 cursor-not-allowed'
+                                    : 'text-gray-700 hover:bg-gray-50'
+                                  }`}
+                              >
+                                <CheckCircle className={`w-4 h-4 ${message.status === 'resolved' ? 'text-gray-400' : 'text-green-600'}`} />
+                                <span className="flex-1">Mark as Resolved</span>
+                                {message.status === 'resolved' && (
+                                  <span className="text-xs text-gray-400">Current</span>
+                                )}
+                              </button>
+                            </div>
+                          </>
+                        )}
+
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
         </div>
 
         {/* Mobile/Tablet Cards */}

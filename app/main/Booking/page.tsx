@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { BookingHistory, BookignCounts, Service } from '@/app/api/api_client';
+import Loader from '@/app/components/PageLoader';
 
 export default function BookingHistoryScreen() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -463,6 +464,9 @@ export default function BookingHistoryScreen() {
 
         {/* Desktop Table */}
         <div className="hidden lg:block overflow-x-auto">
+        {loading ? (
+    <Loader />
+  ) : (
           <table className="w-full">
             <thead className="bg-gray-50">
               <tr>
@@ -475,6 +479,7 @@ export default function BookingHistoryScreen() {
                 <th className="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
+            
             <tbody className="divide-y divide-gray-200">
               {filteredBookings.map((booking) => (
                 <tr key={booking.id} className="hover:bg-gray-50 transition-colors">
@@ -540,7 +545,10 @@ export default function BookingHistoryScreen() {
                 </tr>
               ))}
             </tbody>
+
+
           </table>
+          )}
         </div>
 
 {/* Booking Details Modal */}

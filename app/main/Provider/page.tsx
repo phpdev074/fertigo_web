@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { GetProviders, Service, GetProviderById, updateProvider } from '@/app/api/api_client';
 import { IMAGE_BASE_URL } from '@/app/api/api';
+import Loader from '@/app/components/PageLoader';
 
 interface ProviderManagementScreenProps {
   onAddProvider?: () => void;
@@ -38,8 +39,6 @@ export default function Provider({ onAddProvider, onEditProvider }: ProviderMana
   const [providerData, setProviderData] = useState<any | null>(null);
   const [showProviderModal, setShowProviderModal] = useState(false);
   const [modalLoading, setModalLoading] = useState(false);
-
-
 
   const router = useRouter();
 
@@ -369,6 +368,9 @@ export default function Provider({ onAddProvider, onEditProvider }: ProviderMana
 
         {/* Desktop Table */}
         <div className="hidden lg:block overflow-x-auto">
+  {loading ? (
+    <Loader />
+  ) : (
           <table className="w-full">
             <thead className="bg-gray-50">
               <tr>
@@ -379,11 +381,12 @@ export default function Provider({ onAddProvider, onEditProvider }: ProviderMana
                 <th className="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
+            
             <tbody className="divide-y divide-gray-200">
               {providers
                 .filter((provider) => {
                   const matchesCategory =
-                    selectedCategory === 'all' || provider.category === selectedCategory;
+                  selectedCategory === 'all' || provider.category === selectedCategory;
 
                   const matchesSearch =
                     provider.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -422,6 +425,7 @@ export default function Provider({ onAddProvider, onEditProvider }: ProviderMana
                               {provider.name?.slice(0, 2).toUpperCase()}
                             </span>
                           )}
+
                         </div>
 
                         <div>
@@ -493,8 +497,11 @@ export default function Provider({ onAddProvider, onEditProvider }: ProviderMana
                     </td>
                   </tr>
                 ))}
+
             </tbody>
+
           </table>
+  )}
         </div>
 
         {/* Mobile/Tablet Cards */}

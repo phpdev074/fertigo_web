@@ -216,17 +216,6 @@ const AdminLoginScreen = () => {
                 </a>
               </div>
 
-              {/* Submit Button */}
-              {/* <button
-                type="submit"
-                className="w-full bg-gradient-to-r from-pink-500 to-pink-600 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-3 group"
-              >
-                <span>Sign In</span>
-
-                <LogIn className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button> */}
-
-
               <button
                 type="submit"
                 disabled={loading}

@@ -4,6 +4,8 @@ import { useState, ChangeEvent, useEffect } from 'react';
 import { Search, Plus, Edit2, Eye, Activity, Trash2, Image as ImageIcon, X } from 'lucide-react';
 import { Service, imageUpload, createService, updateService, DeleteService } from '@/app/api/api_client';
 import { IMAGE_BASE_URL } from '@/app/api/api';
+import Loader from '@/app/components/PageLoader';
+
 
 type ServiceItem = {
     _id: string;
@@ -31,7 +33,9 @@ export default function ServiceManagement() {
         total: 0,
         totalPages: 0,
     });
-
+    const [loading, setLoading] = useState(false);
+    const [loadingSubmit, setLoadingSubmit] = useState(false);
+    const [loadingDelete, setLoadingDelete] = useState(false);
 
     const [form, setForm] = useState<{ name: string; icon: string }>({
         name: '',
@@ -41,6 +45,7 @@ export default function ServiceManagement() {
 
     const getServices = async () => {
         try {
+            setLoading(true);
             const res = await Service({ page });
             setServices(res.data.data);
             if (res.data.pagination) {
@@ -48,6 +53,8 @@ export default function ServiceManagement() {
             }
         } catch (error) {
             console.error(error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -87,8 +94,9 @@ export default function ServiceManagement() {
 
     /* ================= SUBMIT ================= */
     const handleSubmit = async () => {
-        if (!form.name || !form.icon) return;
 
+        if (!form.name || !form.icon) return;
+        setLoadingSubmit(true);
         try {
             if (editingService) {
                 await updateService({
@@ -111,12 +119,15 @@ export default function ServiceManagement() {
 
         } catch (err) {
             console.error(err);
+        } finally {
+            setLoadingSubmit(false);
         }
     };
 
 
 
     const handleDelete = async (id: string) => {
+        setLoadingDelete(true);
         try {
             let data = await DeleteService({
                 id: id,
@@ -127,9 +138,10 @@ export default function ServiceManagement() {
 
         } catch (error) {
             console.log(error)
+        } finally {
+            setLoadingDelete(false);
         }
     };
-
 
     return (
         <div className="p-6 space-y-6">
@@ -189,43 +201,48 @@ export default function ServiceManagement() {
                 </div>
 
                 <div className="hidden lg:block overflow-x-auto">
-                    <table className="w-full">
-                        <thead className="bg-gray-50">
-                            <tr>
-                                <th className="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
-                                    Icon
-                                </th>
 
-                                <th className="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
-                                    Service Name
-                                </th>
+                    {loading ? (
+                        <Loader />
+                    ) : (
 
-                                <th className="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
-                                    Created At
-                                </th>
-                                <th className="px-6 py-4 text-right text-xs font-bold text-gray-600 uppercase tracking-wider">
-                                    Actions
-                                </th>
-                            </tr>
-                        </thead>
+                        <table className="w-full">
+                            <thead className="bg-gray-50">
+                                <tr>
+                                    <th className="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
+                                        Icon
+                                    </th>
 
-                        <tbody className="divide-y divide-gray-200">
-                            {filteredServices.map((service) => (
-                                <tr
-                                    key={service._id}
-                                    className="hover:bg-gray-50 transition-colors"
-                                >
-                                    {/* Service Info */}
-                                    <td className="px-6 py-4">
-                                        <div className="flex items-center gap-3">
-                                            <div className="relative w-10 h-10 rounded-lg overflow-hidden border bg-white">
-                                                <img
-                                                    src={`${IMAGE_BASE_URL}${service.icon}`}
-                                                    alt={service.name}
-                                                    className="w-full h-full object-cover"
-                                                />
+                                    <th className="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
+                                        Service Name
+                                    </th>
 
-                                                {/* <img
+                                    <th className="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
+                                        Created At
+                                    </th>
+                                    <th className="px-6 py-4 text-right text-xs font-bold text-gray-600 uppercase tracking-wider">
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody className="divide-y divide-gray-200">
+                                {filteredServices.map((service) => (
+                                    <tr
+                                        key={service._id}
+                                        className="hover:bg-gray-50 transition-colors"
+                                    >
+                                        {/* Service Info */}
+                                        <td className="px-6 py-4">
+                                            <div className="flex items-center gap-3">
+                                                <div className="relative w-10 h-10 rounded-lg overflow-hidden border bg-white">
+                                                    <img
+                                                        src={`${IMAGE_BASE_URL}${service.icon}`}
+                                                        alt={service.name}
+                                                        className="w-full h-full object-cover"
+                                                    />
+
+                                                    {/* <img
                                                     src={
                                                         form.icon.startsWith('blob:')
                                                             ? form.icon
@@ -236,84 +253,85 @@ export default function ServiceManagement() {
                                                 /> */}
 
 
+                                                </div>
+
                                             </div>
+                                        </td>
 
-                                        </div>
-                                    </td>
+                                        <td className="px-6 py-4">
+                                            <div className="flex items-center gap-3">
+                                                <span className="text-sm font-bold text-gray-900">
+                                                    {service.name}
+                                                </span>
+                                            </div>
+                                        </td>
 
-                                    <td className="px-6 py-4">
-                                        <div className="flex items-center gap-3">
-                                            <span className="text-sm font-bold text-gray-900">
-                                                {service.name}
+
+                                        {/* Created Date */}
+                                        <td className="px-6 py-4">
+                                            <span className="text-sm font-semibold text-gray-600">
+                                                {new Date(service.createdAt).toISOString().split('T')[0]}
+
                                             </span>
-                                        </div>
-                                    </td>
+                                        </td>
 
-
-                                    {/* Created Date */}
-                                    <td className="px-6 py-4">
-                                        <span className="text-sm font-semibold text-gray-600">
-                                            {new Date(service.createdAt).toISOString().split('T')[0]}
-
-                                        </span>
-                                    </td>
-
-                                    {/* Actions */}
-                                    <td className="px-6 py-4">
-                                        <div className="flex items-center justify-end gap-2">
-                                            {/* <button
+                                        {/* Actions */}
+                                        <td className="px-6 py-4">
+                                            <div className="flex items-center justify-end gap-2">
+                                                {/* <button
                                                 onClick={() => alert(JSON.stringify(service, null, 2))}
                                                 className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors"
                                             >
                                                 <Eye className="w-4 h-4 text-gray-600" />
                                             </button> */}
 
-                                            <button
-                                                onClick={() => {
-                                                    setEditingService(service);
-                                                    setForm({
-                                                        name: service.name,
-                                                        icon: service.icon,
-                                                    });
-                                                    setIsModalOpen(true);
-                                                }}
-                                                className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-blue-50 transition-colors"
-                                            >
-                                                <Edit2 className="w-4 h-4 text-blue-600" />
-                                            </button>
+                                                <button
+                                                    onClick={() => {
+                                                        setEditingService(service);
+                                                        setForm({
+                                                            name: service.name,
+                                                            icon: service.icon,
+                                                        });
+                                                        setIsModalOpen(true);
+                                                    }}
+                                                    className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-blue-50 transition-colors"
+                                                >
+                                                    <Edit2 className="w-4 h-4 text-blue-600" />
+                                                </button>
 
-                                            <button
+                                                <button
 
-                                                onClick={() => {
-                                                    setConfirmAction({
-                                                        type: "delete",
-                                                        item: service,
-                                                    });
-                                                    setShowConfirmModal(true);
-                                                }}
+                                                    onClick={() => {
+                                                        setConfirmAction({
+                                                            type: "delete",
+                                                            item: service,
+                                                        });
+                                                        setShowConfirmModal(true);
+                                                    }}
 
-                                                className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-red-50 transition-colors">
-                                                <Trash2 className="w-4 h-4 text-red-600" />
-                                            </button>
+                                                    className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-red-50 transition-colors">
+                                                    <Trash2 className="w-4 h-4 text-red-600" />
+                                                </button>
 
 
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
 
-                            {filteredServices.length === 0 && (
-                                <tr>
-                                    <td
-                                        colSpan={3}
-                                        className="px-6 py-6 text-center text-sm font-semibold text-gray-500"
-                                    >
-                                        No services found
-                                    </td>
-                                </tr>
-                            )}
-                        </tbody>
-                    </table>
+                                {filteredServices.length === 0 && (
+                                    <tr>
+                                        <td
+                                            colSpan={3}
+                                            className="px-6 py-6 text-center text-sm font-semibold text-gray-500"
+                                        >
+                                            No services found
+                                        </td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    )}
                 </div>
             </div>
 
@@ -442,9 +460,10 @@ export default function ServiceManagement() {
                             <button
                                 onClick={() => handleDelete(confirmAction.item._id)}
                                 className="flex-1 px-4 py-2.5 rounded-xl font-semibold text-sm transition-all bg-red-600 text-white hover:bg-red-700 flex items-center justify-center gap-2"
+                                disabled={loadingDelete}
                             >
-                                <Trash2 className="w-4 h-4" />
-                                Delete
+                                {loadingDelete ? 'Deleting...' : <><Trash2 className="w-4 h-4" /> Delete</>}
+
                             </button>
                         </div>
 
@@ -507,9 +526,17 @@ export default function ServiceManagement() {
                             <button
                                 onClick={handleSubmit}
                                 className="w-full bg-gray-900 text-white py-2 rounded-lg text-sm font-semibold"
+                                disabled={loadingSubmit}
                             >
-                                {editingService ? 'Update Service' : 'Create Service'}
+                                {loadingSubmit
+                                    ? editingService
+                                        ? 'Updating…'
+                                        : 'Creating…'
+                                    : editingService
+                                        ? 'Update Service'
+                                        : 'Create Service'}
                             </button>
+
                         </div>
                     </div>
                 </div>
