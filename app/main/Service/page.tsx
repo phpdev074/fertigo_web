@@ -65,7 +65,7 @@ export default function ServiceManagement() {
 
 
     /* ================= FILTER ================= */
-    const filteredServices = services.filter((s) =>
+    const filteredServices = services?.filter((s) =>
         s.name.toLowerCase().includes(search.toLowerCase())
     );
 
@@ -227,7 +227,7 @@ export default function ServiceManagement() {
                             </thead>
 
                             <tbody className="divide-y divide-gray-200">
-                                {filteredServices.map((service) => (
+                                {filteredServices?.map((service) => (
                                     <tr
                                         key={service._id}
                                         className="hover:bg-gray-50 transition-colors"
@@ -319,7 +319,7 @@ export default function ServiceManagement() {
                                     </tr>
                                 ))}
 
-                                {filteredServices.length === 0 && (
+                                {filteredServices?.length === 0 && (
                                     <tr>
                                         <td
                                             colSpan={3}
@@ -340,7 +340,7 @@ export default function ServiceManagement() {
 
             {/* Mobile Cards */}
             <div className="lg:hidden space-y-4">
-                {filteredServices.map((service) => (
+                {filteredServices?.map((service) => (
                     <div
                         key={service._id}
                         className="bg-white border rounded-xl p-4 flex gap-4 items-center"
@@ -401,7 +401,7 @@ export default function ServiceManagement() {
                     </div>
                 ))}
 
-                {filteredServices.length === 0 && (
+                {filteredServices?.length === 0 && (
                     <p className="text-center text-sm font-semibold text-gray-500">
                         No services found
                     </p>
