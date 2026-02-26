@@ -49,13 +49,16 @@ export default function Provider({ onAddProvider, onEditProvider }: ProviderMana
   const [currentPage, setCurrentPage] = useState(1);
 
   // Categories for filter
-  const categories = [
-    { id: 'all', label: 'All Services' },
-    ...services.map((s) => ({
-      id: s._id,
-      label: s.name,
-    })),
-  ];
+ const categories = [
+  { id: 'all', label: 'All Services' },
+  ...(Array.isArray(services)
+    ? services.map((s) => ({
+        id: s._id,
+        label: s.name,
+      }))
+    : []),
+];
+
   const getServices = async () => {
     try {
       const res = await Service({});
@@ -210,7 +213,7 @@ export default function Provider({ onAddProvider, onEditProvider }: ProviderMana
 
 
   const getServiceName = (serviceId: string) => {
-    const service = services.find(s => s._id === serviceId);
+    const service = services?.find(s => s._id === serviceId);
     return service?.name || 'Unknown Service';
   };
 
