@@ -565,7 +565,7 @@ export default function AddProviderScreen({
         : payload;
 
       console.log("Submitting payload:", finalPayload);
-
+      return;
       const res = isEditMode
         ? await updateProvider(finalPayload)
         : await CreateProvider(finalPayload);
@@ -1252,14 +1252,40 @@ export default function AddProviderScreen({
                           initialLat={formData.mapLocation.lat}
                           initialLng={formData.mapLocation.lng}
                           onClose={() => setOpenMap(false)}
-                          onSelect={(lat, lng) => {
-                            setFormData((prev) => ({
-                              ...prev,
-                              mapLocation: {
-                                lat: Number(lat),
-                                lng: Number(lng),
-                              },
-                            }));
+                          onSelect={(lat, lng, addressDetails) => {
+                            setFormData((prev) => {
+                              const newData = {
+                                ...prev,
+                                mapLocation: {
+                                  lat: Number(lat),
+                                  lng: Number(lng),
+                                },
+                              };
+
+                              if (addressDetails) {
+                                if (addressDetails.address) newData.address = addressDetails.address;
+                                if (addressDetails.city) newData.city = addressDetails.city;
+                                if (addressDetails.postalCode) newData.postalCode = addressDetails.postalCode;
+
+                                if (addressDetails.countryCode) {
+                                  const allCountries = Country.getAllCountries();
+                                  const matchedCountry = allCountries.find(
+                                    (c) => c.isoCode.toLowerCase() === addressDetails.countryCode.toLowerCase()
+                                  );
+
+                                  if (matchedCountry) {
+                                    newData.country = matchedCountry.name;
+                                    newData.countryCode = `+${matchedCountry.phonecode}`;
+                                  } else if (addressDetails.country) {
+                                    newData.country = addressDetails.country;
+                                  }
+                                } else if (addressDetails.country) {
+                                  newData.country = addressDetails.country;
+                                }
+                              }
+
+                              return newData;
+                            });
                             setOpenMap(false);
                           }}
                         />
