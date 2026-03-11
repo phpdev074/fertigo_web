@@ -565,7 +565,7 @@ export default function AddProviderScreen({
         : payload;
 
       console.log("Submitting payload:", finalPayload);
-      return;
+      
       const res = isEditMode
         ? await updateProvider(finalPayload)
         : await CreateProvider(finalPayload);
