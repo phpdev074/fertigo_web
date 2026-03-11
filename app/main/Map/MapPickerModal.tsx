@@ -50,15 +50,44 @@ export default function MapPickerModal({
       if (data && data.address) {
         const addr = data.address;
         
-        const fullAddressParts = [];
-        if (addr.house_number) fullAddressParts.push(addr.house_number);
-        if (addr.road) fullAddressParts.push(addr.road);
-        if (addr.suburb || addr.neighbourhood) fullAddressParts.push(addr.suburb || addr.neighbourhood);
+        // Build a rich address using all available fields
+        const fullAddressParts: string[] = [];
 
-        const fullAddress =
-          fullAddressParts.length > 0
-            ? fullAddressParts.join(", ")
-            : (data.display_name ? data.display_name.split(",").slice(0, 2).join(", ") : "");
+        // 1. Top-level name from Nominatim (often the specific place/building name)
+        if (data.name) fullAddressParts.push(data.name);
+
+        // 2. Building / shop / office / amenity / other named places
+        const placeName = addr.building || addr.shop || addr.office || addr.amenity 
+          || addr.tourism || addr.leisure || addr.commercial || addr.industrial 
+          || addr.place || addr.hamlet || "";
+        if (placeName && !fullAddressParts.includes(placeName)) {
+          fullAddressParts.push(placeName);
+        }
+
+        // 3. House number + road
+        if (addr.house_number) fullAddressParts.push(addr.house_number);
+        if (addr.road && !fullAddressParts.includes(addr.road)) {
+          fullAddressParts.push(addr.road);
+        }
+
+        // 4. Suburb / neighbourhood (deduplicated)
+        const area = addr.suburb || addr.neighbourhood || "";
+        if (area && !fullAddressParts.includes(area)) {
+          fullAddressParts.push(area);
+        }
+
+        // If our constructed parts are too sparse, use display_name which has the richest data
+        let fullAddress: string;
+        if (fullAddressParts.length >= 2) {
+          fullAddress = fullAddressParts.join(", ");
+        } else {
+          // display_name is the most detailed string Nominatim returns
+          // Take first 3-4 parts (skip city/state/country which we handle separately)
+          const displayParts = (data.display_name || "").split(",").map((p: string) => p.trim());
+          // Remove the last 2-3 parts (usually state, country, postcode)
+          const detailParts = displayParts.slice(0, Math.max(3, displayParts.length - 3));
+          fullAddress = detailParts.join(", ");
+        }
 
         setAddressDetails({
           address: fullAddress,
