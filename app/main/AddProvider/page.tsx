@@ -13,6 +13,8 @@ import {
   Calendar,
   Users,
   FileText,
+  Search,
+  ChevronDown,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { GetServices } from "@/app/api/ApiHelper/serviceHelper";
@@ -35,6 +37,28 @@ interface AddProviderScreenProps {
   onBack?: () => void;
   provider?: any;
 }
+
+const getCurrencySymbol = (currencyCode: string) => {
+  try {
+    const symbol = (0).toLocaleString("en-US", {
+      style: "currency",
+      currency: currencyCode,
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).replace(/\d/g, "").trim();
+    return symbol || currencyCode;
+  } catch (e) {
+    return currencyCode;
+  }
+};
+
+const COUNTRIES_WITH_CURRENCY = Country.getAllCountries()
+  .filter((c) => c.currency)
+  .map((c) => ({
+    name: c.name,
+    code: c.currency,
+    symbol: getCurrencySymbol(c.currency),
+  }));
 
 const SERVICES = [
   { id: "ivf-medications", label: "IVF Medications" },
@@ -198,6 +222,10 @@ export default function AddProviderScreen({
   const [services, setServices] = useState<
     { _id: string; name: string; icon?: string }[]
   >([]);
+
+  const [openCurrencyDropdown, setOpenCurrencyDropdown] = useState<string | null>(null);
+  const [currencySearch, setCurrencySearch] = useState("");
+  const [globalCurrency, setGlobalCurrency] = useState({ code: "USD", symbol: "$" });
 
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
@@ -470,6 +498,7 @@ export default function AddProviderScreen({
       ([serviceId, price]) => ({
         serviceId,
         price: Number(price),
+        currency: globalCurrency.symbol,
       }),
     );
 
@@ -838,10 +867,63 @@ export default function AddProviderScreen({
                             {isSelected && (
                               <div className="mt-3">
                                 <div className="relative">
-                                  {/* $ symbol */}
-                                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-                                    $
-                                  </span>
+                                  {/* Currency Dropdown */}
+                                  <div className="absolute left-1 top-1/2 -translate-y-1/2 z-10 flex items-center">
+                                    <button
+                                      type="button"
+                                      onClick={() =>
+                                        setOpenCurrencyDropdown(
+                                          openCurrencyDropdown === treatment._id ? null : treatment._id
+                                        )
+                                      }
+                                      className="flex items-center gap-1 text-gray-600 hover:text-gray-900 px-2 h-full text-sm font-bold bg-gray-50 rounded-md border border-gray-200 focus:outline-none"
+                                      style={{ height: '30px' }}
+                                    >
+                                      {globalCurrency.symbol}
+                                      <ChevronDown className="w-3 h-3" />
+                                    </button>
+
+                                    {openCurrencyDropdown === treatment._id && (
+                                      <div
+                                        className="absolute top-full left-0 mt-1 w-64 bg-white border border-gray-200 rounded-xl shadow-xl z-50 overflow-hidden text-left"
+                                        onClick={(e) => e.stopPropagation()}
+                                      >
+                                        <div className="p-2 border-b border-gray-100 relative">
+                                          <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                                          <input
+                                            type="text"
+                                            placeholder="Search country..."
+                                            className="w-full pl-8 pr-2 py-1.5 text-sm bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-pink-500 focus:ring-1 focus:ring-pink-500"
+                                            value={currencySearch}
+                                            onChange={(e) => setCurrencySearch(e.target.value)}
+                                          />
+                                        </div>
+                                        <div className="max-h-48 overflow-y-auto">
+                                          {COUNTRIES_WITH_CURRENCY.filter(
+                                            (c) =>
+                                              c.name.toLowerCase().includes(currencySearch.toLowerCase()) ||
+                                              c.code.toLowerCase().includes(currencySearch.toLowerCase())
+                                          ).map((c, i) => (
+                                            <button
+                                              key={`${c.code}-${i}`}
+                                              type="button"
+                                              className="w-full text-left px-4 py-2 text-sm hover:bg-pink-50 hover:text-pink-600 flex items-center justify-between"
+                                              onClick={() => {
+                                                setGlobalCurrency({ code: c.code, symbol: c.symbol });
+                                                setOpenCurrencyDropdown(null);
+                                                setCurrencySearch("");
+                                              }}
+                                            >
+                                              <span className="font-medium truncate mr-2">{c.name}</span>
+                                              <span className="text-gray-500 text-xs shrink-0">
+                                                {c.code} {c.symbol}
+                                              </span>
+                                            </button>
+                                          ))}
+                                        </div>
+                                      </div>
+                                    )}
+                                  </div>
 
                                   <input
                                     type="number"
@@ -859,7 +941,7 @@ export default function AddProviderScreen({
                                         },
                                       }))
                                     }
-                                    className="w-full pl-8 pr-4 py-2 rounded-lg border border-gray-300
+                                    className="w-full pl-[4.5rem] pr-4 py-2 rounded-lg border border-gray-300
                    focus:border-pink-500 focus:ring-2 focus:ring-pink-200
                    outline-none transition-all"
                                   />
