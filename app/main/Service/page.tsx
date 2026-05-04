@@ -11,6 +11,7 @@ type ServiceItem = {
     _id: string;
     name: string;
     icon: string;
+    type?: string;
     createdAt: string;
     updatedAt: string;
 };
@@ -37,9 +38,10 @@ export default function ServiceManagement() {
     const [loadingSubmit, setLoadingSubmit] = useState(false);
     const [loadingDelete, setLoadingDelete] = useState(false);
 
-    const [form, setForm] = useState<{ name: string; icon: string }>({
+    const [form, setForm] = useState<{ name: string; icon: string; type: string }>({
         name: '',
         icon: '',
+        type: 'service',
     });
 
 
@@ -103,18 +105,20 @@ export default function ServiceManagement() {
                     id: editingService._id,
                     name: form.name,
                     icon: form.icon,
+                    type: form.type,
                 });
             } else {
                 await createService({
                     name: form.name,
                     icon: form.icon,
+                    type: form.type,
                 });
             }
 
             await getServices();
 
             setIsModalOpen(false);
-            setForm({ name: '', icon: '' });
+            setForm({ name: '', icon: '', type: 'service' });
             setEditingService(null);
 
         } catch (err) {
@@ -159,7 +163,7 @@ export default function ServiceManagement() {
                     <button
                         onClick={() => {
                             setEditingService(null);
-                            setForm({ name: '', icon: '' });
+                            setForm({ name: '', icon: '', type: 'service' });
                             setIsModalOpen(true);
                         }}
                         className="flex items-center gap-2 px-4 py-2 bg-pink-600 text-white text-sm font-semibold rounded-xl hover:bg-pink-700"
@@ -291,6 +295,7 @@ export default function ServiceManagement() {
                                                         setForm({
                                                             name: service.name,
                                                             icon: service.icon,
+                                                            type: service.type || 'service',
                                                         });
                                                         setIsModalOpen(true);
                                                     }}
@@ -375,7 +380,7 @@ export default function ServiceManagement() {
                             <button
                                 onClick={() => {
                                     setEditingService(service);
-                                    setForm({ name: service.name, icon: service.icon });
+                                    setForm({ name: service.name, icon: service.icon, type: service.type || 'service' });
                                     setIsModalOpen(true);
                                 }}
                                 className="w-8 h-8 flex items-center justify-center rounded-lg bg-blue-50"
@@ -500,7 +505,7 @@ export default function ServiceManagement() {
                             value={form.name}
                             onChange={(e) => setForm({ ...form, name: e.target.value })}
                             placeholder="Service name"
-                            className="w-full px-3 py-2 border rounded-lg text-sm text-black"
+                            className="w-full px-3 py-2 border rounded-lg text-sm text-black outline-none"
                         />
 
                         <label className="flex items-center gap-3 px-3 py-2 border rounded-lg cursor-pointer text-sm text-gray-600">
@@ -508,6 +513,15 @@ export default function ServiceManagement() {
                             Upload icon
                             <input type="file" accept="image/*" hidden onChange={handleImageUpload} />
                         </label>
+
+                        <select 
+                            value={form.type} 
+                            onChange={(e) => setForm({ ...form, type: e.target.value })}
+                            className="w-full px-3 py-2 border rounded-lg text-sm text-black outline-none cursor-pointer"
+                        >
+                            <option value="service">Service</option>
+                            <option value="community">Community</option>
+                        </select>
 
                         {form.icon && (
                             <div className="relative w-full h-40 rounded-lg overflow-hidden border">
