@@ -23,6 +23,7 @@ interface ConfirmAction {
 export default function ServiceManagement() {
     const [services, setServices] = useState<ServiceItem[]>([]);
     const [search, setSearch] = useState('');
+    const [debouncedSearch, setDebouncedSearch] = useState('');
     const [editingService, setEditingService] = useState<ServiceItem | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [page, setPage] = useState(1);
@@ -45,10 +46,21 @@ export default function ServiceManagement() {
     });
 
 
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            setDebouncedSearch(search);
+        }, 500);
+
+        return () => {
+            clearTimeout(handler);
+        };
+    }, [search]);
+
+
     const getServices = async () => {
         try {
             setLoading(true);
-            const res = await Service({ page });
+            const res = await Service({ page, limit: pagination.limit, search: debouncedSearch });
             setServices(res.data.data);
             if (res.data.pagination) {
                 setPagination(res.data.pagination);
@@ -62,14 +74,17 @@ export default function ServiceManagement() {
 
     useEffect(() => {
         getServices();
-    }, [page]);
+    }, [page, debouncedSearch]);
+
+    const handlePageChange = (newPage: number) => {
+        if (newPage < 1 || newPage > pagination.totalPages) return;
+        setPage(newPage);
+    };
 
 
 
     /* ================= FILTER ================= */
-    const filteredServices = services?.filter((s) =>
-        s.name.toLowerCase().includes(search.toLowerCase())
-    );
+    const filteredServices = services;
 
     /* ================= IMAGE UPLOAD (PREVIEW ONLY) ================= */
     const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -153,7 +168,7 @@ export default function ServiceManagement() {
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 
                 <div>
-                    <h2 className="text-3xl font-bold text-gray-900 mb-2">Services</h2>
+                    <h2 className="text-3xl font-bold text-gray-900 mb-2 -mt-8">Services</h2>
                     <p className="text-gray-600 font-medium">Manage all service and their listings</p>
                 </div>
 
@@ -196,7 +211,10 @@ export default function ServiceManagement() {
                             <input
                                 type="text"
                                 value={search}
-                                onChange={(e) => setSearch(e.target.value)}
+                                onChange={(e) => {
+                                    setSearch(e.target.value);
+                                    setPage(1);
+                                }}
                                 placeholder="Search by name"
                                 className="bg-transparent border-none outline-none text-sm font-medium text-gray-900 w-full placeholder:text-gray-400"
                             />
@@ -338,6 +356,43 @@ export default function ServiceManagement() {
                         </table>
                     )}
                 </div>
+
+                {/* Pagination */}
+                {services && services.length > 0 && (
+                    <div className="p-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <p className="text-sm font-semibold text-gray-600">
+                            Showing {services.length} of {pagination.total} services
+                        </p>
+                        <div className="flex items-center gap-2">
+                            <button
+                                onClick={() => handlePageChange(page - 1)}
+                                disabled={page === 1}
+                                className="px-4 py-2 rounded-lg border border-gray-200 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                Previous
+                            </button>
+                            {Array.from({ length: pagination.totalPages }, (_, i) => (
+                                <button
+                                    key={i + 1}
+                                    onClick={() => handlePageChange(i + 1)}
+                                    className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${page === i + 1
+                                        ? 'bg-gradient-to-r from-pink-500 to-pink-600 text-white shadow-lg'
+                                        : 'border border-gray-200 text-gray-600 hover:bg-gray-50'
+                                        }`}
+                                >
+                                    {i + 1}
+                                </button>
+                            ))}
+                            <button
+                                onClick={() => handlePageChange(page + 1)}
+                                disabled={page === pagination.totalPages}
+                                className="px-4 py-2 rounded-lg border border-gray-200 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                Next
+                            </button>
+                        </div>
+                    </div>
+                )}
             </div>
 
 

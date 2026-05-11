@@ -25,8 +25,7 @@ export const BookignCounts = () => {
 }
 
 export const Service = (data: any) => {
-    const query = data.page ? `?page=${data.page}` : '';
-  return instance.get(`/service?page=${query}`)
+  return instance.get(`/service?page=${data.page || 1}&limit=${data.limit || 10}&search=${data.search || ''}`);
 } 
 
 export const imageUpload = (data: FormData) => {
